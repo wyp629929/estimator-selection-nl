@@ -1,0 +1,16 @@
+{
+  "linear": {
+    "delta_cp": 0.645,
+    "se_cp": 0.033836001536824645,
+    "delta_cv": 0.305,
+    "se_cv": 0.03255572146336186
+  },
+  "semiparametric": {
+    "delta_cp": 0.61,
+    "se_cp": 0.03448912872196107,
+    "delta_cv": 0.3,
+    "se_cv": 0.0324037034920393
+  },
+  "_n_reps": 200,
+  "_status": "completed semiparametric"
+}

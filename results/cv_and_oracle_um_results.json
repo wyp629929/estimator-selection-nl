@@ -1,0 +1,11 @@
+{
+  "regime": "nonlinear",
+  "n_reps": 20,
+  "delta_cp": 0.8,
+  "delta_cp_se": 0.08944271909999159,
+  "delta_cv": 0.85,
+  "delta_cv_se": 0.07984359711335655,
+  "delta_U_oracle": 0.6710526315789473,
+  "delta_U_oracle_se": 0.021580551930074635,
+  "pairwise_U_oracle": 0.6588345864661656
+}

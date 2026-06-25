@@ -1,0 +1,27 @@
+{
+  "linear": {
+    "delta_cvplus": 0.4814666666666667,
+    "se_cvplus": 0.026935278807624103
+  },
+  "mildly_nonlinear": {
+    "delta_cvplus": 0.4267333333333333,
+    "se_cvplus": 0.028244881148822544
+  },
+  "nonlinear": {
+    "delta_cvplus": 0.8342666666666666,
+    "se_cvplus": 0.013359145015889135
+  },
+  "threshold": {
+    "delta_cvplus": 0.12333333333333332,
+    "se_cvplus": 0.00963454432988112
+  },
+  "highdim": {
+    "delta_cvplus": 0.0426,
+    "se_cvplus": 0.004359100314922284
+  },
+  "heteroscedastic": {
+    "delta_cvplus": 0.4537333333333333,
+    "se_cvplus": 0.028436738365869053
+  },
+  "_n_reps": 200
+}

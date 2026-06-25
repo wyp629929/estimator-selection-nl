@@ -51,8 +51,6 @@
 \textbf{Author contributions:} Y. Wang conceived the study, designed and implemented the experiments, analyzed the results, and wrote the manuscript.
 \textbf{Data availability:} The simulation code and experimental configurations are available at \url{https://github.com/wyp629929/estimator-selection-nl}. The real datasets used in this study are publicly available: Home Credit Default Risk (Kaggle), PIMA Diabetes (UCI), and Superconductivity (UCI).
 
-\textbf{AI/LLM usage disclosure:} Large language models (Claude, Anthropic) were used to assist with code writing and experimental implementation, and to refine the wording of theoretical statements and proofs. All intellectual contributions, analysis, and final editorial decisions are the sole responsibility of the author. The author retains full accountability for the work.
-
 %% ============================================================
 \section{Introduction}
 \label{sec:intro}
@@ -139,6 +137,8 @@ with $X_j \stackrel{\text{i.i.d.}}{\sim} N(0,1)$ for $j=1,\ldots,p$, $\varepsilo
 Seven estimators are compared across all scenarios. Classical baselines include ordinary least squares (OLS), ridge regression (regularization parameter $\lambda = 1$), and lasso (fixed regularization parameter $\alpha = 0.01$). Tree ensemble methods include random forest (200 trees, max depth 10, min samples leaf 5), XGBoost~\citep{chen2016} (200 trees, max depth 6, learning rate 0.1), and LightGBM~\citep{ke2017} (200 trees, max depth 6, learning rate 0.1). The deep neural network (DNN) has three hidden layers (128-64-32 units) with ReLU activations, dropout (0.2), and is trained with the Adam optimizer for up to 200 epochs with early stopping (patience 20) on a 20\% validation split. For DNN training, features are standardized using training-set means and standard deviations.
 
 All analyses use Python 3.13 with scikit-learn 1.6, XGBoost 2.1, LightGBM 4.5, and PyTorch 2.5, running on Apple M4 Pro with 32 GB memory. Monte Carlo replications use independent seeds $(2024 + \text{rep})$ for full reproducibility.
+
+Large language models (Claude, Anthropic) were used to assist with code writing and experimental implementation, and to refine the wording of theoretical statements and proofs. The author retains full accountability for the final version of this work.
 
 \subsection{Conformal Prediction Signals}
 \label{sec:cp-signals}
@@ -231,7 +231,7 @@ We report the baseline MSE performance across all regimes in Table~\ref{tab:base
 
 \begin{table}[t]
     \centering
-    \caption{Mean squared error (MSE) across six simulation regimes. All regimes use $B=500$ replications, except heteroscedastic and mildly nonlinear which use $B=200$ due to the additional computational cost of the nested calibration design required for the ranking--decision experiments involving these regimes.}
+    \caption{Mean squared error (MSE) across six simulation regimes. All regimes use $B=500$ replications, except heteroscedastic and mildly nonlinear which use $B=200$ due to the additional computational cost of the nested calibration design required for the ranking--decision experiments involving these regimes}
     \label{tab:baseline}
     \begin{tabular}{lcccccc}
         \toprule
@@ -268,7 +268,7 @@ A natural baseline is the $\Delta$ achieved by selecting the estimator with mini
 
 \begin{table}[t]
     \centering
-    \caption{Ranking--decision misalignment diagnostics across six regimes and two CP signal variants. $\Delta$ is the primary diagnostic (misalignment probability). Random baselines: per-point argmin $1/7 \approx 0.143$ ($\Delta = 0.857$); pairwise ranking 0.500; top-2 coverage $2/7 \approx 0.286$. Monte Carlo standard errors are shown in parentheses. All results at $B=200$.}
+    \caption{Ranking--decision misalignment diagnostics across six regimes and two CP signal variants. $\Delta$ is the primary diagnostic (misalignment probability). Random baselines: per-point argmin $1/7 \approx 0.143$ ($\Delta = 0.857$); pairwise ranking 0.500; top-2 coverage $2/7 \approx 0.286$. Monte Carlo standard errors are shown in parentheses. All results at $B=200$}
     \label{tab:misalignment}
     \begin{tabular}{lccccc}
         \toprule
@@ -298,7 +298,7 @@ A natural baseline is the $\Delta$ achieved by selecting the estimator with mini
 
 \begin{table}[t]
     \centering
-    \caption{Validation-MSE baseline for global model selection across six regimes. $\Delta_{\text{val}}$ is the misalignment probability when selecting the model with minimum validation MSE (80/20 holdout). All results at $B=200$.}
+    \caption{Validation-MSE baseline for global model selection across six regimes. $\Delta_{\text{val}}$ is the misalignment probability when selecting the model with minimum validation MSE (80/20 holdout). All results at $B=200$}
     \label{tab:val-baseline}
     \begin{tabular}{lcc}
         \toprule
@@ -419,14 +419,14 @@ Contrast this with the threshold regime. $M_1$ (a linear model) exhibits substan
 \begin{figure}[t]
     \centering
     \includegraphics[width=\textwidth]{figures/figure1.pdf}
-    \caption{Empirical identification of the alignment boundary between marginal CP uncertainty and conditional risk ordering. Misalignment probability $\Delta$ across six structural regimes for two surrogate functionals: global CP interval width (blue) and per-point regret bound $U_M$ (orange). The dashed line marks the random baseline ($1 - 1/7 \approx 0.857$). Error bars show $\pm 1$ standard deviation across $B = 200$ replications. Alignment is strongest in the high-dimensional regime where lasso dominates, and weakest in competitive settings (linear, heteroscedastic) where multiple estimators perform similarly. The per-point surrogate $U_M$ does not materially improve over the global surrogate, confirming that the absolute-residual quantile to L2-conditional functional gap is persistent rather than resolvable by localized smoothing in our experiments.}
+    \caption{Empirical identification of the alignment boundary between marginal CP uncertainty and conditional risk ordering. Misalignment probability $\Delta$ across six structural regimes for two surrogate functionals: global CP interval width (blue) and per-point regret bound $U_M$ (orange). The dashed line marks the random baseline ($1 - 1/7 \approx 0.857$). Error bars show $\pm 1$ standard deviation across $B = 200$ replications. Alignment is strongest in the high-dimensional regime where lasso dominates, and weakest in competitive settings (linear, heteroscedastic) where multiple estimators perform similarly. The per-point surrogate $U_M$ does not materially improve over the global surrogate, confirming that the absolute-residual quantile to L2-conditional functional gap is persistent rather than resolvable by localized smoothing in our experiments}
     \label{fig:gap-vs-regime}
 \end{figure}
 
 \begin{figure}[t]
     \centering
     \includegraphics[width=0.7\textwidth]{figures/figure2_bias_crossing.pdf}
-    \caption{Conceptual illustration of bias crossing in the threshold regime. The squared-bias functions of a linear model (blue) and a tree model (orange) cross as a function of the threshold variable $x_1$. On each side of the crossing region, a different estimator incurs lower bias; no global summary can capture this spatial reversal. This geometric mechanism is the root cause of the alignment gap under heterogeneous bias (Proposition~2).}
+    \caption{Conceptual illustration of bias crossing in the threshold regime. The squared-bias functions of a linear model (blue) and a tree model (orange) cross as a function of the threshold variable $x_1$. On each side of the crossing region, a different estimator incurs lower bias; no global summary can capture this spatial reversal. This geometric mechanism is the root cause of the alignment gap under heterogeneous bias (Proposition~2)}
     \label{fig:bias-crossing}
 \end{figure}
 
@@ -443,7 +443,7 @@ The fact that CRGA underperforms even equal-weight fusion in the threshold and h
 
 \begin{table}[t]
     \centering
-    \caption{Aggregation MSE across regimes. Oracle column shows the best single-model MSE per regime.}
+    \caption{Aggregation MSE across regimes. Oracle column shows the best single-model MSE per regime}
     \label{tab:aggregation}
     \begin{tabular}{lcccc}
         \toprule
@@ -468,7 +468,7 @@ For each dataset, we compute $\hat{\Delta}$ across multiple random train-test sp
 
 \begin{table}[t]
     \centering
-    \caption{Real-data misalignment $\hat{\Delta}$ across random train-test splits.}
+    \caption{Real-data misalignment $\hat{\Delta}$ across random train-test splits}
     \label{tab:real}
     \begin{tabular}{lcccc}
         \toprule

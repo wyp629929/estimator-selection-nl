@@ -115,6 +115,8 @@ Seven estimators are compared across all scenarios. Classical baselines include 
 
 All analyses use Python 3.13 with scikit-learn 1.6, XGBoost 2.1, LightGBM 4.5, and PyTorch 2.5, running on Apple M4 Pro with 32 GB memory. Monte Carlo replications use independent seeds $(2024 + \text{rep})$ for full reproducibility.
 
+Large language models (Claude, Anthropic) were used to assist with code writing and experimental implementation, and to refine the wording of theoretical statements and proofs. The author retains full accountability for the final version of this work.
+
 \subsection{Conformal Prediction Signals}
 \label{sec:cp-signals}
 
@@ -479,9 +481,6 @@ We emphasize that the objective of this paper is not to propose an alternative m
 % ============================================================
 \paragraph{Data and code availability.}
 Simulation code and experimental configurations are available at \url{https://github.com/wyp629929/estimator-selection-nl}. Real datasets: Home Credit Default Risk (Kaggle), PIMA Diabetes (UCI), and Superconductivity (UCI).
-
-\paragraph{AI/LLM usage disclosure.}
-Large language models (Claude, Anthropic) were used to assist with code writing and experimental implementation, and to refine the wording of theoretical statements and proofs. The author retains full accountability for the final version of this work.
 
 \bibliography{refs}
 % ============================================================

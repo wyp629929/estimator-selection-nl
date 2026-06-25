@@ -1,0 +1,60 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{parskip}
+\usepackage[numbers]{natbib}
+
+\bibliographystyle{plainnat}
+
+\begin{document}
+
+\begin{flushright}
+Yaoping Wang\\
+Department of Statistics, Rutgers University\\
+Piscataway, NJ, USA\\
+\texttt{yw1580@scarletmail.rutgers.edu}\\
+\end{flushright}
+
+\vspace{2em}
+
+\begin{flushleft}
+Editor-in-Chief\\
+\textit{Statistics and Computing}\\
+Springer Nature\\
+\end{flushleft}
+
+\vspace{2em}
+
+\textbf{Submission:} \textit{On the Alignment Between Marginal Uncertainty Measures and Conditional Decision Risk in Estimator Selection}
+
+\vspace{1em}
+
+Dear Editor,
+
+I am pleased to submit this manuscript for consideration for publication in \textit{Statistics and Computing}.
+
+\paragraph{Motivation.}
+Conformal prediction (CP) has become a standard tool for distribution-free uncertainty quantification, and its signals---particularly prediction interval width---are increasingly used to guide model and estimator selection. Practitioners often interpret narrower prediction intervals as evidence of superior predictive performance. However, this practice rests on an unexamined assumption: that the uncertainty ranking induced by CP aligns with the ranking induced by actual conditional prediction risk. This manuscript provides the first systematic investigation of this assumption.
+
+\paragraph{Contribution.}
+The paper makes three principal contributions. First, we prove an impossibility result (Proposition~2): under heterogeneous bias geometry, no selector based solely on marginal absolute-residual functionals can achieve uniform decision consistency. Second, we identify a positive boundary condition (Proposition~1): under variance dominance and uniformly ordered absolute bias, residual-quantile rankings preserve the conditional risk ordering. Third, we provide a large-scale empirical characterization across six data-generating regimes, seven estimators (spanning classical methods, tree ensembles, and deep neural networks), and multiple CP signal variants (split CP, conformalized regret bounds, conformalized quantile regression, CV+), showing that the alignment gap is structural rather than implementation-specific.
+
+\paragraph{Relation to existing work.}
+Recent work by Liang et al. (2024) and Bao et al. (2025) has noted in passing that minimizing CP width is not aligned with minimizing prediction error. Our contribution differs in both scope and depth: we provide the first formal impossibility theorem for marginal residual selectors, a systematic 6-regime, 7-estimator empirical characterization, and a theoretical explanation (bias crossing) for the observed misalignment.
+
+\paragraph{Why \textit{Statistics and Computing}.}
+This manuscript sits at the intersection of statistical methodology and computational practice. The core question---whether uncertainty measures from modern predictive algorithms can reliably guide estimator selection---is inherently a statistical computing problem. The experimental framework (simulation across diverse DGPs, multiple estimator classes, repeated-split validation) follows the computational-statistical paradigm characteristic of the journal. The findings have direct practical implications for applied statisticians and machine learning practitioners who use conformal prediction for model selection, making \textit{Statistics and Computing} a natural venue.
+
+\paragraph{Reproducibility.}
+All simulation code, experimental configurations, and data sources are publicly available at \url{https://github.com/wyp629929/estimator-selection-nl}, ensuring full reproducibility of the results.
+
+\vspace{2em}
+
+I confirm that this manuscript is original, has not been published elsewhere, and is not under consideration by another journal. I have no competing interests to declare.
+
+\vspace{3em}
+
+Sincerely,\\
+Yaoping Wang
+
+\end{document}

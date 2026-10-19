@@ -1,0 +1,199 @@
+## Table H1: CP width vs validation MSE on the CTR23 datasets (full calibration set)
+
+| dataset | n_cal | α=0.05: P(CP=val), CP/val risk (mean, max) | α=0.1: P(CP=val), CP/val risk (mean, max) | α=0.2: P(CP=val), CP/val risk (mean, max) |
+|---|---|---|---|---|
+| abalone | 1044 | 0.50, 1.007 (1.145) | 0.55, 1.008 (1.262) | 0.70, 0.989 (1.149) |
+| white_wine | 1224 | 0.40, 1.020 (1.135) | 0.55, 1.016 (1.083) | 0.60, 1.006 (1.083) |
+| cpu_activity | 2048 | 0.55, 1.009 (2.159) | 0.55, 1.058 (2.046) | 0.60, 1.081 (2.159) |
+| kin8nm | 2048 | 1.00, 1.000 (1.000) | 1.00, 1.000 (1.000) | 1.00, 1.000 (1.000) |
+| pumadyn32nh | 2048 | 1.00, 1.000 (1.000) | 1.00, 1.000 (1.000) | 0.95, 1.003 (1.068) |
+| grid_stability | 2500 | 0.95, 1.002 (1.041) | 1.00, 1.000 (1.000) | 0.95, 0.999 (1.000) |
+| brazilian_houses | 2673 | 0.05, 11.481 (51.665) | 0.05, 11.857 (57.169) | 0.10, 7.884 (51.665) |
+| naval_propulsion_plant | 2983 | 0.80, 0.997 (1.037) | 0.75, 1.001 (1.089) | 0.75, 1.001 (1.089) |
+| miami_housing | 3483 | 0.70, 0.996 (1.067) | 0.70, 1.007 (1.073) | 0.45, 1.009 (1.073) |
+| fifa | 4794 | 0.10, 1.037 (1.166) | 0.15, 1.039 (1.166) | 0.15, 1.044 (1.166) |
+| california_housing | 5160 | 0.60, 1.001 (1.017) | 0.50, 1.004 (1.054) | 0.45, 1.004 (1.054) |
+| kings_county | 5403 | 0.50, 0.980 (1.123) | 0.35, 0.987 (1.123) | 0.45, 0.997 (1.140) |
+| health_insurance | 5568 | 0.00, 1.052 (1.069) | 0.00, 1.052 (1.069) | 0.20, 1.014 (1.060) |
+| fps_benchmark | 6156 | 0.85, 1.010 (1.108) | 0.80, 1.018 (1.162) | 1.00, 1.000 (1.000) |
+| cps88wages | 7038 | 0.75, 1.003 (1.031) | 1.00, 1.000 (1.000) | 0.95, 1.000 (1.001) |
+| physiochemical_protein | 11432 | 0.75, 1.004 (1.047) | 0.80, 1.000 (1.022) | 0.40, 1.006 (1.023) |
+| sarcos | 12233 | 0.90, 0.999 (1.018) | 0.85, 1.001 (1.050) | 0.90, 1.001 (1.021) |
+| diamonds | 12500 | 1.00, 1.000 (1.000) | 0.95, 1.001 (1.024) | 0.90, 1.004 (1.049) |
+| video_transcoding | 12500 | 0.90, 1.004 (1.039) | 0.95, 1.002 (1.034) | 0.95, 1.002 (1.034) |
+| wave_energy | 12500 | 0.80, 1.000 (1.003) | 0.80, 1.000 (1.003) | 0.75, 1.000 (1.003) |
+
+## Predictions (informational)
+
+M1 (original, reported) costly disagreements (CP pick != val pick, CP test MSE > 1.01 x val), full n: 255 (dataset, alpha, split) cells in 46 (dataset, alpha) groups.
+   CP pick wins on most test points (win share > 0.5) in 0.53 of them (median win share 0.511); predicted >= 0.80 -> NOT as predicted
+   abalone alpha=0.05: 6 cells, win shares [0.421, 0.512, 0.446, 0.444, 0.482, 0.493]
+   abalone alpha=0.1: 3 cells, win shares [0.495, 0.482, 0.493]
+   abalone alpha=0.2: 1 cells, win shares [0.543]
+   brazilian_houses alpha=0.05: 17 cells, win shares [0.608, 0.591, 0.631, 0.611, 0.64, 0.628, 0.64, 0.636, 0.634, 0.628, 0.602, 0.613, 0.634, 0.625, 0.394, 0.629, 0.634]
+   brazilian_houses alpha=0.1: 18 cells, win shares [0.608, 0.592, 0.633, 0.611, 0.64, 0.638, 0.64, 0.636, 0.617, 0.618, 0.609, 0.613, 0.623, 0.609, 0.394, 0.634, 0.629, 0.634]
+   brazilian_houses alpha=0.2: 17 cells, win shares [0.624, 0.592, 0.631, 0.611, 0.64, 0.638, 0.64, 0.646, 0.634, 0.628, 0.609, 0.613, 0.634, 0.609, 0.634, 0.629, 0.634]
+   california_housing alpha=0.05: 2 cells, win shares [0.514, 0.511]
+   california_housing alpha=0.1: 3 cells, win shares [0.514, 0.49, 0.499]
+   california_housing alpha=0.2: 5 cells, win shares [0.514, 0.49, 0.514, 0.499, 0.511]
+   cps88wages alpha=0.05: 1 cells, win shares [0.475]
+   cpu_activity alpha=0.05: 5 cells, win shares [0.519, 0.499, 0.519, 0.508, 0.5]
+   cpu_activity alpha=0.1: 5 cells, win shares [0.519, 0.499, 0.522, 0.491, 0.5]
+   cpu_activity alpha=0.2: 3 cells, win shares [0.508, 0.522, 0.491]
+   diamonds alpha=0.1: 1 cells, win shares [0.455]
+   diamonds alpha=0.2: 2 cells, win shares [0.466, 0.461]
+   fifa alpha=0.05: 12 cells, win shares [0.541, 0.545, 0.557, 0.524, 0.452, 0.517, 0.538, 0.525, 0.534, 0.547, 0.519, 0.5]
+   fifa alpha=0.1: 12 cells, win shares [0.541, 0.545, 0.524, 0.443, 0.555, 0.525, 0.517, 0.538, 0.543, 0.528, 0.534, 0.5]
+   fifa alpha=0.2: 13 cells, win shares [0.541, 0.513, 0.557, 0.524, 0.555, 0.525, 0.548, 0.538, 0.543, 0.528, 0.55, 0.547, 0.5]
+   fps_benchmark alpha=0.05: 3 cells, win shares [0.492, 0.475, 0.512]
+   fps_benchmark alpha=0.1: 4 cells, win shares [0.492, 0.459, 0.475, 0.512]
+   grid_stability alpha=0.05: 1 cells, win shares [0.48]
+   health_insurance alpha=0.05: 20 cells, win shares [0.4, 0.408, 0.388, 0.4, 0.405, 0.411, 0.396, 0.403, 0.398, 0.391, 0.401, 0.408, 0.393, 0.41, 0.388, 0.397, 0.413, 0.397, 0.395, 0.382]
+   health_insurance alpha=0.1: 20 cells, win shares [0.4, 0.408, 0.388, 0.4, 0.406, 0.411, 0.394, 0.403, 0.399, 0.391, 0.401, 0.407, 0.393, 0.41, 0.388, 0.397, 0.412, 0.397, 0.395, 0.382]
+   health_insurance alpha=0.2: 9 cells, win shares [0.478, 0.47, 0.406, 0.472, 0.428, 0.388, 0.413, 0.472, 0.459]
+   kings_county alpha=0.05: 3 cells, win shares [0.53, 0.511, 0.539]
+   kings_county alpha=0.1: 5 cells, win shares [0.53, 0.494, 0.52, 0.511, 0.539]
+   kings_county alpha=0.2: 5 cells, win shares [0.53, 0.52, 0.469, 0.511, 0.539]
+   miami_housing alpha=0.05: 1 cells, win shares [0.533]
+   miami_housing alpha=0.1: 3 cells, win shares [0.537, 0.543, 0.533]
+   miami_housing alpha=0.2: 5 cells, win shares [0.537, 0.543, 0.531, 0.535, 0.533]
+   naval_propulsion_plant alpha=0.05: 1 cells, win shares [0.526]
+   naval_propulsion_plant alpha=0.1: 2 cells, win shares [0.512, 0.526]
+   naval_propulsion_plant alpha=0.2: 2 cells, win shares [0.512, 0.526]
+   physiochemical_protein alpha=0.05: 3 cells, win shares [0.459, 0.493, 0.489]
+   physiochemical_protein alpha=0.1: 1 cells, win shares [0.493]
+   physiochemical_protein alpha=0.2: 8 cells, win shares [0.499, 0.503, 0.503, 0.501, 0.5, 0.512, 0.507, 0.519]
+   pumadyn32nh alpha=0.2: 1 cells, win shares [0.458]
+   sarcos alpha=0.05: 1 cells, win shares [0.485]
+   sarcos alpha=0.1: 2 cells, win shares [0.485, 0.494]
+   sarcos alpha=0.2: 1 cells, win shares [0.511]
+   video_transcoding alpha=0.05: 2 cells, win shares [0.542, 0.466]
+   video_transcoding alpha=0.1: 1 cells, win shares [0.542]
+   video_transcoding alpha=0.2: 1 cells, win shares [0.542]
+   white_wine alpha=0.05: 10 cells, win shares [0.438, 0.441, 0.41, 0.451, 0.442, 0.422, 0.419, 0.435, 0.441, 0.437]
+   white_wine alpha=0.1: 8 cells, win shares [0.449, 0.405, 0.439, 0.41, 0.438, 0.443, 0.435, 0.441]
+   white_wine alpha=0.2: 6 cells, win shares [0.438, 0.427, 0.443, 0.451, 0.435, 0.441]
+M1' (primary) costly disagreements selected on test half A: 237 cells in 46 (dataset, alpha) groups.
+   on half B: bulk mean d <= 0 in 0.53 of them, tail mean d > 0 in 0.77; predicted bulk share >= 0.80 -> NOT as predicted
+   abalone alpha=0.05: 5 cells, bulk d [0.497, 0.1158, 0.1351, -0.1191, 0.054], tail d [3.3705, 10.6134, 1.2391, 5.1095, 6.3503]
+   abalone alpha=0.1: 3 cells, bulk d [-0.0682, -0.103, 0.0622], tail d [-0.5888, 2.4014, 3.1886]
+   brazilian_houses alpha=0.05: 14 cells, bulk d [-795360.1736, -613772.2419, -770655.261, -919549.5833, -942049.2281, -1135838.4609, -754378.1819, -1006377.6489, -530364.5095, -922795.4109, -835261.8877, 417742.0421, -765944.6711, -666543.9426], tail d [3558770234.7794, 12907740227.8841, 646546845.1274, 13729419204.2579, 85572526.4171, -8264954.1782, 16596018.6462, 16961718165.513, 41423706.6764, -29774449.9272, 1014713912.3061, -677240407.5936, -21875311.3969, 1368753889.8405]
+   brazilian_houses alpha=0.1: 15 cells, bulk d [-703792.5335, -503559.2634, -634706.0886, -665785.2957, -805945.7611, -1014933.7573, -670409.7687, -526256.4024, -554489.9552, -817253.2465, -727513.7497, 271801.2015, -817789.7335, -587799.6589, -433868.0726], tail d [1778165378.5641, -1126684.0434, 321667596.0189, -80366597.4001, 41093354.4846, 7131955399.9911, 300993222.7068, 8557315247.4446, 20663259.9727, 57435086.6143, 792503647.3037, -337097228.7874, -810942.1379, -12919944.8221, 681954799.2799]
+   brazilian_houses alpha=0.2: 14 cells, bulk d [-384464.334, -373600.3708, -604531.0855, -360874.222, -654869.1212, -592044.7964, -534503.0529, -418272.3881, -356186.4919, -384693.8328, -525624.9636, -595652.1602, -276179.7576, -124985.8282], tail d [141269218.9459, 3225516728.7962, 160396082.7328, -41732422.4592, 157151955.6118, -5087204.8057, 2706181.7977, 4277963768.2399, 9263390.9706, -10282091.8273, 395082771.5815, -1700429.6146, -7996863.5634, 339528394.2631]
+   california_housing alpha=0.05: 2 cells, bulk d [3962981.6415, -50893016.2961], tail d [927621417.0811, 1434235413.6314]
+   california_housing alpha=0.1: 4 cells, bulk d [-24358299.9269, 3025358.0137, 19454255.6762, -14708273.6295], tail d [720683733.477, 569978521.9108, 474075288.4346, -348293629.7088]
+   california_housing alpha=0.2: 5 cells, bulk d [-8493791.0921, 7417709.2804, 15400493.759, -40640722.4213, -3395865.8566], tail d [284704681.4356, 268932534.8953, 262979819.7245, 279379915.6864, -226750582.7606]
+   cps88wages alpha=0.05: 1 cells, bulk d [1691.7897], tail d [58691.8873]
+   cpu_activity alpha=0.05: 3 cells, bulk d [-0.0368, 0.0701, -0.0326], tail d [0.1087, 3.6666, 232.2105]
+   cpu_activity alpha=0.1: 4 cells, bulk d [-0.056, 0.0828, 0.004, -0.1382], tail d [0.2084, 1.772, 57.8298, 54.3858]
+   cpu_activity alpha=0.2: 3 cells, bulk d [-0.0653, -0.0423, -0.073], tail d [59.0086, 29.243, 26.9961]
+   diamonds alpha=0.1: 1 cells, bulk d [1774.6606], tail d [16610.0879]
+   diamonds alpha=0.2: 2 cells, bulk d [487.1157, 2185.4161], tail d [53765.8046, 31632.3571]
+   fifa alpha=0.05: 10 cells, bulk d [-926459.6742, -1065107.5669, 182000.8621, 1229162.9078, -1740546.8964, -520927.0445, -45785.3287, -56395.1463, -2500304.6107, -878119.4306], tail d [25599445.349, 116688745.5144, -135368462.5853, 104471084.2336, -78594785.7718, 86306701.711, 334133578.0669, 335463421.9114, -16451631.0424, 70694210.4039]
+   fifa alpha=0.1: 11 cells, bulk d [-699117.278, -598236.4423, -356669.0033, 337133.2697, -918108.0278, -472467.1944, -1041141.8436, -555612.2311, -441216.0494, -1177129.5892, -784850.1013], tail d [-42489635.3633, 53613869.4456, -62749690.9879, 130889502.418, 64003340.9214, -17123796.284, 47570485.4013, 171628089.9335, 98034504.5755, 57820742.8726, 34069398.7672]
+   fifa alpha=0.2: 11 cells, bulk d [98501.715, -233953.6901, 133896.3809, -38573.1627, -375863.2112, -306369.0648, -355869.2895, -331658.1833, -415726.8153, -247988.1757, 141938.2173], tail d [72375954.4451, 2937878.0869, 23582335.7622, -32824237.9588, 29375896.534, -9461832.1818, 35127728.4704, 84641355.8019, 48694793.532, 24609112.4103, -14377681.7953]
+   fps_benchmark alpha=0.05: 3 cells, bulk d [0.2402, 0.6354, -0.29], tail d [4.0373, -5.1948, 16.3949]
+   fps_benchmark alpha=0.1: 4 cells, bulk d [0.1565, 0.6811, 0.3757, -0.1129], tail d [2.8916, 4.1619, 0.0559, 6.4595]
+   grid_stability alpha=0.05: 1 cells, bulk d [0.0], tail d [-0.0]
+   health_insurance alpha=0.05: 20 cells, bulk d [8.694, 8.6232, 14.1595, 6.6652, 7.5118, 6.4391, 6.9306, 11.7059, 7.8639, 6.6325, 6.773, 9.2791, 10.2693, 5.3207, 10.6914, 6.7675, 11.1338, 6.4771, 4.5089, 9.5671], tail d [51.52, 72.2305, 69.7249, 59.0241, 49.5679, 2.1571, 27.8302, 31.8429, 38.87, 45.728, 65.5231, 51.0821, 48.9529, 29.1856, 58.0456, 98.2738, 30.552, 70.1771, 68.7999, 70.7559]
+   health_insurance alpha=0.1: 20 cells, bulk d [6.6394, 6.0907, 12.9269, 5.269, 6.0202, 5.3522, 6.715, 10.5715, 7.3177, 5.985, 5.1073, 8.1124, 8.2113, 4.6758, 8.7585, 5.8187, 8.837, 4.5323, 3.4795, 8.0085], tail d [48.6317, 63.2791, 53.1088, 45.4746, 42.0834, 14.0498, 19.3507, 31.9959, 28.3527, 32.0671, 50.9326, 41.2984, 48.1581, 23.0863, 51.8087, 61.2028, 41.5435, 55.9024, 45.7796, 54.265]
+   health_insurance alpha=0.2: 10 cells, bulk d [0.4897, 2.3464, 4.8705, 1.4159, 0.7935, 1.9744, 6.5376, 7.243, 0.3274, 0.803], tail d [18.3374, 13.0637, 28.6797, -23.763, 23.5689, 10.8454, 39.1296, 31.5736, 20.515, 7.6881]
+   kings_county alpha=0.05: 4 cells, bulk d [-535025516.8863, -167992239.1712, -95500534.7263, -87593200.3843], tail d [-70474896534.6203, 72466877.5889, -10199364047.2253, 39503760329.9244]
+   kings_county alpha=0.1: 4 cells, bulk d [-232346509.6886, -140081305.1986, -108818323.7208, -165796457.782], tail d [-38349177269.32, -297693496.0275, -5046607149.6861, 20482651075.8371]
+   kings_county alpha=0.2: 5 cells, bulk d [-94477226.3614, -154582875.969, -2816041.6789, -101475696.7023, -119545509.02], tail d [-19876702622.6831, -161107200.355, 6357003740.0729, -2611606103.432, 9992763581.6559]
+   miami_housing alpha=0.05: 2 cells, bulk d [-106752583.9355, -81249180.7223], tail d [-8095328961.8501, 15757720186.3534]
+   miami_housing alpha=0.1: 5 cells, bulk d [-139042348.1794, -106192310.4415, -122538989.6104, 13910826.2616, -82525501.2883], tail d [-3834733502.143, 4914824764.422, -6857995123.3468, 7425559893.5387, 7894918240.0175]
+   miami_housing alpha=0.2: 7 cells, bulk d [-81394419.7336, -71423985.9877, -10616588.7142, -37800873.4941, -68582068.097, -23362901.2297, -49504147.8843], tail d [-2222278784.4788, -2465703212.337, 2030028342.0943, -3838140763.6901, 4059616237.7662, 1819145112.0316, 3785823809.4189]
+   naval_propulsion_plant alpha=0.05: 1 cells, bulk d [-0.0], tail d [0.0]
+   naval_propulsion_plant alpha=0.1: 2 cells, bulk d [-0.0, -0.0], tail d [0.0, 0.0]
+   naval_propulsion_plant alpha=0.2: 2 cells, bulk d [-0.0, -0.0], tail d [0.0, 0.0]
+   physiochemical_protein alpha=0.05: 2 cells, bulk d [0.5645, 0.1716], tail d [1.4168, 2.6412]
+   physiochemical_protein alpha=0.1: 2 cells, bulk d [-0.0595, 0.051], tail d [-2.6627, 2.491]
+   physiochemical_protein alpha=0.2: 9 cells, bulk d [0.0406, 0.0223, 0.1431, 0.2876, 0.3478, -0.1466, 0.1313, -0.1244, 0.0129], tail d [-0.1819, 0.9692, -1.0143, -0.9422, 0.058, 0.962, -0.9017, 0.0187, -0.7262]
+   pumadyn32nh alpha=0.2: 1 cells, bulk d [0.0], tail d [0.0001]
+   sarcos alpha=0.05: 1 cells, bulk d [0.0072], tail d [2.2764]
+   sarcos alpha=0.1: 2 cells, bulk d [0.1056, 0.0801], tail d [0.2567, -0.3012]
+   sarcos alpha=0.2: 1 cells, bulk d [0.0382], tail d [-0.5736]
+   video_transcoding alpha=0.05: 2 cells, bulk d [0.0035, 0.1158], tail d [0.2198, 1.718]
+   video_transcoding alpha=0.1: 1 cells, bulk d [-0.0318], tail d [0.4294]
+   video_transcoding alpha=0.2: 1 cells, bulk d [-0.0218], tail d [0.1591]
+   wave_energy alpha=0.2: 1 cells, bulk d [2.0451], tail d [-717.178]
+   white_wine alpha=0.05: 7 cells, bulk d [0.0105, -0.0008, 0.0051, 0.0018, 0.0213, 0.0108, 0.0093], tail d [0.2474, 0.1208, 0.4888, 0.2371, 0.8718, 0.6048, 0.0988]
+   white_wine alpha=0.1: 6 cells, bulk d [-0.0147, 0.0269, 0.0074, 0.0101, 0.0145, 0.008], tail d [0.059, 0.2302, 0.0618, -0.0368, -0.0948, 0.3321]
+   white_wine alpha=0.2: 3 cells, bulk d [0.0185, -0.0011, -0.0012], tail d [-0.0567, 0.0243, 0.2082]
+(The M1 lines above are the original statistic; it is reported, M1' is the primary check.)
+M2 persistence: P(CP = val) at full n minus at n=1000, in (dataset, alpha) groups with a costly disagreement; predicted rise <= 0.1:
+   [NO ] abalone alpha=0.05: 0.35 -> 0.50
+   [yes] abalone alpha=0.1: 0.55 -> 0.55
+   [NO ] abalone alpha=0.2: 0.50 -> 0.70
+   [yes] brazilian_houses alpha=0.05: 0.30 -> 0.05
+   [yes] brazilian_houses alpha=0.1: 0.25 -> 0.05
+   [yes] brazilian_houses alpha=0.2: 0.15 -> 0.10
+   [yes] california_housing alpha=0.05: 0.75 -> 0.60
+   [yes] california_housing alpha=0.1: 0.60 -> 0.50
+   [yes] california_housing alpha=0.2: 0.60 -> 0.45
+   [NO ] cps88wages alpha=0.05: 0.30 -> 0.75
+   [yes] cpu_activity alpha=0.05: 0.75 -> 0.55
+   [yes] cpu_activity alpha=0.1: 0.65 -> 0.55
+   [yes] cpu_activity alpha=0.2: 0.65 -> 0.60
+   [NO ] diamonds alpha=0.1: 0.60 -> 0.95
+   [NO ] diamonds alpha=0.2: 0.55 -> 0.90
+   [yes] fifa alpha=0.05: 0.40 -> 0.10
+   [yes] fifa alpha=0.1: 0.45 -> 0.15
+   [yes] fifa alpha=0.2: 0.35 -> 0.15
+   [NO ] fps_benchmark alpha=0.05: 0.70 -> 0.85
+   [yes] fps_benchmark alpha=0.1: 0.80 -> 0.80
+   [yes] grid_stability alpha=0.05: 0.90 -> 0.95
+   [yes] health_insurance alpha=0.05: 0.05 -> 0.00
+   [yes] health_insurance alpha=0.1: 0.10 -> 0.00
+   [yes] health_insurance alpha=0.2: 0.45 -> 0.20
+   [yes] kings_county alpha=0.05: 0.60 -> 0.50
+   [yes] kings_county alpha=0.1: 0.65 -> 0.35
+   [yes] kings_county alpha=0.2: 0.55 -> 0.45
+   [yes] miami_housing alpha=0.05: 0.75 -> 0.70
+   [yes] miami_housing alpha=0.1: 0.65 -> 0.70
+   [NO ] miami_housing alpha=0.2: 0.35 -> 0.45
+   [yes] naval_propulsion_plant alpha=0.05: 0.75 -> 0.80
+   [yes] naval_propulsion_plant alpha=0.1: 0.70 -> 0.75
+   [yes] naval_propulsion_plant alpha=0.2: 0.65 -> 0.75
+   [yes] physiochemical_protein alpha=0.05: 0.70 -> 0.75
+   [yes] physiochemical_protein alpha=0.1: 0.85 -> 0.80
+   [yes] physiochemical_protein alpha=0.2: 0.70 -> 0.40
+   [NO ] pumadyn32nh alpha=0.2: 0.80 -> 0.95
+   [yes] sarcos alpha=0.05: 0.80 -> 0.90
+   [yes] sarcos alpha=0.1: 0.85 -> 0.85
+   [NO ] sarcos alpha=0.2: 0.75 -> 0.90
+   [NO ] video_transcoding alpha=0.05: 0.60 -> 0.90
+   [NO ] video_transcoding alpha=0.1: 0.75 -> 0.95
+   [NO ] video_transcoding alpha=0.2: 0.80 -> 0.95
+   [NO ] white_wine alpha=0.05: 0.30 -> 0.40
+   [yes] white_wine alpha=0.1: 0.50 -> 0.55
+   [yes] white_wine alpha=0.2: 0.50 -> 0.60
+   33/46 as predicted
+M3 mean over datasets of the mean CP/val risk ratio: α=0.05: 1.5301  α=0.1: 1.5526  α=0.2: 1.3522  -> predicted α=0.2 >= α=0.05: NOT as predicted
+Descriptive: alpha=0.1, datasets with mean CP/val ratio > 1.01: 6/20 ['white_wine', 'cpu_activity', 'brazilian_houses', 'fifa', 'health_insurance', 'fps_benchmark']; largest: brazilian_houses 11.857
+
+E7a (local selection, alpha = 0.1), risk relative to val (mean ± SE over splits):
+   abalone: CRS-forest 0.984 ± 0.021   CRS-kNN 0.988 ± 0.017
+   white_wine: CRS-forest 0.997 ± 0.006   CRS-kNN 0.998 ± 0.003
+   cpu_activity: CRS-forest 1.047 ± 0.066   CRS-kNN 1.063 ± 0.070
+   kin8nm: CRS-forest 1.000 ± 0.000   CRS-kNN 1.000 ± 0.000
+   pumadyn32nh: CRS-forest 1.000 ± 0.000   CRS-kNN 1.000 ± 0.000
+   grid_stability: CRS-forest 0.957 ± 0.010   CRS-kNN 0.970 ± 0.008
+   brazilian_houses: CRS-forest 1.453 ± 0.431   CRS-kNN 1.653 ± 0.350
+   naval_propulsion_plant: CRS-forest 0.814 ± 0.010   CRS-kNN 0.834 ± 0.012
+   miami_housing: CRS-forest 1.000 ± 0.005   CRS-kNN 1.001 ± 0.008
+   fifa: CRS-forest 0.996 ± 0.005   CRS-kNN 1.040 ± 0.018
+   california_housing: CRS-forest 1.003 ± 0.002   CRS-kNN 1.001 ± 0.002
+   kings_county: CRS-forest 0.971 ± 0.013   CRS-kNN 0.974 ± 0.014
+   health_insurance: CRS-forest 0.998 ± 0.001   CRS-kNN 1.001 ± 0.001
+   fps_benchmark: CRS-forest 0.701 ± 0.016   CRS-kNN 0.781 ± 0.013
+   cps88wages: CRS-forest 1.003 ± 0.002   CRS-kNN 1.003 ± 0.001
+   physiochemical_protein: CRS-forest 0.936 ± 0.002   CRS-kNN 0.959 ± 0.003
+   sarcos: CRS-forest 0.853 ± 0.005   CRS-kNN 0.884 ± 0.006
+   diamonds: CRS-forest 1.045 ± 0.052   CRS-kNN 0.997 ± 0.003
+   video_transcoding: CRS-forest 0.917 ± 0.010   CRS-kNN 0.972 ± 0.008
+   wave_energy: CRS-forest 0.990 ± 0.005   CRS-kNN 0.986 ± 0.006
+L1 CRS-forest/val <= 1.01 in 17/20 datasets (predicted: all).
+L2 CRS-forest better than val by more than 2 SE in 7/20 datasets (no directional prediction).
+exit code: 0

@@ -1,0 +1,122 @@
+{
+ "settings": {
+  "n_train": 250,
+  "n_cal": [
+   250,
+   1000,
+   4000
+  ],
+  "n_test": 5000,
+  "n_int": 50000,
+  "sigma": 1.0,
+  "cp_alpha": 0.1,
+  "fit_frac": 0.6,
+  "cv_folds": 5,
+  "eps_global": [
+   0.0,
+   0.01,
+   0.05
+  ],
+  "eps_local": [
+   0.0,
+   0.1,
+   0.5
+  ],
+  "models": [
+   "ols",
+   "ridge",
+   "lasso",
+   "rf",
+   "xgboost",
+   "lightgbm",
+   "dnn"
+  ],
+  "global_selectors": [
+   "cp",
+   "val"
+  ],
+  "local_selectors": [
+   "lw",
+   "U",
+   "rhat",
+   "knn",
+   "crs"
+  ],
+  "reps": 100,
+  "base_seed": 2024,
+  "device": "cpu",
+  "quick": false,
+  "variant": "tuned",
+  "variant_cfg": {
+   "p_lin": 10,
+   "p_high": 100,
+   "rho": 0.0,
+   "tuned": true,
+   "regimes": [
+    "linear",
+    "nonlinear",
+    "threshold"
+   ]
+  },
+  "regimes": [
+   "linear",
+   "nonlinear",
+   "threshold"
+  ],
+  "tune_grids": {
+   "ridge": {
+    "alpha": [
+     0.1,
+     1.0,
+     10.0
+    ]
+   },
+   "lasso": {
+    "alpha": [
+     0.001,
+     0.01,
+     0.1
+    ]
+   },
+   "rf": {
+    "min_samples_leaf": [
+     1,
+     5,
+     20
+    ]
+   },
+   "xgboost": {
+    "max_depth": [
+     2,
+     4,
+     6
+    ],
+    "learning_rate": [
+     0.05,
+     0.1
+    ]
+   },
+   "lightgbm": {
+    "max_depth": [
+     2,
+     4,
+     6
+    ],
+    "learning_rate": [
+     0.05,
+     0.1
+    ]
+   }
+  }
+ },
+ "environment": {
+  "python": "3.12.3",
+  "numpy": "2.3.5",
+  "sklearn": "1.7.2",
+  "xgboost": "3.2.0",
+  "lightgbm": "4.6.0",
+  "torch": "2.12.1+cpu",
+  "machine": "Linux-5.15.0-25-generic-x86_64-with-glibc2.35",
+  "cpu_count": 208
+ }
+}

@@ -1,0 +1,135 @@
+## Table E1: test MSE of each estimator (mean over splits)
+
+| dataset | n train / cal / test | ols | ridge | lasso | rf | xgboost | lightgbm | dnn |
+|---|---|---|---|---|---|---|---|---|
+| abalone | 2088 / 1044 / 1045 | 5.102 | 5.105 | 5.132 | 4.779 | 5.218 | 5.002 | 5.604 |
+| white_wine | 2449 / 1224 / 1225 | 0.5783 | 0.5781 | 0.5781 | 0.4592 | 0.4445 | 0.4573 | 0.5015 |
+| cpu_activity | 4096 / 2048 / 2048 | 95.65 | 95.65 | 95.65 | 7.059 | 7.802 | 5.186 | 7.07 |
+| kin8nm | 4096 / 2048 / 2048 | 0.04054 | 0.04054 | 0.04128 | 0.0246 | 0.01661 | 0.01655 | 0.006534 |
+| pumadyn32nh | 4096 / 2048 / 2048 | 0.001088 | 0.001088 | 0.001188 | 0.0004625 | 0.0004942 | 0.0004926 | 0.0005879 |
+| grid_stability | 5000 / 2500 / 2500 | 0.0004839 | 0.0004838 | 0.001269 | 0.0001755 | 8.281e-05 | 7.824e-05 | 6.552e-05 |
+| brazilian_houses | 5346 / 2673 / 2673 | 2.205e+07 | 2.204e+07 | 2.205e+07 | 2.705e+08 | 1.146e+08 | 2.5e+08 | 1.678e+08 |
+| naval_propulsion_plant | 5967 / 2983 / 2984 | 3.419e-05 | 4.748e-05 | 0.0002172 | 2.175e-05 | 1.807e-06 | 1.928e-06 | 1.941e-05 |
+| miami_housing | 6966 / 3483 / 3483 | 3.12e+10 | 3.12e+10 | 3.12e+10 | 1.181e+10 | 8.903e+09 | 8.733e+09 | 1.542e+10 |
+| fifa | 9589 / 4794 / 4795 | 2.227e+08 | 2.227e+08 | 2.227e+08 | 8.499e+07 | 8.764e+07 | 8.767e+07 | 1.843e+08 |
+| california_housing | 10320 / 5160 / 5160 | 4.837e+09 | 4.837e+09 | 4.837e+09 | 2.917e+09 | 2.277e+09 | 2.265e+09 | 4.08e+09 |
+| kings_county | 10806 / 5403 / 5404 | 2.6e+10 | 2.599e+10 | 2.6e+10 | 2.031e+10 | 1.533e+10 | 1.54e+10 | 1.706e+10 |
+| health_insurance | 11136 / 5568 / 5568 | 222.1 | 222.1 | 222.1 | 210.8 | 216.3 | 213.5 | 212.2 |
+| fps_benchmark | 12312 / 6156 / 6156 | 137.5 | 137.5 | 137.5 | 443.7 | 5.835 | 6.654 | 11.48 |
+| cps88wages | 14077 / 7038 / 7040 | 1.547e+05 | 1.547e+05 | 1.547e+05 | 1.486e+05 | 1.57e+05 | 1.488e+05 | 1.47e+05 |
+| physiochemical_protein | 22865 / 11432 / 11433 | 26.97 | 26.97 | 26.98 | 17.76 | 15.46 | 16.12 | 15.54 |
+| sarcos | 24466 / 12233 / 12234 | 30.7 | 30.7 | 30.71 | 22.18 | 9.819 | 10.83 | 10.59 |
+| diamonds | 25000 / 12500 / 12500 | 1.329e+06 | 1.324e+06 | 1.329e+06 | 4.743e+05 | 3.116e+05 | 3.238e+05 | 1.253e+06 |
+| video_transcoding | 25000 / 12500 / 12500 | 120.9 | 120.9 | 120.9 | 10.42 | 3.494 | 3.817 | 8.026 |
+| wave_energy | 25000 / 12500 / 12500 | 2.622e+04 | 2.625e+04 | 2.625e+04 | 3.509e+09 | 4.418e+08 | 4.061e+08 | 7.579e+08 |
+
+## Table E2: held-out risk relative to the validation-MSE rule (mean ± SE over splits)
+
+| dataset | cp | val | lw | U | rhat | knn | crs | best single model (infeasible) | P(kNN level = const) | P(forest level = const) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| abalone | 1.008 ± 0.019 | 1.000 ± 0.000 | 1.000 ± 0.025 | 0.985 ± 0.025 | 1.039 ± 0.066 | 0.988 ± 0.017 | 0.984 ± 0.021 | 0.954 ± 0.022 | 0.35 | 0.30 |
+| white_wine | 1.016 ± 0.006 | 1.000 ± 0.000 | 1.024 ± 0.009 | 1.010 ± 0.007 | 1.003 ± 0.006 | 0.998 ± 0.003 | 0.997 ± 0.006 | 0.995 ± 0.003 | 0.45 | 0.20 |
+| cpu_activity | 1.058 ± 0.067 | 1.000 ± 0.000 | 1.070 ± 0.065 | 1.121 ± 0.087 | 1.089 ± 0.074 | 1.063 ± 0.070 | 1.047 ± 0.066 | 0.907 ± 0.042 | 0.20 | 0.15 |
+| kin8nm | 1.000 ± 0.000 | 1.000 ± 0.000 | 1.009 ± 0.003 | 1.009 ± 0.003 | 1.003 ± 0.001 | 1.000 ± 0.000 | 1.000 ± 0.000 | 1.000 ± 0.000 | 0.75 | 0.85 |
+| pumadyn32nh | 1.000 ± 0.000 | 1.000 ± 0.000 | 1.003 ± 0.003 | 1.018 ± 0.002 | 1.026 ± 0.002 | 1.000 ± 0.000 | 1.000 ± 0.000 | 1.000 ± 0.000 | 0.65 | 0.95 |
+| grid_stability | 1.000 ± 0.000 | 1.000 ± 0.000 | 1.000 ± 0.000 | 1.011 ± 0.008 | 0.980 ± 0.008 | 0.970 ± 0.008 | 0.957 ± 0.010 | 0.999 ± 0.001 | 0.05 | 0.05 |
+| brazilian_houses | 11.857 ± 3.894 | 1.000 ± 0.000 | 2.199 ± 0.537 | 2.158 ± 0.565 | 2.013 ± 0.551 | 1.653 ± 0.350 | 1.453 ± 0.431 | 0.902 ± 0.066 | 0.40 | 0.05 |
+| naval_propulsion_plant | 1.001 ± 0.006 | 1.000 ± 0.000 | 1.001 ± 0.006 | 0.943 ± 0.010 | 0.939 ± 0.009 | 0.834 ± 0.012 | 0.814 ± 0.010 | 0.991 ± 0.004 | 0.00 | 0.00 |
+| miami_housing | 1.007 ± 0.005 | 1.000 ± 0.000 | 1.066 ± 0.014 | 1.073 ± 0.013 | 1.039 ± 0.008 | 1.001 ± 0.008 | 1.000 ± 0.005 | 0.988 ± 0.004 | 0.35 | 0.30 |
+| fifa | 1.039 ± 0.013 | 1.000 ± 0.000 | 1.048 ± 0.011 | 1.030 ± 0.012 | 1.017 ± 0.008 | 1.040 ± 0.018 | 0.996 ± 0.005 | 0.985 ± 0.004 | 0.20 | 0.15 |
+| california_housing | 1.004 ± 0.003 | 1.000 ± 0.000 | 1.037 ± 0.004 | 1.010 ± 0.002 | 1.008 ± 0.004 | 1.001 ± 0.002 | 1.003 ± 0.002 | 0.997 ± 0.001 | 0.15 | 0.70 |
+| kings_county | 0.987 ± 0.015 | 1.000 ± 0.000 | 1.002 ± 0.017 | 0.991 ± 0.015 | 0.992 ± 0.013 | 0.974 ± 0.014 | 0.971 ± 0.013 | 0.958 ± 0.012 | 0.05 | 0.45 |
+| health_insurance | 1.052 ± 0.002 | 1.000 ± 0.000 | 1.022 ± 0.002 | 1.004 ± 0.002 | 1.004 ± 0.002 | 1.001 ± 0.001 | 0.998 ± 0.001 | 0.997 ± 0.001 | 0.50 | 0.45 |
+| fps_benchmark | 1.018 ± 0.010 | 1.000 ± 0.000 | 0.881 ± 0.019 | 0.916 ± 0.014 | 0.871 ± 0.017 | 0.781 ± 0.013 | 0.701 ± 0.016 | 1.000 ± 0.000 | 0.00 | 0.00 |
+| cps88wages | 1.000 ± 0.000 | 1.000 ± 0.000 | 1.010 ± 0.002 | 1.010 ± 0.002 | 1.006 ± 0.002 | 1.003 ± 0.001 | 1.003 ± 0.002 | 1.000 ± 0.000 | 0.45 | 0.65 |
+| physiochemical_protein | 1.000 ± 0.001 | 1.000 ± 0.000 | 1.002 ± 0.003 | 0.994 ± 0.003 | 0.976 ± 0.002 | 0.959 ± 0.003 | 0.936 ± 0.002 | 0.999 ± 0.001 | 0.00 | 0.00 |
+| sarcos | 1.001 ± 0.003 | 1.000 ± 0.000 | 0.986 ± 0.007 | 0.991 ± 0.006 | 0.974 ± 0.006 | 0.884 ± 0.006 | 0.853 ± 0.005 | 0.998 ± 0.002 | 0.00 | 0.00 |
+| diamonds | 1.001 ± 0.001 | 1.000 ± 0.000 | 1.017 ± 0.007 | 1.039 ± 0.012 | 1.004 ± 0.006 | 0.997 ± 0.003 | 1.045 ± 0.052 | 0.999 ± 0.001 | 0.10 | 0.10 |
+| video_transcoding | 1.002 ± 0.002 | 1.000 ± 0.000 | 1.025 ± 0.013 | 1.020 ± 0.010 | 0.995 ± 0.007 | 0.972 ± 0.008 | 0.917 ± 0.010 | 1.000 ± 0.000 | 0.20 | 0.00 |
+| wave_energy | 1.000 ± 0.000 | 1.000 ± 0.000 | 0.994 ± 0.002 | 1.024 ± 0.027 | 0.994 ± 0.003 | 0.986 ± 0.006 | 0.990 ± 0.005 | 1.000 ± 0.000 | 0.15 | 0.10 |
+
+Acceptance checks:
+  [PASS] abalone: splits 0..19 all present exactly once: 20 rows
+  [PASS] white_wine: splits 0..19 all present exactly once: 20 rows
+  [PASS] cpu_activity: splits 0..19 all present exactly once: 20 rows
+  [PASS] kin8nm: splits 0..19 all present exactly once: 20 rows
+  [PASS] pumadyn32nh: splits 0..19 all present exactly once: 20 rows
+  [PASS] grid_stability: splits 0..19 all present exactly once: 20 rows
+  [PASS] brazilian_houses: splits 0..19 all present exactly once: 20 rows
+  [PASS] naval_propulsion_plant: splits 0..19 all present exactly once: 20 rows
+  [PASS] miami_housing: splits 0..19 all present exactly once: 20 rows
+  [PASS] fifa: splits 0..19 all present exactly once: 20 rows
+  [PASS] california_housing: splits 0..19 all present exactly once: 20 rows
+  [PASS] kings_county: splits 0..19 all present exactly once: 20 rows
+  [PASS] health_insurance: splits 0..19 all present exactly once: 20 rows
+  [PASS] fps_benchmark: splits 0..19 all present exactly once: 20 rows
+  [PASS] cps88wages: splits 0..19 all present exactly once: 20 rows
+  [PASS] physiochemical_protein: splits 0..19 all present exactly once: 20 rows
+  [PASS] sarcos: splits 0..19 all present exactly once: 20 rows
+  [PASS] diamonds: splits 0..19 all present exactly once: 20 rows
+  [PASS] video_transcoding: splits 0..19 all present exactly once: 20 rows
+  [PASS] wave_energy: splits 0..19 all present exactly once: 20 rows
+  [PASS] no NaN/Infinity in any output: 
+  [PASS] abalone: split-CP test coverage >= 0.900 - 4 SE for all models: 0.898–0.900
+  [PASS] abalone: split-CP test coverage <= 0.901 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['lightgbm']
+  [PASS] abalone: U_M joint coverage >= 0.90 - 4 SE: 0.902 (SE 0.005)
+  [PASS] white_wine: split-CP test coverage >= 0.900 - 4 SE for all models: 0.898–0.901
+  [PASS] white_wine: split-CP test coverage <= 0.901 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] white_wine: U_M joint coverage >= 0.90 - 4 SE: 0.903 (SE 0.004)
+  [PASS] cpu_activity: split-CP test coverage >= 0.900 - 4 SE for all models: 0.902–0.904
+  [PASS] cpu_activity: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['rf']
+  [PASS] cpu_activity: U_M joint coverage >= 0.90 - 4 SE: 0.902 (SE 0.003)
+  [PASS] kin8nm: split-CP test coverage >= 0.900 - 4 SE for all models: 0.899–0.903
+  [PASS] kin8nm: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] kin8nm: U_M joint coverage >= 0.90 - 4 SE: 0.902 (SE 0.003)
+  [PASS] pumadyn32nh: split-CP test coverage >= 0.900 - 4 SE for all models: 0.902–0.903
+  [PASS] pumadyn32nh: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] pumadyn32nh: U_M joint coverage >= 0.90 - 4 SE: 0.908 (SE 0.002)
+  [PASS] grid_stability: split-CP test coverage >= 0.900 - 4 SE for all models: 0.898–0.903
+  [PASS] grid_stability: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] grid_stability: U_M joint coverage >= 0.90 - 4 SE: 0.897 (SE 0.002)
+  [PASS] brazilian_houses: split-CP test coverage >= 0.900 - 4 SE for all models: 0.897–0.900
+  [PASS] brazilian_houses: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] brazilian_houses: U_M joint coverage >= 0.90 - 4 SE: 0.900 (SE 0.003)
+  [PASS] naval_propulsion_plant: split-CP test coverage >= 0.900 - 4 SE for all models: 0.901–0.907
+  [PASS] naval_propulsion_plant: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 3 models checked, models with discrete residuals excluded: ['lasso', 'rf', 'xgboost', 'lightgbm']
+  [PASS] naval_propulsion_plant: U_M joint coverage >= 0.90 - 4 SE: 0.896 (SE 0.003)
+  [PASS] miami_housing: split-CP test coverage >= 0.900 - 4 SE for all models: 0.899–0.902
+  [PASS] miami_housing: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] miami_housing: U_M joint coverage >= 0.90 - 4 SE: 0.899 (SE 0.002)
+  [PASS] fifa: split-CP test coverage >= 0.900 - 4 SE for all models: 0.899–0.900
+  [PASS] fifa: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 4 models checked, models with discrete residuals excluded: ['rf', 'lightgbm', 'dnn']
+  [PASS] fifa: U_M joint coverage >= 0.90 - 4 SE: 0.900 (SE 0.002)
+  [PASS] california_housing: split-CP test coverage >= 0.900 - 4 SE for all models: 0.901–0.902
+  [PASS] california_housing: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] california_housing: U_M joint coverage >= 0.90 - 4 SE: 0.902 (SE 0.002)
+  [PASS] kings_county: split-CP test coverage >= 0.900 - 4 SE for all models: 0.900–0.902
+  [PASS] kings_county: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] kings_county: U_M joint coverage >= 0.90 - 4 SE: 0.901 (SE 0.002)
+  [PASS] health_insurance: split-CP test coverage >= 0.900 - 4 SE for all models: 0.899–0.902
+  [PASS] health_insurance: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] health_insurance: U_M joint coverage >= 0.90 - 4 SE: 0.901 (SE 0.002)
+  [PASS] fps_benchmark: split-CP test coverage >= 0.900 - 4 SE for all models: 0.898–0.902
+  [PASS] fps_benchmark: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['rf']
+  [PASS] fps_benchmark: U_M joint coverage >= 0.90 - 4 SE: 0.902 (SE 0.002)
+  [PASS] cps88wages: split-CP test coverage >= 0.900 - 4 SE for all models: 0.899–0.900
+  [PASS] cps88wages: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] cps88wages: U_M joint coverage >= 0.90 - 4 SE: 0.900 (SE 0.001)
+  [PASS] physiochemical_protein: split-CP test coverage >= 0.900 - 4 SE for all models: 0.899–0.901
+  [PASS] physiochemical_protein: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] physiochemical_protein: U_M joint coverage >= 0.90 - 4 SE: 0.900 (SE 0.001)
+  [PASS] sarcos: split-CP test coverage >= 0.900 - 4 SE for all models: 0.899–0.902
+  [PASS] sarcos: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] sarcos: U_M joint coverage >= 0.90 - 4 SE: 0.900 (SE 0.001)
+  [PASS] diamonds: split-CP test coverage >= 0.900 - 4 SE for all models: 0.900–0.901
+  [PASS] diamonds: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 4 models checked, models with discrete residuals excluded: ['rf', 'lightgbm', 'dnn']
+  [PASS] diamonds: U_M joint coverage >= 0.90 - 4 SE: 0.901 (SE 0.001)
+  [PASS] video_transcoding: split-CP test coverage >= 0.900 - 4 SE for all models: 0.899–0.900
+  [PASS] video_transcoding: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['rf']
+  [PASS] video_transcoding: U_M joint coverage >= 0.90 - 4 SE: 0.899 (SE 0.001)
+  [PASS] wave_energy: split-CP test coverage >= 0.900 - 4 SE for all models: 0.899–0.901
+  [PASS] wave_energy: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] wave_energy: U_M joint coverage >= 0.90 - 4 SE: 0.902 (SE 0.001)
+
+0 check(s) failed.
+exit code: 0

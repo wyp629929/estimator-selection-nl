@@ -1,0 +1,86 @@
+{
+ "settings": {
+  "datasets": [
+   "abalone",
+   "white_wine",
+   "cpu_activity",
+   "kin8nm",
+   "pumadyn32nh",
+   "grid_stability",
+   "brazilian_houses",
+   "naval_propulsion_plant",
+   "miami_housing",
+   "fifa",
+   "california_housing",
+   "kings_county",
+   "health_insurance",
+   "fps_benchmark",
+   "cps88wages",
+   "physiochemical_protein",
+   "sarcos",
+   "diamonds",
+   "video_transcoding",
+   "wave_energy"
+  ],
+  "splits": {
+   "abalone": 20,
+   "white_wine": 20,
+   "cpu_activity": 20,
+   "kin8nm": 20,
+   "pumadyn32nh": 20,
+   "grid_stability": 20,
+   "brazilian_houses": 20,
+   "naval_propulsion_plant": 20,
+   "miami_housing": 20,
+   "fifa": 20,
+   "california_housing": 20,
+   "kings_county": 20,
+   "health_insurance": 20,
+   "fps_benchmark": 20,
+   "cps88wages": 20,
+   "physiochemical_protein": 20,
+   "sarcos": 20,
+   "diamonds": 20,
+   "video_transcoding": 20,
+   "wave_energy": 20
+  },
+  "frac_train": 0.5,
+  "frac_cal": 0.25,
+  "cp_alpha": 0.1,
+  "cv_folds": 5,
+  "models": [
+   "ols",
+   "ridge",
+   "lasso",
+   "rf",
+   "xgboost",
+   "lightgbm",
+   "dnn"
+  ],
+  "global_selectors": [
+   "cp",
+   "val"
+  ],
+  "local_selectors": [
+   "lw",
+   "U",
+   "rhat",
+   "knn",
+   "crs"
+  ],
+  "base_seed": 2024,
+  "max_rows": null,
+  "device": "cpu",
+  "quick": false
+ },
+ "environment": {
+  "python": "3.12.3",
+  "numpy": "2.3.5",
+  "sklearn": "1.7.2",
+  "xgboost": "3.2.0",
+  "lightgbm": "4.6.0",
+  "torch": "2.12.1+cpu",
+  "machine": "Linux-5.15.0-25-generic-x86_64-with-glibc2.35",
+  "cpu_count": 208
+ }
+}

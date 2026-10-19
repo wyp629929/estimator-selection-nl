@@ -1,0 +1,67 @@
+{
+ "settings": {
+  "datasets": [
+   "pima",
+   "supercond",
+   "homecredit",
+   "creditcard",
+   "mammography",
+   "bank",
+   "default",
+   "adult"
+  ],
+  "splits": {
+   "pima": 50,
+   "supercond": 20,
+   "homecredit": 20,
+   "creditcard": 20,
+   "mammography": 20,
+   "bank": 20,
+   "default": 20,
+   "adult": 20
+  },
+  "alphas": [
+   0.05,
+   0.1,
+   0.2
+  ],
+  "n_cal": [
+   250,
+   1000,
+   4000
+  ],
+  "models": [
+   "ols",
+   "ridge",
+   "lasso",
+   "rf",
+   "xgboost",
+   "lightgbm",
+   "dnn"
+  ],
+  "base_seed": 2024,
+  "dataset_ids": {
+   "pima": 0,
+   "supercond": 1,
+   "homecredit": 2,
+   "creditcard": 3,
+   "mammography": 4,
+   "bank": 5,
+   "default": 6,
+   "adult": 7
+  },
+  "max_rows": null,
+  "device": "cpu",
+  "quick": false
+ },
+ "environment": {
+  "python": "3.12.3",
+  "numpy": "2.3.5",
+  "sklearn": "1.7.2",
+  "xgboost": "3.2.0",
+  "lightgbm": "4.6.0",
+  "torch": "2.12.1+cpu",
+  "machine": "Linux-5.15.0-25-generic-x86_64-with-glibc2.35",
+  "cpu_count": 208
+ }
+}

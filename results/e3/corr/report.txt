@@ -1,0 +1,96 @@
+## Table A: global risk G(M) incl. noise variance (mean ± SE over replications)
+
+| regime | ols | ridge | lasso | rf | xgboost | lightgbm | dnn | P(oracle gap < 0.01) | P(gap < 0.05) |
+|---|---|---|---|---|---|---|---|---|---|
+| linear | 1.047 | 1.047 | 1.043 | 1.625 | 1.730 | 1.655 | 1.236 | 0.89 | 1.00 |
+| nonlinear | 3.082 | 3.079 | 3.056 | 1.551 | 1.636 | 1.850 | 1.455 | 0.03 | 0.21 |
+| threshold | 1.470 | 1.468 | 1.455 | 1.130 | 1.328 | 1.350 | 1.417 | 0.00 | 0.00 |
+
+## Table B: global target (selector vs argmin G)
+
+| regime | n_cal | selector | G regret | Δ_glob exact | Δ_glob ε=0.01 | Δ_glob ε=0.05 | pairwise |
+|---|---|---|---|---|---|---|---|
+| linear | 250 | cp | 0.0071 ± 0.0026 | 0.550 | 0.080 | 0.030 | 0.881 |
+| linear | 250 | val | 0.0008 ± 0.0002 | 0.260 | 0.010 | 0.000 | 0.929 |
+| linear | 1000 | cp | 0.0031 ± 0.0004 | 0.560 | 0.060 | 0.000 | 0.902 |
+| linear | 1000 | val | 0.0002 ± 0.0001 | 0.160 | 0.000 | 0.000 | 0.962 |
+| linear | 4000 | cp | 0.0012 ± 0.0002 | 0.330 | 0.010 | 0.000 | 0.936 |
+| linear | 4000 | val | 0.0001 ± 0.0000 | 0.090 | 0.000 | 0.000 | 0.982 |
+| nonlinear | 250 | cp | 0.0482 ± 0.0088 | 0.360 | 0.360 | 0.310 | 0.895 |
+| nonlinear | 250 | val | 0.0199 ± 0.0045 | 0.240 | 0.240 | 0.160 | 0.962 |
+| nonlinear | 1000 | cp | 0.0162 ± 0.0037 | 0.220 | 0.220 | 0.150 | 0.935 |
+| nonlinear | 1000 | val | 0.0039 ± 0.0014 | 0.110 | 0.090 | 0.030 | 0.982 |
+| nonlinear | 4000 | cp | 0.0082 ± 0.0021 | 0.180 | 0.180 | 0.070 | 0.954 |
+| nonlinear | 4000 | val | 0.0005 ± 0.0004 | 0.020 | 0.020 | 0.000 | 0.992 |
+| threshold | 250 | cp | 0.0255 ± 0.0072 | 0.120 | 0.120 | 0.120 | 0.749 |
+| threshold | 250 | val | 0.0000 ± 0.0000 | 0.000 | 0.000 | 0.000 | 0.882 |
+| threshold | 1000 | cp | 0.0000 ± 0.0000 | 0.000 | 0.000 | 0.000 | 0.868 |
+| threshold | 1000 | val | 0.0000 ± 0.0000 | 0.000 | 0.000 | 0.000 | 0.934 |
+| threshold | 4000 | cp | 0.0000 ± 0.0000 | 0.000 | 0.000 | 0.000 | 0.928 |
+| threshold | 4000 | val | 0.0000 ± 0.0000 | 0.000 | 0.000 | 0.000 | 0.973 |
+
+## Table C: local target (selector vs argmin D(·|x)); floor = Lemma 1 bound for global rules
+
+| regime | n_cal | floor ε=0 / 0.1 / 0.5 | cp: regret, Δ ε=0, Δ ε=0.5 | val: regret, Δ ε=0, Δ ε=0.5 | lw: regret, Δ ε=0, Δ ε=0.5 | U: regret, Δ ε=0, Δ ε=0.5 | rhat: regret, Δ ε=0, Δ ε=0.5 | knn: regret, Δ ε=0, Δ ε=0.5 | crs: regret, Δ ε=0, Δ ε=0.5 |
+|---|---|---|---|---|---|---|---|---|---|
+| linear | 250 | 0.717 / 0.060 / 0.001 | 0.031, 0.777, 0.004 | 0.025, 0.733, 0.001 | 0.156, 0.815, 0.079 | 0.085, 0.792, 0.037 | 0.100, 0.795, 0.046 | 0.029, 0.737, 0.003 | 0.028, 0.738, 0.003 |
+| linear | 1000 | 0.717 / 0.060 / 0.001 | 0.027, 0.787, 0.001 | 0.024, 0.725, 0.001 | 0.074, 0.795, 0.031 | 0.042, 0.765, 0.012 | 0.047, 0.778, 0.014 | 0.025, 0.726, 0.001 | 0.025, 0.730, 0.001 |
+| linear | 4000 | 0.717 / 0.060 / 0.001 | 0.025, 0.758, 0.001 | 0.024, 0.723, 0.001 | 0.035, 0.778, 0.006 | 0.030, 0.747, 0.004 | 0.030, 0.763, 0.004 | 0.023, 0.714, 0.001 | 0.024, 0.725, 0.001 |
+| nonlinear | 250 | 0.715 / 0.429 / 0.151 | 0.346, 0.739, 0.174 | 0.315, 0.727, 0.164 | 0.401, 0.765, 0.203 | 0.337, 0.738, 0.168 | 0.350, 0.744, 0.180 | 0.322, 0.733, 0.168 | 0.313, 0.728, 0.163 |
+| nonlinear | 1000 | 0.715 / 0.429 / 0.151 | 0.312, 0.723, 0.157 | 0.300, 0.718, 0.159 | 0.302, 0.730, 0.158 | 0.271, 0.719, 0.139 | 0.271, 0.713, 0.140 | 0.266, 0.710, 0.142 | 0.260, 0.710, 0.138 |
+| nonlinear | 4000 | 0.715 / 0.429 / 0.151 | 0.305, 0.720, 0.154 | 0.297, 0.717, 0.158 | 0.234, 0.703, 0.124 | 0.239, 0.716, 0.129 | 0.220, 0.696, 0.118 | 0.211, 0.683, 0.111 | 0.184, 0.678, 0.096 |
+| threshold | 250 | 0.646 / 0.242 / 0.029 | 0.112, 0.670, 0.049 | 0.087, 0.646, 0.029 | 0.212, 0.761, 0.129 | 0.159, 0.712, 0.085 | 0.179, 0.731, 0.101 | 0.096, 0.654, 0.035 | 0.098, 0.658, 0.038 |
+| threshold | 1000 | 0.646 / 0.242 / 0.029 | 0.087, 0.646, 0.029 | 0.087, 0.646, 0.029 | 0.163, 0.728, 0.090 | 0.104, 0.667, 0.043 | 0.118, 0.685, 0.053 | 0.088, 0.647, 0.030 | 0.089, 0.650, 0.031 |
+| threshold | 4000 | 0.646 / 0.242 / 0.029 | 0.087, 0.646, 0.029 | 0.087, 0.646, 0.029 | 0.101, 0.674, 0.040 | 0.087, 0.649, 0.030 | 0.086, 0.652, 0.030 | 0.086, 0.644, 0.029 | 0.080, 0.643, 0.026 |
+
+## Table D: CRS vs the best global rule; local regret, and how often CV picks the constant level
+
+| regime | n_cal | heterogeneity (floor ε=0.5) | val | CRS-kNN | CRS-forest | P(kNN level = const) | P(forest level = const) |
+|---|---|---|---|---|---|---|---|
+| linear | 250 | 0.001 | 0.025 ± 0.001 | 0.029 ± 0.002 | 0.028 ± 0.002 | 0.83 | 0.81 |
+| linear | 1000 | 0.001 | 0.024 ± 0.001 | 0.025 ± 0.001 | 0.025 ± 0.001 | 0.61 | 0.80 |
+| linear | 4000 | 0.001 | 0.024 ± 0.001 | 0.023 ± 0.001 | 0.024 ± 0.001 | 0.31 | 0.77 |
+| nonlinear | 250 | 0.151 | 0.315 ± 0.008 | 0.322 ± 0.007 | 0.313 ± 0.006 | 0.34 | 0.42 |
+| nonlinear | 1000 | 0.151 | 0.300 ± 0.006 | 0.266 ± 0.004 | 0.260 ± 0.004 | 0.15 | 0.12 |
+| nonlinear | 4000 | 0.151 | 0.297 ± 0.006 | 0.211 ± 0.003 | 0.184 ± 0.002 | 0.00 | 0.00 |
+| threshold | 250 | 0.029 | 0.087 ± 0.002 | 0.096 ± 0.003 | 0.098 ± 0.003 | 0.83 | 0.79 |
+| threshold | 1000 | 0.029 | 0.087 ± 0.002 | 0.088 ± 0.002 | 0.089 ± 0.002 | 0.69 | 0.70 |
+| threshold | 4000 | 0.029 | 0.087 ± 0.002 | 0.086 ± 0.002 | 0.080 ± 0.001 | 0.49 | 0.31 |
+
+Summary -> results/e3/corr/summary.json
+
+Acceptance checks:
+  [PASS] linear: replications 0..99 all present exactly once: 100 rows, 100 unique
+  [PASS] nonlinear: replications 0..99 all present exactly once: 100 rows, 100 unique
+  [PASS] threshold: replications 0..99 all present exactly once: 100 rows, 100 unique
+  [PASS] no NaN/Infinity in any output: 
+  [PASS] linear n=250: split-CP test coverage within [0.900, 0.904] ± 4 SE for all models: 0.898–0.900
+  [PASS] linear n=250: U_M joint coverage >= 0.90 - 4 SE: 0.901 (SE 0.003)
+  [PASS] linear n=250: Lemma 1 holds per replication (global rules never below the floor): max violation 1.11e-16
+  [PASS] linear n=1000: split-CP test coverage within [0.900, 0.901] ± 4 SE for all models: 0.900–0.901
+  [PASS] linear n=1000: U_M joint coverage >= 0.90 - 4 SE: 0.901 (SE 0.001)
+  [PASS] linear n=1000: Lemma 1 holds per replication (global rules never below the floor): max violation 1.11e-16
+  [PASS] linear n=4000: split-CP test coverage within [0.900, 0.900] ± 4 SE for all models: 0.900–0.901
+  [PASS] linear n=4000: U_M joint coverage >= 0.90 - 4 SE: 0.900 (SE 0.001)
+  [PASS] linear n=4000: Lemma 1 holds per replication (global rules never below the floor): max violation 1.11e-16
+  [PASS] nonlinear n=250: split-CP test coverage within [0.900, 0.904] ± 4 SE for all models: 0.900–0.903
+  [PASS] nonlinear n=250: U_M joint coverage >= 0.90 - 4 SE: 0.899 (SE 0.003)
+  [PASS] nonlinear n=250: Lemma 1 holds per replication (global rules never below the floor): max violation 1.11e-16
+  [PASS] nonlinear n=1000: split-CP test coverage within [0.900, 0.901] ± 4 SE for all models: 0.900–0.902
+  [PASS] nonlinear n=1000: U_M joint coverage >= 0.90 - 4 SE: 0.902 (SE 0.002)
+  [PASS] nonlinear n=1000: Lemma 1 holds per replication (global rules never below the floor): max violation 1.11e-16
+  [PASS] nonlinear n=4000: split-CP test coverage within [0.900, 0.900] ± 4 SE for all models: 0.899–0.901
+  [PASS] nonlinear n=4000: U_M joint coverage >= 0.90 - 4 SE: 0.900 (SE 0.001)
+  [PASS] nonlinear n=4000: Lemma 1 holds per replication (global rules never below the floor): max violation 1.11e-16
+  [PASS] threshold n=250: split-CP test coverage within [0.900, 0.904] ± 4 SE for all models: 0.901–0.904
+  [PASS] threshold n=250: U_M joint coverage >= 0.90 - 4 SE: 0.902 (SE 0.003)
+  [PASS] threshold n=250: Lemma 1 holds per replication (global rules never below the floor): max violation 1.11e-16
+  [PASS] threshold n=1000: split-CP test coverage within [0.900, 0.901] ± 4 SE for all models: 0.901–0.903
+  [PASS] threshold n=1000: U_M joint coverage >= 0.90 - 4 SE: 0.904 (SE 0.001)
+  [PASS] threshold n=1000: Lemma 1 holds per replication (global rules never below the floor): max violation 1.11e-16
+  [PASS] threshold n=4000: split-CP test coverage within [0.900, 0.900] ± 4 SE for all models: 0.901–0.902
+  [PASS] threshold n=4000: U_M joint coverage >= 0.90 - 4 SE: 0.902 (SE 0.001)
+  [PASS] threshold n=4000: Lemma 1 holds per replication (global rules never below the floor): max violation 1.11e-16
+
+0 check(s) failed.
+exit code: 0

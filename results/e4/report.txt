@@ -1,0 +1,63 @@
+## Table E1: test MSE of each estimator (mean over splits)
+
+| dataset | n train / cal / test | ols | ridge | lasso | rf | xgboost | lightgbm | dnn |
+|---|---|---|---|---|---|---|---|---|
+| pima | 384 / 192 / 192 | 0.1664 | 0.1664 | 0.1659 | 0.1655 | 0.1958 | 0.2025 | 0.1706 |
+| supercond | 10631 / 5315 / 5317 | 315.4 | 315.8 | 318.2 | 127.4 | 102.7 | 106.9 | 157.2 |
+| homecredit | 25000 / 12500 / 12500 | 0.07058 | 0.07055 | 0.07104 | 0.07057 | 0.07157 | 0.07093 | 0.07068 |
+| creditcard | 25000 / 12500 / 12500 | 0.0009997 | 0.0009997 | 0.001907 | 0.0007178 | 0.0009167 | 0.000668 | 0.0008179 |
+| mammography | 5591 / 2795 / 2797 | 0.01636 | 0.01636 | 0.01725 | 0.0114 | 0.01223 | 0.0109 | 0.01112 |
+| bank | 22605 / 11302 / 11304 | 0.0724 | 0.0724 | 0.07379 | 0.06593 | 0.06345 | 0.0629 | 0.06659 |
+| default | 15000 / 7500 / 7500 | 0.1509 | 0.1509 | 0.1513 | 0.1349 | 0.1391 | 0.1374 | 0.137 |
+| adult | 24421 / 12210 / 12211 | 0.116 | 0.116 | 0.1181 | 0.09537 | 0.0902 | 0.08999 | 0.1025 |
+
+## Table E2: held-out risk relative to the validation-MSE rule (mean ± SE over splits)
+
+| dataset | cp | val | lw | U | rhat | knn | crs | best single model (infeasible) | P(kNN level = const) | P(forest level = const) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| pima | 0.993 ± 0.005 | 1.000 ± 0.000 | 1.010 ± 0.008 | 1.009 ± 0.005 | 1.043 ± 0.007 | 1.021 ± 0.007 | 1.009 ± 0.006 | 0.968 ± 0.005 | 0.46 | 0.60 |
+| supercond | 1.001 ± 0.003 | 1.000 ± 0.000 | 1.017 ± 0.006 | 1.022 ± 0.005 | 1.010 ± 0.005 | 0.998 ± 0.002 | 0.998 ± 0.005 | 0.998 ± 0.002 | 0.50 | 0.25 |
+| homecredit | 1.005 ± 0.002 | 1.000 ± 0.000 | 1.004 ± 0.002 | 0.997 ± 0.002 | 0.998 ± 0.002 | 1.000 ± 0.001 | 0.999 ± 0.002 | 0.995 ± 0.002 | 0.20 | 0.45 |
+| creditcard | 1.084 ± 0.034 | 1.000 ± 0.000 | 1.084 ± 0.034 | 1.016 ± 0.032 | 1.003 ± 0.033 | 1.032 ± 0.034 | 0.953 ± 0.024 | 0.949 ± 0.017 | 0.25 | 0.05 |
+| mammography | 1.014 ± 0.025 | 1.000 ± 0.000 | 0.991 ± 0.011 | 1.027 ± 0.018 | 1.007 ± 0.019 | 1.009 ± 0.014 | 1.004 ± 0.010 | 0.969 ± 0.009 | 0.30 | 0.20 |
+| bank | 1.003 ± 0.002 | 1.000 ± 0.000 | 1.053 ± 0.004 | 1.019 ± 0.004 | 1.011 ± 0.002 | 1.003 ± 0.002 | 1.001 ± 0.001 | 0.999 ± 0.001 | 0.40 | 0.80 |
+| default | 1.105 ± 0.009 | 1.000 ± 0.000 | 1.036 ± 0.002 | 1.060 ± 0.003 | 1.012 ± 0.001 | 1.000 ± 0.000 | 1.001 ± 0.001 | 1.000 ± 0.000 | 0.80 | 0.90 |
+| adult | 1.002 ± 0.001 | 1.000 ± 0.000 | 1.029 ± 0.001 | 1.063 ± 0.002 | 1.002 ± 0.001 | 1.000 ± 0.001 | 1.000 ± 0.001 | 1.000 ± 0.000 | 0.15 | 0.35 |
+
+Acceptance checks:
+  [PASS] pima: splits 0..49 all present exactly once: 50 rows
+  [PASS] supercond: splits 0..19 all present exactly once: 20 rows
+  [PASS] homecredit: splits 0..19 all present exactly once: 20 rows
+  [PASS] creditcard: splits 0..19 all present exactly once: 20 rows
+  [PASS] mammography: splits 0..19 all present exactly once: 20 rows
+  [PASS] bank: splits 0..19 all present exactly once: 20 rows
+  [PASS] default: splits 0..19 all present exactly once: 20 rows
+  [PASS] adult: splits 0..19 all present exactly once: 20 rows
+  [PASS] no NaN/Infinity in any output: 
+  [PASS] pima: split-CP test coverage >= 0.900 - 4 SE for all models: 0.902–0.907
+  [PASS] pima: split-CP test coverage <= 0.905 + 4 SE where scores are continuous: 7 models checked, 0 (split, model) pairs with ties excluded
+  [PASS] pima: U_M joint coverage >= 0.90 - 4 SE: 0.915 (SE 0.005)
+  [PASS] supercond: split-CP test coverage >= 0.900 - 4 SE for all models: 0.898–0.900
+  [PASS] supercond: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 7 models checked, 0 (split, model) pairs with ties excluded
+  [PASS] supercond: U_M joint coverage >= 0.90 - 4 SE: 0.896 (SE 0.002)
+  [PASS] homecredit: split-CP test coverage >= 0.900 - 4 SE for all models: 0.899–0.900
+  [PASS] homecredit: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 7 models checked, 0 (split, model) pairs with ties excluded
+  [PASS] homecredit: U_M joint coverage >= 0.90 - 4 SE: 0.900 (SE 0.001)
+  [PASS] creditcard: split-CP test coverage >= 0.900 - 4 SE for all models: 0.899–0.947
+  [PASS] creditcard: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 6 models checked, 31 (split, model) pairs with ties excluded
+  [PASS] creditcard: U_M joint coverage >= 0.90 - 4 SE: 0.900 (SE 0.001)
+  [PASS] mammography: split-CP test coverage >= 0.900 - 4 SE for all models: 0.901–0.903
+  [PASS] mammography: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 7 models checked, 1 (split, model) pairs with ties excluded
+  [PASS] mammography: U_M joint coverage >= 0.90 - 4 SE: 0.901 (SE 0.002)
+  [PASS] bank: split-CP test coverage >= 0.900 - 4 SE for all models: 0.899–0.900
+  [PASS] bank: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 7 models checked, 0 (split, model) pairs with ties excluded
+  [PASS] bank: U_M joint coverage >= 0.90 - 4 SE: 0.900 (SE 0.001)
+  [PASS] default: split-CP test coverage >= 0.900 - 4 SE for all models: 0.900–0.902
+  [PASS] default: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 7 models checked, 1 (split, model) pairs with ties excluded
+  [PASS] default: U_M joint coverage >= 0.90 - 4 SE: 0.900 (SE 0.002)
+  [PASS] adult: split-CP test coverage >= 0.900 - 4 SE for all models: 0.900–0.901
+  [PASS] adult: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 7 models checked, 3 (split, model) pairs with ties excluded
+  [PASS] adult: U_M joint coverage >= 0.90 - 4 SE: 0.899 (SE 0.001)
+
+0 check(s) failed.
+exit code: 0

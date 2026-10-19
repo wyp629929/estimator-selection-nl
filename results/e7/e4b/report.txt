@@ -1,0 +1,674 @@
+## Table F: what the split-CP width selects (per dataset, CP level alpha, calibration size n)
+
+e = share of calibration residuals with |r| >= 1/2 (Proposition 3); regime (b) when e < alpha, (c) when e > alpha.
+
+| dataset | prevalence | alpha | n | mean # positives | positives invisible to the width (share) | CP pick: most frequent | e of CP pick (mean) | P(e of CP pick < alpha) | P(CP = val) | P(CP = test-best) | P(val = test-best) | CP / val risk | Kendall(width, risk) |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| abalone | continuous | 0.05 | 250 | — | — | xgboost (5/20) | — | — | 0.20 | 0.25 | 0.50 | 1.0349 ± 0.0119 | 0.21 |
+| abalone | continuous | 0.05 | 1000 | — | — | rf (9/20) | — | — | 0.35 | 0.45 | 0.40 | 0.9639 ± 0.0295 | 0.17 |
+| abalone | continuous | 0.05 | 1044 | — | — | rf (11/20) | — | — | 0.50 | 0.40 | 0.50 | 1.0066 ± 0.0189 | 0.16 |
+| abalone | continuous | 0.1 | 250 | — | — | dnn (8/20) | — | — | 0.50 | 0.50 | 0.50 | 0.9934 ± 0.0226 | 0.28 |
+| abalone | continuous | 0.1 | 1000 | — | — | dnn (13/20) | — | — | 0.55 | 0.55 | 0.40 | 0.9664 ± 0.0243 | 0.24 |
+| abalone | continuous | 0.1 | 1044 | — | — | dnn (14/20) | — | — | 0.55 | 0.60 | 0.50 | 1.0081 ± 0.0193 | 0.24 |
+| abalone | continuous | 0.2 | 250 | — | — | dnn (7/20) | — | — | 0.40 | 0.55 | 0.50 | 0.9887 ± 0.0226 | 0.23 |
+| abalone | continuous | 0.2 | 1000 | — | — | dnn (14/20) | — | — | 0.50 | 0.70 | 0.40 | 0.9542 ± 0.0319 | 0.40 |
+| abalone | continuous | 0.2 | 1044 | — | — | dnn (14/20) | — | — | 0.70 | 0.70 | 0.50 | 0.9889 ± 0.0171 | 0.44 |
+| white_wine | continuous | 0.05 | 250 | — | — | xgboost (7/20) | — | — | 0.40 | 0.35 | 0.65 | 1.0371 ± 0.0140 | 0.56 |
+| white_wine | continuous | 0.05 | 1000 | — | — | rf (11/20) | — | — | 0.30 | 0.35 | 0.80 | 1.0195 ± 0.0078 | 0.62 |
+| white_wine | continuous | 0.05 | 1224 | — | — | rf (10/20) | — | — | 0.40 | 0.40 | 0.80 | 1.0201 ± 0.0084 | 0.66 |
+| white_wine | continuous | 0.1 | 250 | — | — | xgboost (9/20) | — | — | 0.55 | 0.50 | 0.65 | 1.0088 ± 0.0059 | 0.61 |
+| white_wine | continuous | 0.1 | 1000 | — | — | xgboost (9/20) | — | — | 0.50 | 0.55 | 0.80 | 1.0140 ± 0.0059 | 0.73 |
+| white_wine | continuous | 0.1 | 1224 | — | — | xgboost (10/20) | — | — | 0.55 | 0.50 | 0.80 | 1.0157 ± 0.0060 | 0.78 |
+| white_wine | continuous | 0.2 | 250 | — | — | xgboost (9/20) | — | — | 0.35 | 0.55 | 0.65 | 1.0132 ± 0.0102 | 0.72 |
+| white_wine | continuous | 0.2 | 1000 | — | — | xgboost (11/20) | — | — | 0.50 | 0.55 | 0.80 | 1.0080 ± 0.0059 | 0.76 |
+| white_wine | continuous | 0.2 | 1224 | — | — | xgboost (13/20) | — | — | 0.60 | 0.60 | 0.80 | 1.0056 ± 0.0058 | 0.76 |
+| cpu_activity | continuous | 0.05 | 250 | — | — | xgboost (10/20) | — | — | 0.55 | 0.50 | 0.55 | 1.1365 ± 0.0925 | 0.69 |
+| cpu_activity | continuous | 0.05 | 1000 | — | — | xgboost (10/20) | — | — | 0.75 | 0.60 | 0.65 | 1.0735 ± 0.0597 | 0.70 |
+| cpu_activity | continuous | 0.05 | 2048 | — | — | lightgbm (15/20) | — | — | 0.55 | 0.55 | 0.60 | 1.0088 ± 0.0752 | 0.71 |
+| cpu_activity | continuous | 0.1 | 250 | — | — | lightgbm (10/20) | — | — | 0.55 | 0.60 | 0.55 | 1.1523 ± 0.1345 | 0.68 |
+| cpu_activity | continuous | 0.1 | 1000 | — | — | lightgbm (12/20) | — | — | 0.65 | 0.60 | 0.65 | 1.1545 ± 0.1026 | 0.67 |
+| cpu_activity | continuous | 0.1 | 2048 | — | — | lightgbm (15/20) | — | — | 0.55 | 0.55 | 0.60 | 1.0578 ± 0.0665 | 0.68 |
+| cpu_activity | continuous | 0.2 | 250 | — | — | lightgbm (11/20) | — | — | 0.50 | 0.55 | 0.55 | 1.0311 ± 0.0788 | 0.70 |
+| cpu_activity | continuous | 0.2 | 1000 | — | — | xgboost (12/20) | — | — | 0.65 | 0.50 | 0.65 | 1.1616 ± 0.0826 | 0.70 |
+| cpu_activity | continuous | 0.2 | 2048 | — | — | lightgbm (10/20) | — | — | 0.60 | 0.70 | 0.60 | 1.0810 ± 0.0909 | 0.70 |
+| kin8nm | continuous | 0.05 | 250 | — | — | dnn (20/20) | — | — | 1.00 | 1.00 | 1.00 | 1.0000 ± 0.0000 | 0.80 |
+| kin8nm | continuous | 0.05 | 1000 | — | — | dnn (20/20) | — | — | 1.00 | 1.00 | 1.00 | 1.0000 ± 0.0000 | 0.85 |
+| kin8nm | continuous | 0.05 | 2048 | — | — | dnn (20/20) | — | — | 1.00 | 1.00 | 1.00 | 1.0000 ± 0.0000 | 0.88 |
+| kin8nm | continuous | 0.1 | 250 | — | — | dnn (20/20) | — | — | 1.00 | 1.00 | 1.00 | 1.0000 ± 0.0000 | 0.82 |
+| kin8nm | continuous | 0.1 | 1000 | — | — | dnn (20/20) | — | — | 1.00 | 1.00 | 1.00 | 1.0000 ± 0.0000 | 0.90 |
+| kin8nm | continuous | 0.1 | 2048 | — | — | dnn (20/20) | — | — | 1.00 | 1.00 | 1.00 | 1.0000 ± 0.0000 | 0.90 |
+| kin8nm | continuous | 0.2 | 250 | — | — | dnn (20/20) | — | — | 1.00 | 1.00 | 1.00 | 1.0000 ± 0.0000 | 0.88 |
+| kin8nm | continuous | 0.2 | 1000 | — | — | dnn (20/20) | — | — | 1.00 | 1.00 | 1.00 | 1.0000 ± 0.0000 | 0.91 |
+| kin8nm | continuous | 0.2 | 2048 | — | — | dnn (20/20) | — | — | 1.00 | 1.00 | 1.00 | 1.0000 ± 0.0000 | 0.91 |
+| pumadyn32nh | continuous | 0.05 | 250 | — | — | rf (13/20) | — | — | 0.70 | 0.65 | 0.85 | 1.0104 ± 0.0063 | 0.81 |
+| pumadyn32nh | continuous | 0.05 | 1000 | — | — | rf (17/20) | — | — | 0.85 | 0.85 | 1.00 | 1.0099 ± 0.0056 | 0.85 |
+| pumadyn32nh | continuous | 0.05 | 2048 | — | — | rf (20/20) | — | — | 1.00 | 1.00 | 1.00 | 1.0000 ± 0.0000 | 0.89 |
+| pumadyn32nh | continuous | 0.1 | 250 | — | — | rf (14/20) | — | — | 0.65 | 0.70 | 0.85 | 1.0076 ± 0.0078 | 0.84 |
+| pumadyn32nh | continuous | 0.1 | 1000 | — | — | rf (17/20) | — | — | 0.85 | 0.85 | 1.00 | 1.0101 ± 0.0056 | 0.89 |
+| pumadyn32nh | continuous | 0.1 | 2048 | — | — | rf (20/20) | — | — | 1.00 | 1.00 | 1.00 | 1.0000 ± 0.0000 | 0.89 |
+| pumadyn32nh | continuous | 0.2 | 250 | — | — | rf (13/20) | — | — | 0.80 | 0.65 | 0.85 | 1.0126 ± 0.0060 | 0.84 |
+| pumadyn32nh | continuous | 0.2 | 1000 | — | — | rf (16/20) | — | — | 0.80 | 0.80 | 1.00 | 1.0135 ± 0.0063 | 0.87 |
+| pumadyn32nh | continuous | 0.2 | 2048 | — | — | rf (19/20) | — | — | 0.95 | 0.95 | 1.00 | 1.0034 ± 0.0034 | 0.89 |
+| grid_stability | continuous | 0.05 | 250 | — | — | dnn (16/20) | — | — | 0.70 | 0.70 | 0.90 | 1.0257 ± 0.0179 | 0.90 |
+| grid_stability | continuous | 0.05 | 1000 | — | — | dnn (19/20) | — | — | 0.90 | 0.85 | 0.95 | 1.0110 ± 0.0091 | 0.93 |
+| grid_stability | continuous | 0.05 | 2500 | — | — | dnn (20/20) | — | — | 0.95 | 0.90 | 0.95 | 1.0020 ± 0.0020 | 0.94 |
+| grid_stability | continuous | 0.1 | 250 | — | — | dnn (17/20) | — | — | 0.85 | 0.75 | 0.90 | 1.0114 ± 0.0091 | 0.91 |
+| grid_stability | continuous | 0.1 | 1000 | — | — | dnn (20/20) | — | — | 0.95 | 0.90 | 0.95 | 1.0020 ± 0.0020 | 0.95 |
+| grid_stability | continuous | 0.1 | 2500 | — | — | dnn (19/20) | — | — | 1.00 | 0.95 | 0.95 | 1.0000 ± 0.0000 | 0.94 |
+| grid_stability | continuous | 0.2 | 250 | — | — | dnn (17/20) | — | — | 0.80 | 0.90 | 0.90 | 1.0030 ± 0.0097 | 0.92 |
+| grid_stability | continuous | 0.2 | 1000 | — | — | dnn (18/20) | — | — | 0.95 | 0.90 | 0.95 | 1.0044 ± 0.0044 | 0.93 |
+| grid_stability | continuous | 0.2 | 2500 | — | — | dnn (18/20) | — | — | 0.95 | 1.00 | 0.95 | 0.9985 ± 0.0015 | 0.93 |
+| brazilian_houses | continuous | 0.05 | 250 | — | — | xgboost (10/20) | — | — | 0.50 | 0.05 | 0.05 | 1.4492 ± 0.4191 | 0.09 |
+| brazilian_houses | continuous | 0.05 | 1000 | — | — | rf (9/20) | — | — | 0.30 | 0.00 | 0.15 | 5.8999 ± 2.6993 | 0.06 |
+| brazilian_houses | continuous | 0.05 | 2673 | — | — | rf (9/20) | — | — | 0.05 | 0.05 | 0.35 | 11.4810 ± 3.7344 | 0.09 |
+| brazilian_houses | continuous | 0.1 | 250 | — | — | rf (8/20) | — | — | 0.45 | 0.10 | 0.05 | 4.2510 ± 2.1134 | 0.00 |
+| brazilian_houses | continuous | 0.1 | 1000 | — | — | xgboost (10/20) | — | — | 0.25 | 0.15 | 0.15 | 4.2278 ± 2.5111 | 0.04 |
+| brazilian_houses | continuous | 0.1 | 2673 | — | — | rf (9/20) | — | — | 0.05 | 0.00 | 0.35 | 11.8573 ± 3.8942 | 0.00 |
+| brazilian_houses | continuous | 0.2 | 250 | — | — | xgboost (9/20) | — | — | 0.50 | 0.05 | 0.05 | 3.7860 ± 2.1162 | -0.22 |
+| brazilian_houses | continuous | 0.2 | 1000 | — | — | xgboost (13/20) | — | — | 0.15 | 0.10 | 0.15 | 7.5874 ± 3.6212 | -0.16 |
+| brazilian_houses | continuous | 0.2 | 2673 | — | — | xgboost (14/20) | — | — | 0.10 | 0.05 | 0.35 | 7.8844 ± 3.0221 | -0.15 |
+| naval_propulsion_plant | continuous | 0.05 | 250 | — | — | xgboost (12/20) | — | — | 0.75 | 0.60 | 0.55 | 0.9976 ± 0.0094 | 0.91 |
+| naval_propulsion_plant | continuous | 0.05 | 1000 | — | — | xgboost (18/20) | — | — | 0.75 | 0.80 | 0.85 | 1.0009 ± 0.0083 | 0.96 |
+| naval_propulsion_plant | continuous | 0.05 | 2983 | — | — | xgboost (19/20) | — | — | 0.80 | 0.85 | 0.75 | 0.9966 ± 0.0036 | 0.97 |
+| naval_propulsion_plant | continuous | 0.1 | 250 | — | — | xgboost (16/20) | — | — | 0.85 | 0.60 | 0.55 | 0.9986 ± 0.0026 | 0.92 |
+| naval_propulsion_plant | continuous | 0.1 | 1000 | — | — | xgboost (19/20) | — | — | 0.70 | 0.75 | 0.85 | 1.0019 ± 0.0084 | 0.95 |
+| naval_propulsion_plant | continuous | 0.1 | 2983 | — | — | xgboost (20/20) | — | — | 0.75 | 0.80 | 0.75 | 1.0011 ± 0.0059 | 0.96 |
+| naval_propulsion_plant | continuous | 0.2 | 250 | — | — | xgboost (19/20) | — | — | 0.60 | 0.75 | 0.55 | 0.9929 ± 0.0104 | 0.91 |
+| naval_propulsion_plant | continuous | 0.2 | 1000 | — | — | xgboost (20/20) | — | — | 0.65 | 0.80 | 0.85 | 1.0001 ± 0.0086 | 0.91 |
+| naval_propulsion_plant | continuous | 0.2 | 2983 | — | — | xgboost (20/20) | — | — | 0.75 | 0.80 | 0.75 | 1.0011 ± 0.0059 | 0.91 |
+| miami_housing | continuous | 0.05 | 250 | — | — | xgboost (12/20) | — | — | 0.60 | 0.55 | 0.50 | 1.0433 ± 0.0469 | 0.73 |
+| miami_housing | continuous | 0.05 | 1000 | — | — | lightgbm (10/20) | — | — | 0.75 | 0.55 | 0.50 | 1.0012 ± 0.0074 | 0.80 |
+| miami_housing | continuous | 0.05 | 3483 | — | — | xgboost (11/20) | — | — | 0.70 | 0.50 | 0.40 | 0.9960 ± 0.0059 | 0.77 |
+| miami_housing | continuous | 0.1 | 250 | — | — | xgboost (12/20) | — | — | 0.60 | 0.45 | 0.50 | 1.0188 ± 0.0200 | 0.78 |
+| miami_housing | continuous | 0.1 | 1000 | — | — | lightgbm (10/20) | — | — | 0.65 | 0.55 | 0.50 | 1.0016 ± 0.0043 | 0.80 |
+| miami_housing | continuous | 0.1 | 3483 | — | — | xgboost (13/20) | — | — | 0.70 | 0.30 | 0.40 | 1.0070 ± 0.0052 | 0.83 |
+| miami_housing | continuous | 0.2 | 250 | — | — | xgboost (16/20) | — | — | 0.40 | 0.55 | 0.50 | 0.9890 ± 0.0188 | 0.84 |
+| miami_housing | continuous | 0.2 | 1000 | — | — | xgboost (16/20) | — | — | 0.35 | 0.45 | 0.50 | 1.0066 ± 0.0079 | 0.80 |
+| miami_housing | continuous | 0.2 | 3483 | — | — | xgboost (18/20) | — | — | 0.45 | 0.35 | 0.40 | 1.0086 ± 0.0068 | 0.81 |
+| fifa | continuous | 0.05 | 250 | — | — | xgboost (7/20) | — | — | 0.35 | 0.20 | 0.35 | 1.1509 ± 0.1125 | 0.25 |
+| fifa | continuous | 0.05 | 1000 | — | — | lightgbm (9/20) | — | — | 0.40 | 0.35 | 0.30 | 1.0759 ± 0.0771 | 0.42 |
+| fifa | continuous | 0.05 | 4000 | — | — | lightgbm (10/20) | — | — | 0.20 | 0.25 | 0.20 | 1.0264 ± 0.0139 | 0.40 |
+| fifa | continuous | 0.05 | 4794 | — | — | xgboost (9/20) | — | — | 0.10 | 0.25 | 0.35 | 1.0368 ± 0.0135 | 0.45 |
+| fifa | continuous | 0.1 | 250 | — | — | lightgbm (11/20) | — | — | 0.40 | 0.55 | 0.35 | 1.0208 ± 0.0588 | 0.62 |
+| fifa | continuous | 0.1 | 1000 | — | — | lightgbm (11/20) | — | — | 0.45 | 0.25 | 0.30 | 1.0164 ± 0.0091 | 0.66 |
+| fifa | continuous | 0.1 | 4000 | — | — | xgboost (10/20) | — | — | 0.20 | 0.30 | 0.20 | 1.0131 ± 0.0140 | 0.69 |
+| fifa | continuous | 0.1 | 4794 | — | — | xgboost (10/20) | — | — | 0.15 | 0.20 | 0.35 | 1.0393 ± 0.0126 | 0.67 |
+| fifa | continuous | 0.2 | 250 | — | — | xgboost (11/20) | — | — | 0.30 | 0.15 | 0.35 | 0.9991 ± 0.0305 | 0.65 |
+| fifa | continuous | 0.2 | 1000 | — | — | xgboost (11/20) | — | — | 0.35 | 0.25 | 0.30 | 1.0159 ± 0.0114 | 0.70 |
+| fifa | continuous | 0.2 | 4000 | — | — | xgboost (13/20) | — | — | 0.20 | 0.20 | 0.20 | 1.0295 ± 0.0138 | 0.70 |
+| fifa | continuous | 0.2 | 4794 | — | — | xgboost (14/20) | — | — | 0.15 | 0.20 | 0.35 | 1.0438 ± 0.0131 | 0.69 |
+| california_housing | continuous | 0.05 | 250 | — | — | xgboost (10/20) | — | — | 0.65 | 0.20 | 0.40 | 1.0144 ± 0.0124 | 0.63 |
+| california_housing | continuous | 0.05 | 1000 | — | — | lightgbm (11/20) | — | — | 0.75 | 0.60 | 0.65 | 1.0005 ± 0.0009 | 0.76 |
+| california_housing | continuous | 0.05 | 4000 | — | — | lightgbm (13/20) | — | — | 0.75 | 0.40 | 0.55 | 1.0020 ± 0.0012 | 0.76 |
+| california_housing | continuous | 0.05 | 5160 | — | — | lightgbm (16/20) | — | — | 0.60 | 0.45 | 0.55 | 1.0014 ± 0.0012 | 0.81 |
+| california_housing | continuous | 0.1 | 250 | — | — | xgboost (14/20) | — | — | 0.45 | 0.35 | 0.40 | 1.0175 ± 0.0161 | 0.71 |
+| california_housing | continuous | 0.1 | 1000 | — | — | xgboost (12/20) | — | — | 0.60 | 0.45 | 0.65 | 1.0008 ± 0.0009 | 0.80 |
+| california_housing | continuous | 0.1 | 4000 | — | — | xgboost (12/20) | — | — | 0.30 | 0.65 | 0.55 | 1.0024 ± 0.0034 | 0.80 |
+| california_housing | continuous | 0.1 | 5160 | — | — | lightgbm (10/20) | — | — | 0.50 | 0.55 | 0.55 | 1.0036 ± 0.0033 | 0.77 |
+| california_housing | continuous | 0.2 | 250 | — | — | xgboost (11/20) | — | — | 0.40 | 0.50 | 0.40 | 0.9967 ± 0.0030 | 0.77 |
+| california_housing | continuous | 0.2 | 1000 | — | — | xgboost (12/20) | — | — | 0.60 | 0.35 | 0.65 | 1.0038 ± 0.0029 | 0.79 |
+| california_housing | continuous | 0.2 | 4000 | — | — | xgboost (14/20) | — | — | 0.30 | 0.45 | 0.55 | 1.0038 ± 0.0034 | 0.79 |
+| california_housing | continuous | 0.2 | 5160 | — | — | xgboost (15/20) | — | — | 0.45 | 0.50 | 0.55 | 1.0039 ± 0.0034 | 0.82 |
+| kings_county | continuous | 0.05 | 250 | — | — | xgboost (10/20) | — | — | 0.50 | 0.50 | 0.45 | 0.9847 ± 0.0170 | 0.51 |
+| kings_county | continuous | 0.05 | 1000 | — | — | xgboost (14/20) | — | — | 0.60 | 0.55 | 0.50 | 0.9892 ± 0.0161 | 0.82 |
+| kings_county | continuous | 0.05 | 4000 | — | — | xgboost (14/20) | — | — | 0.55 | 0.55 | 0.35 | 0.9881 ± 0.0125 | 0.80 |
+| kings_county | continuous | 0.05 | 5403 | — | — | xgboost (14/20) | — | — | 0.50 | 0.55 | 0.40 | 0.9799 ± 0.0151 | 0.82 |
+| kings_county | continuous | 0.1 | 250 | — | — | xgboost (11/20) | — | — | 0.30 | 0.60 | 0.45 | 0.9796 ± 0.0190 | 0.73 |
+| kings_county | continuous | 0.1 | 1000 | — | — | xgboost (16/20) | — | — | 0.65 | 0.45 | 0.50 | 0.9985 ± 0.0142 | 0.78 |
+| kings_county | continuous | 0.1 | 4000 | — | — | xgboost (17/20) | — | — | 0.60 | 0.50 | 0.35 | 0.9951 ± 0.0113 | 0.74 |
+| kings_county | continuous | 0.1 | 5403 | — | — | xgboost (17/20) | — | — | 0.35 | 0.50 | 0.40 | 0.9874 ± 0.0147 | 0.74 |
+| kings_county | continuous | 0.2 | 250 | — | — | xgboost (13/20) | — | — | 0.25 | 0.35 | 0.45 | 0.9955 ± 0.0198 | 0.74 |
+| kings_county | continuous | 0.2 | 1000 | — | — | xgboost (14/20) | — | — | 0.55 | 0.45 | 0.50 | 1.0038 ± 0.0166 | 0.74 |
+| kings_county | continuous | 0.2 | 4000 | — | — | xgboost (16/20) | — | — | 0.55 | 0.45 | 0.35 | 1.0044 ± 0.0130 | 0.70 |
+| kings_county | continuous | 0.2 | 5403 | — | — | xgboost (17/20) | — | — | 0.45 | 0.45 | 0.40 | 0.9974 ± 0.0162 | 0.68 |
+| health_insurance | continuous | 0.05 | 250 | — | — | lasso (15/20) | — | — | 0.15 | 0.05 | 0.50 | 1.0394 ± 0.0046 | -0.35 |
+| health_insurance | continuous | 0.05 | 1000 | — | — | lasso (11/20) | — | — | 0.05 | 0.10 | 0.55 | 1.0422 ± 0.0046 | -0.37 |
+| health_insurance | continuous | 0.05 | 4000 | — | — | lasso (13/20) | — | — | 0.00 | 0.00 | 0.80 | 1.0537 ± 0.0020 | -0.35 |
+| health_insurance | continuous | 0.05 | 5568 | — | — | lasso (16/20) | — | — | 0.00 | 0.00 | 0.65 | 1.0525 ± 0.0021 | -0.35 |
+| health_insurance | continuous | 0.1 | 250 | — | — | lasso (10/20) | — | — | 0.25 | 0.10 | 0.50 | 1.0316 ± 0.0052 | -0.35 |
+| health_insurance | continuous | 0.1 | 1000 | — | — | lasso (10/20) | — | — | 0.10 | 0.10 | 0.55 | 1.0447 ± 0.0040 | -0.40 |
+| health_insurance | continuous | 0.1 | 4000 | — | — | lasso (14/20) | — | — | 0.00 | 0.00 | 0.80 | 1.0537 ± 0.0020 | -0.34 |
+| health_insurance | continuous | 0.1 | 5568 | — | — | lasso (15/20) | — | — | 0.00 | 0.00 | 0.65 | 1.0525 ± 0.0021 | -0.31 |
+| health_insurance | continuous | 0.2 | 250 | — | — | dnn (6/20) | — | — | 0.45 | 0.25 | 0.50 | 1.0094 ± 0.0055 | 0.04 |
+| health_insurance | continuous | 0.2 | 1000 | — | — | dnn (10/20) | — | — | 0.45 | 0.30 | 0.55 | 1.0090 ± 0.0039 | 0.18 |
+| health_insurance | continuous | 0.2 | 4000 | — | — | dnn (10/20) | — | — | 0.30 | 0.35 | 0.80 | 1.0088 ± 0.0027 | 0.39 |
+| health_insurance | continuous | 0.2 | 5568 | — | — | dnn (10/20) | — | — | 0.20 | 0.20 | 0.65 | 1.0142 ± 0.0040 | 0.27 |
+| fps_benchmark | continuous | 0.05 | 250 | — | — | xgboost (14/20) | — | — | 0.85 | 0.65 | 0.80 | 1.0728 ± 0.0627 | 0.82 |
+| fps_benchmark | continuous | 0.05 | 1000 | — | — | xgboost (16/20) | — | — | 0.70 | 0.75 | 0.95 | 1.0318 ± 0.0217 | 0.82 |
+| fps_benchmark | continuous | 0.05 | 4000 | — | — | xgboost (18/20) | — | — | 0.85 | 0.85 | 1.00 | 1.0097 ± 0.0059 | 0.84 |
+| fps_benchmark | continuous | 0.05 | 6156 | — | — | xgboost (18/20) | — | — | 0.85 | 0.85 | 1.00 | 1.0097 ± 0.0059 | 0.83 |
+| fps_benchmark | continuous | 0.1 | 250 | — | — | xgboost (15/20) | — | — | 0.80 | 0.70 | 0.80 | 1.0147 ± 0.0167 | 0.88 |
+| fps_benchmark | continuous | 0.1 | 1000 | — | — | xgboost (18/20) | — | — | 0.80 | 0.85 | 0.95 | 1.0104 ± 0.0112 | 0.85 |
+| fps_benchmark | continuous | 0.1 | 4000 | — | — | xgboost (17/20) | — | — | 0.80 | 0.80 | 1.00 | 1.0178 ± 0.0096 | 0.83 |
+| fps_benchmark | continuous | 0.1 | 6156 | — | — | xgboost (17/20) | — | — | 0.80 | 0.80 | 1.00 | 1.0178 ± 0.0096 | 0.82 |
+| fps_benchmark | continuous | 0.2 | 250 | — | — | xgboost (17/20) | — | — | 0.70 | 0.80 | 0.80 | 0.9873 ± 0.0213 | 0.85 |
+| fps_benchmark | continuous | 0.2 | 1000 | — | — | xgboost (19/20) | — | — | 0.95 | 1.00 | 0.95 | 0.9948 ± 0.0052 | 0.90 |
+| fps_benchmark | continuous | 0.2 | 4000 | — | — | xgboost (19/20) | — | — | 1.00 | 1.00 | 1.00 | 1.0000 ± 0.0000 | 0.85 |
+| fps_benchmark | continuous | 0.2 | 6156 | — | — | xgboost (19/20) | — | — | 1.00 | 1.00 | 1.00 | 1.0000 ± 0.0000 | 0.86 |
+| cps88wages | continuous | 0.05 | 250 | — | — | rf (8/20) | — | — | 0.55 | 0.45 | 0.75 | 1.0068 ± 0.0054 | 0.29 |
+| cps88wages | continuous | 0.05 | 1000 | — | — | dnn (6/20) | — | — | 0.30 | 0.30 | 0.80 | 1.0245 ± 0.0067 | 0.18 |
+| cps88wages | continuous | 0.05 | 4000 | — | — | dnn (14/20) | — | — | 0.70 | 0.70 | 0.95 | 1.0067 ± 0.0037 | 0.43 |
+| cps88wages | continuous | 0.05 | 7038 | — | — | dnn (17/20) | — | — | 0.75 | 0.75 | 1.00 | 1.0030 ± 0.0016 | 0.18 |
+| cps88wages | continuous | 0.1 | 250 | — | — | dnn (9/20) | — | — | 0.55 | 0.50 | 0.75 | 1.0089 ± 0.0052 | 0.12 |
+| cps88wages | continuous | 0.1 | 1000 | — | — | dnn (13/20) | — | — | 0.60 | 0.70 | 0.80 | 1.0023 ± 0.0044 | 0.33 |
+| cps88wages | continuous | 0.1 | 4000 | — | — | dnn (17/20) | — | — | 0.85 | 0.90 | 0.95 | 1.0010 ± 0.0012 | 0.54 |
+| cps88wages | continuous | 0.1 | 7038 | — | — | dnn (17/20) | — | — | 1.00 | 1.00 | 1.00 | 1.0000 ± 0.0000 | 0.51 |
+| cps88wages | continuous | 0.2 | 250 | — | — | dnn (11/20) | — | — | 0.45 | 0.60 | 0.75 | 1.0071 ± 0.0087 | 0.36 |
+| cps88wages | continuous | 0.2 | 1000 | — | — | lightgbm (7/20) | — | — | 0.45 | 0.45 | 0.80 | 1.0058 ± 0.0041 | 0.47 |
+| cps88wages | continuous | 0.2 | 4000 | — | — | dnn (14/20) | — | — | 0.70 | 0.75 | 0.95 | 1.0018 ± 0.0015 | 0.57 |
+| cps88wages | continuous | 0.2 | 7038 | — | — | dnn (17/20) | — | — | 0.95 | 0.95 | 1.00 | 1.0000 ± 0.0000 | 0.62 |
+| physiochemical_protein | continuous | 0.05 | 250 | — | — | dnn (7/20) | — | — | 0.45 | 0.45 | 0.65 | 1.0904 ± 0.0479 | 0.46 |
+| physiochemical_protein | continuous | 0.05 | 1000 | — | — | xgboost (9/20) | — | — | 0.70 | 0.45 | 0.70 | 1.0160 ± 0.0076 | 0.67 |
+| physiochemical_protein | continuous | 0.05 | 4000 | — | — | xgboost (16/20) | — | — | 0.60 | 0.65 | 0.80 | 1.0085 ± 0.0045 | 0.78 |
+| physiochemical_protein | continuous | 0.05 | 11432 | — | — | xgboost (17/20) | — | — | 0.75 | 0.75 | 0.85 | 1.0041 ± 0.0026 | 0.77 |
+| physiochemical_protein | continuous | 0.1 | 250 | — | — | xgboost (9/20) | — | — | 0.50 | 0.35 | 0.65 | 1.0056 ± 0.0047 | 0.70 |
+| physiochemical_protein | continuous | 0.1 | 1000 | — | — | xgboost (10/20) | — | — | 0.85 | 0.70 | 0.70 | 1.0005 ± 0.0016 | 0.76 |
+| physiochemical_protein | continuous | 0.1 | 4000 | — | — | xgboost (14/20) | — | — | 0.80 | 0.80 | 0.80 | 1.0002 ± 0.0014 | 0.79 |
+| physiochemical_protein | continuous | 0.1 | 11432 | — | — | xgboost (15/20) | — | — | 0.80 | 0.95 | 0.85 | 0.9998 ± 0.0015 | 0.81 |
+| physiochemical_protein | continuous | 0.2 | 250 | — | — | dnn (12/20) | — | — | 0.55 | 0.55 | 0.65 | 1.0070 ± 0.0097 | 0.71 |
+| physiochemical_protein | continuous | 0.2 | 1000 | — | — | dnn (13/20) | — | — | 0.70 | 0.60 | 0.70 | 1.0018 ± 0.0029 | 0.83 |
+| physiochemical_protein | continuous | 0.2 | 4000 | — | — | dnn (18/20) | — | — | 0.50 | 0.40 | 0.80 | 1.0048 ± 0.0018 | 0.78 |
+| physiochemical_protein | continuous | 0.2 | 11432 | — | — | dnn (19/20) | — | — | 0.40 | 0.35 | 0.85 | 1.0061 ± 0.0022 | 0.79 |
+| sarcos | continuous | 0.05 | 250 | — | — | xgboost (9/20) | — | — | 0.70 | 0.60 | 0.80 | 1.0275 ± 0.0127 | 0.77 |
+| sarcos | continuous | 0.05 | 1000 | — | — | xgboost (15/20) | — | — | 0.80 | 0.70 | 0.80 | 1.0096 ± 0.0070 | 0.83 |
+| sarcos | continuous | 0.05 | 4000 | — | — | xgboost (17/20) | — | — | 0.90 | 0.90 | 0.80 | 0.9977 ± 0.0020 | 0.84 |
+| sarcos | continuous | 0.05 | 12233 | — | — | xgboost (18/20) | — | — | 0.90 | 0.95 | 0.95 | 0.9989 ± 0.0022 | 0.80 |
+| sarcos | continuous | 0.1 | 250 | — | — | xgboost (11/20) | — | — | 0.70 | 0.60 | 0.80 | 1.0208 ± 0.0095 | 0.78 |
+| sarcos | continuous | 0.1 | 1000 | — | — | xgboost (18/20) | — | — | 0.85 | 0.85 | 0.80 | 0.9980 ± 0.0041 | 0.84 |
+| sarcos | continuous | 0.1 | 4000 | — | — | xgboost (19/20) | — | — | 0.80 | 0.90 | 0.80 | 0.9973 ± 0.0044 | 0.84 |
+| sarcos | continuous | 0.1 | 12233 | — | — | xgboost (19/20) | — | — | 0.85 | 0.90 | 0.95 | 1.0015 ± 0.0034 | 0.85 |
+| sarcos | continuous | 0.2 | 250 | — | — | xgboost (11/20) | — | — | 0.60 | 0.50 | 0.80 | 1.0229 ± 0.0111 | 0.73 |
+| sarcos | continuous | 0.2 | 1000 | — | — | xgboost (14/20) | — | — | 0.75 | 0.55 | 0.80 | 1.0122 ± 0.0061 | 0.79 |
+| sarcos | continuous | 0.2 | 4000 | — | — | xgboost (13/20) | — | — | 0.90 | 0.80 | 0.80 | 1.0002 ± 0.0014 | 0.81 |
+| sarcos | continuous | 0.2 | 12233 | — | — | xgboost (14/20) | — | — | 0.90 | 0.85 | 0.95 | 1.0014 ± 0.0011 | 0.84 |
+| diamonds | continuous | 0.05 | 250 | — | — | xgboost (11/20) | — | — | 0.50 | 0.60 | 0.45 | 1.0000 ± 0.0177 | 0.63 |
+| diamonds | continuous | 0.05 | 1000 | — | — | xgboost (14/20) | — | — | 0.70 | 0.65 | 0.80 | 1.3004 ± 0.3423 | 0.71 |
+| diamonds | continuous | 0.05 | 4000 | — | — | xgboost (18/20) | — | — | 0.80 | 0.85 | 0.85 | 0.9991 ± 0.0038 | 0.68 |
+| diamonds | continuous | 0.05 | 12500 | — | — | xgboost (20/20) | — | — | 1.00 | 0.95 | 0.95 | 1.0000 ± 0.0000 | 0.70 |
+| diamonds | continuous | 0.1 | 250 | — | — | xgboost (13/20) | — | — | 0.55 | 0.60 | 0.45 | 0.9024 ± 0.0618 | 0.67 |
+| diamonds | continuous | 0.1 | 1000 | — | — | xgboost (14/20) | — | — | 0.60 | 0.65 | 0.80 | 1.3011 ± 0.3422 | 0.64 |
+| diamonds | continuous | 0.1 | 4000 | — | — | xgboost (17/20) | — | — | 0.85 | 0.80 | 0.85 | 1.0008 ± 0.0039 | 0.67 |
+| diamonds | continuous | 0.1 | 12500 | — | — | xgboost (19/20) | — | — | 0.95 | 0.90 | 0.95 | 1.0012 ± 0.0012 | 0.75 |
+| diamonds | continuous | 0.2 | 250 | — | — | xgboost (11/20) | — | — | 0.45 | 0.50 | 0.45 | 0.9176 ± 0.0652 | 0.68 |
+| diamonds | continuous | 0.2 | 1000 | — | — | xgboost (11/20) | — | — | 0.55 | 0.50 | 0.80 | 1.6173 ± 0.6583 | 0.69 |
+| diamonds | continuous | 0.2 | 4000 | — | — | xgboost (17/20) | — | — | 0.75 | 0.80 | 0.85 | 1.0008 ± 0.0043 | 0.74 |
+| diamonds | continuous | 0.2 | 12500 | — | — | xgboost (18/20) | — | — | 0.90 | 0.85 | 0.95 | 1.0039 ± 0.0028 | 0.73 |
+| video_transcoding | continuous | 0.05 | 250 | — | — | xgboost (15/20) | — | — | 0.70 | 0.65 | 0.75 | 1.0146 ± 0.0120 | 0.80 |
+| video_transcoding | continuous | 0.05 | 1000 | — | — | xgboost (14/20) | — | — | 0.60 | 0.60 | 0.70 | 1.0178 ± 0.0130 | 0.80 |
+| video_transcoding | continuous | 0.05 | 4000 | — | — | xgboost (17/20) | — | — | 0.80 | 0.75 | 0.95 | 1.0097 ± 0.0048 | 0.83 |
+| video_transcoding | continuous | 0.05 | 12500 | — | — | xgboost (19/20) | — | — | 0.90 | 0.85 | 0.95 | 1.0036 ± 0.0025 | 0.82 |
+| video_transcoding | continuous | 0.1 | 250 | — | — | xgboost (15/20) | — | — | 0.60 | 0.65 | 0.75 | 1.0037 ± 0.0123 | 0.79 |
+| video_transcoding | continuous | 0.1 | 1000 | — | — | xgboost (17/20) | — | — | 0.75 | 0.75 | 0.70 | 1.0046 ± 0.0100 | 0.79 |
+| video_transcoding | continuous | 0.1 | 4000 | — | — | xgboost (20/20) | — | — | 0.95 | 0.90 | 0.95 | 1.0017 ± 0.0017 | 0.78 |
+| video_transcoding | continuous | 0.1 | 12500 | — | — | xgboost (20/20) | — | — | 0.95 | 0.90 | 0.95 | 1.0017 ± 0.0017 | 0.77 |
+| video_transcoding | continuous | 0.2 | 250 | — | — | xgboost (16/20) | — | — | 0.65 | 0.70 | 0.75 | 1.0010 ± 0.0095 | 0.80 |
+| video_transcoding | continuous | 0.2 | 1000 | — | — | xgboost (20/20) | — | — | 0.80 | 0.90 | 0.70 | 0.9877 ± 0.0068 | 0.81 |
+| video_transcoding | continuous | 0.2 | 4000 | — | — | xgboost (20/20) | — | — | 0.95 | 0.90 | 0.95 | 1.0017 ± 0.0017 | 0.80 |
+| video_transcoding | continuous | 0.2 | 12500 | — | — | xgboost (20/20) | — | — | 0.95 | 0.90 | 0.95 | 1.0017 ± 0.0017 | 0.78 |
+| wave_energy | continuous | 0.05 | 250 | — | — | ridge (11/20) | — | — | 0.90 | 0.50 | 0.50 | 1.0096 ± 0.0097 | 0.86 |
+| wave_energy | continuous | 0.05 | 1000 | — | — | ridge (13/20) | — | — | 0.90 | 0.50 | 0.60 | 1.0001 ± 0.0001 | 0.89 |
+| wave_energy | continuous | 0.05 | 4000 | — | — | ridge (11/20) | — | — | 0.75 | 0.60 | 0.45 | 0.9819 ± 0.0176 | 0.90 |
+| wave_energy | continuous | 0.05 | 12500 | — | — | ridge (11/20) | — | — | 0.80 | 0.60 | 0.60 | 1.0001 ± 0.0002 | 0.90 |
+| wave_energy | continuous | 0.1 | 250 | — | — | ridge (12/20) | — | — | 0.95 | 0.55 | 0.50 | 0.9999 ± 0.0001 | 0.86 |
+| wave_energy | continuous | 0.1 | 1000 | — | — | ridge (11/20) | — | — | 0.90 | 0.60 | 0.60 | 0.9999 ± 0.0002 | 0.88 |
+| wave_energy | continuous | 0.1 | 4000 | — | — | ridge (11/20) | — | — | 0.75 | 0.60 | 0.45 | 0.9819 ± 0.0176 | 0.90 |
+| wave_energy | continuous | 0.1 | 12500 | — | — | ridge (11/20) | — | — | 0.80 | 0.60 | 0.60 | 1.0001 ± 0.0002 | 0.90 |
+| wave_energy | continuous | 0.2 | 250 | — | — | ridge (12/20) | — | — | 0.95 | 0.55 | 0.50 | 0.9999 ± 0.0001 | 0.86 |
+| wave_energy | continuous | 0.2 | 1000 | — | — | ols (10/20) | — | — | 0.95 | 0.65 | 0.60 | 0.9999 ± 0.0001 | 0.88 |
+| wave_energy | continuous | 0.2 | 4000 | — | — | ridge (11/20) | — | — | 0.75 | 0.60 | 0.45 | 0.9819 ± 0.0176 | 0.89 |
+| wave_energy | continuous | 0.2 | 12500 | — | — | ols (10/20) | — | — | 0.75 | 0.65 | 0.60 | 1.0000 ± 0.0002 | 0.89 |
+
+Acceptance checks:
+  [PASS] abalone: splits 0..19 all present exactly once: 20 rows
+  [PASS] white_wine: splits 0..19 all present exactly once: 20 rows
+  [PASS] cpu_activity: splits 0..19 all present exactly once: 20 rows
+  [PASS] kin8nm: splits 0..19 all present exactly once: 20 rows
+  [PASS] pumadyn32nh: splits 0..19 all present exactly once: 20 rows
+  [PASS] grid_stability: splits 0..19 all present exactly once: 20 rows
+  [PASS] brazilian_houses: splits 0..19 all present exactly once: 20 rows
+  [PASS] naval_propulsion_plant: splits 0..19 all present exactly once: 20 rows
+  [PASS] miami_housing: splits 0..19 all present exactly once: 20 rows
+  [PASS] fifa: splits 0..19 all present exactly once: 20 rows
+  [PASS] california_housing: splits 0..19 all present exactly once: 20 rows
+  [PASS] kings_county: splits 0..19 all present exactly once: 20 rows
+  [PASS] health_insurance: splits 0..19 all present exactly once: 20 rows
+  [PASS] fps_benchmark: splits 0..19 all present exactly once: 20 rows
+  [PASS] cps88wages: splits 0..19 all present exactly once: 20 rows
+  [PASS] physiochemical_protein: splits 0..19 all present exactly once: 20 rows
+  [PASS] sarcos: splits 0..19 all present exactly once: 20 rows
+  [PASS] diamonds: splits 0..19 all present exactly once: 20 rows
+  [PASS] video_transcoding: splits 0..19 all present exactly once: 20 rows
+  [PASS] wave_energy: splits 0..19 all present exactly once: 20 rows
+  [PASS] no NaN/Infinity in any output: 
+  [PASS] abalone n=250 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.946–0.950
+  [PASS] abalone n=250 alpha=0.05: split-CP coverage <= 0.954 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['lightgbm']
+  [PASS] abalone n=250 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.892–0.900
+  [PASS] abalone n=250 alpha=0.1: split-CP coverage <= 0.904 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['lightgbm']
+  [PASS] abalone n=250 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.797–0.802
+  [PASS] abalone n=250 alpha=0.2: split-CP coverage <= 0.804 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['lightgbm']
+  [PASS] abalone n=1000 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.947–0.950
+  [PASS] abalone n=1000 alpha=0.05: split-CP coverage <= 0.951 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['lightgbm']
+  [PASS] abalone n=1000 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.897–0.899
+  [PASS] abalone n=1000 alpha=0.1: split-CP coverage <= 0.901 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['lightgbm']
+  [PASS] abalone n=1000 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.793–0.798
+  [PASS] abalone n=1000 alpha=0.2: split-CP coverage <= 0.801 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['lightgbm']
+  [PASS] abalone n=1044 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.947–0.951
+  [PASS] abalone n=1044 alpha=0.05: split-CP coverage <= 0.951 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['lightgbm']
+  [PASS] abalone n=1044 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.898–0.900
+  [PASS] abalone n=1044 alpha=0.1: split-CP coverage <= 0.901 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['lightgbm']
+  [PASS] abalone n=1044 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.793–0.798
+  [PASS] abalone n=1044 alpha=0.2: split-CP coverage <= 0.801 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['lightgbm']
+  [PASS] white_wine n=250 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.950–0.955
+  [PASS] white_wine n=250 alpha=0.05: split-CP coverage <= 0.954 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] white_wine n=250 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.895–0.898
+  [PASS] white_wine n=250 alpha=0.1: split-CP coverage <= 0.904 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] white_wine n=250 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.788–0.800
+  [PASS] white_wine n=250 alpha=0.2: split-CP coverage <= 0.804 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] white_wine n=1000 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.947–0.952
+  [PASS] white_wine n=1000 alpha=0.05: split-CP coverage <= 0.951 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] white_wine n=1000 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.897–0.900
+  [PASS] white_wine n=1000 alpha=0.1: split-CP coverage <= 0.901 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] white_wine n=1000 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.797–0.801
+  [PASS] white_wine n=1000 alpha=0.2: split-CP coverage <= 0.801 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] white_wine n=1224 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.949–0.952
+  [PASS] white_wine n=1224 alpha=0.05: split-CP coverage <= 0.951 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] white_wine n=1224 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.898–0.901
+  [PASS] white_wine n=1224 alpha=0.1: split-CP coverage <= 0.901 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] white_wine n=1224 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.797–0.801
+  [PASS] white_wine n=1224 alpha=0.2: split-CP coverage <= 0.801 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] cpu_activity n=250 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.950–0.959
+  [PASS] cpu_activity n=250 alpha=0.05: split-CP coverage <= 0.954 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['rf']
+  [PASS] cpu_activity n=250 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.894–0.904
+  [PASS] cpu_activity n=250 alpha=0.1: split-CP coverage <= 0.904 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['rf']
+  [PASS] cpu_activity n=250 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.793–0.808
+  [PASS] cpu_activity n=250 alpha=0.2: split-CP coverage <= 0.804 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['rf']
+  [PASS] cpu_activity n=1000 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.949–0.953
+  [PASS] cpu_activity n=1000 alpha=0.05: split-CP coverage <= 0.951 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['rf']
+  [PASS] cpu_activity n=1000 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.900–0.903
+  [PASS] cpu_activity n=1000 alpha=0.1: split-CP coverage <= 0.901 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['rf']
+  [PASS] cpu_activity n=1000 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.796–0.808
+  [PASS] cpu_activity n=1000 alpha=0.2: split-CP coverage <= 0.801 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['rf']
+  [PASS] cpu_activity n=2048 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.950–0.954
+  [PASS] cpu_activity n=2048 alpha=0.05: split-CP coverage <= 0.950 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['rf']
+  [PASS] cpu_activity n=2048 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.902–0.904
+  [PASS] cpu_activity n=2048 alpha=0.1: split-CP coverage <= 0.900 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['rf']
+  [PASS] cpu_activity n=2048 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.799–0.806
+  [PASS] cpu_activity n=2048 alpha=0.2: split-CP coverage <= 0.800 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['rf']
+  [PASS] kin8nm n=250 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.945–0.951
+  [PASS] kin8nm n=250 alpha=0.05: split-CP coverage <= 0.954 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] kin8nm n=250 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.892–0.899
+  [PASS] kin8nm n=250 alpha=0.1: split-CP coverage <= 0.904 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] kin8nm n=250 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.788–0.799
+  [PASS] kin8nm n=250 alpha=0.2: split-CP coverage <= 0.804 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] kin8nm n=1000 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.949–0.952
+  [PASS] kin8nm n=1000 alpha=0.05: split-CP coverage <= 0.951 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] kin8nm n=1000 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.899–0.903
+  [PASS] kin8nm n=1000 alpha=0.1: split-CP coverage <= 0.901 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] kin8nm n=1000 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.796–0.806
+  [PASS] kin8nm n=1000 alpha=0.2: split-CP coverage <= 0.801 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] kin8nm n=2048 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.948–0.952
+  [PASS] kin8nm n=2048 alpha=0.05: split-CP coverage <= 0.950 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] kin8nm n=2048 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.899–0.903
+  [PASS] kin8nm n=2048 alpha=0.1: split-CP coverage <= 0.900 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] kin8nm n=2048 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.794–0.804
+  [PASS] kin8nm n=2048 alpha=0.2: split-CP coverage <= 0.800 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] pumadyn32nh n=250 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.953–0.958
+  [PASS] pumadyn32nh n=250 alpha=0.05: split-CP coverage <= 0.954 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] pumadyn32nh n=250 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.900–0.905
+  [PASS] pumadyn32nh n=250 alpha=0.1: split-CP coverage <= 0.904 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] pumadyn32nh n=250 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.793–0.809
+  [PASS] pumadyn32nh n=250 alpha=0.2: split-CP coverage <= 0.804 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] pumadyn32nh n=1000 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.949–0.953
+  [PASS] pumadyn32nh n=1000 alpha=0.05: split-CP coverage <= 0.951 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] pumadyn32nh n=1000 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.900–0.905
+  [PASS] pumadyn32nh n=1000 alpha=0.1: split-CP coverage <= 0.901 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] pumadyn32nh n=1000 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.793–0.807
+  [PASS] pumadyn32nh n=1000 alpha=0.2: split-CP coverage <= 0.801 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] pumadyn32nh n=2048 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.950–0.954
+  [PASS] pumadyn32nh n=2048 alpha=0.05: split-CP coverage <= 0.950 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] pumadyn32nh n=2048 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.902–0.903
+  [PASS] pumadyn32nh n=2048 alpha=0.1: split-CP coverage <= 0.900 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] pumadyn32nh n=2048 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.798–0.804
+  [PASS] pumadyn32nh n=2048 alpha=0.2: split-CP coverage <= 0.800 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] grid_stability n=250 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.949–0.956
+  [PASS] grid_stability n=250 alpha=0.05: split-CP coverage <= 0.954 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] grid_stability n=250 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.896–0.904
+  [PASS] grid_stability n=250 alpha=0.1: split-CP coverage <= 0.904 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] grid_stability n=250 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.790–0.803
+  [PASS] grid_stability n=250 alpha=0.2: split-CP coverage <= 0.804 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] grid_stability n=1000 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.947–0.951
+  [PASS] grid_stability n=1000 alpha=0.05: split-CP coverage <= 0.951 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] grid_stability n=1000 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.897–0.902
+  [PASS] grid_stability n=1000 alpha=0.1: split-CP coverage <= 0.901 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] grid_stability n=1000 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.794–0.804
+  [PASS] grid_stability n=1000 alpha=0.2: split-CP coverage <= 0.801 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] grid_stability n=2500 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.949–0.951
+  [PASS] grid_stability n=2500 alpha=0.05: split-CP coverage <= 0.950 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] grid_stability n=2500 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.898–0.903
+  [PASS] grid_stability n=2500 alpha=0.1: split-CP coverage <= 0.900 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] grid_stability n=2500 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.798–0.802
+  [PASS] grid_stability n=2500 alpha=0.2: split-CP coverage <= 0.800 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] brazilian_houses n=250 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.943–0.950
+  [PASS] brazilian_houses n=250 alpha=0.05: split-CP coverage <= 0.954 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] brazilian_houses n=250 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.888–0.898
+  [PASS] brazilian_houses n=250 alpha=0.1: split-CP coverage <= 0.904 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] brazilian_houses n=250 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.790–0.803
+  [PASS] brazilian_houses n=250 alpha=0.2: split-CP coverage <= 0.804 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] brazilian_houses n=1000 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.945–0.946
+  [PASS] brazilian_houses n=1000 alpha=0.05: split-CP coverage <= 0.951 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] brazilian_houses n=1000 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.893–0.896
+  [PASS] brazilian_houses n=1000 alpha=0.1: split-CP coverage <= 0.901 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] brazilian_houses n=1000 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.790–0.795
+  [PASS] brazilian_houses n=1000 alpha=0.2: split-CP coverage <= 0.801 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] brazilian_houses n=2673 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.948–0.950
+  [PASS] brazilian_houses n=2673 alpha=0.05: split-CP coverage <= 0.950 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] brazilian_houses n=2673 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.897–0.900
+  [PASS] brazilian_houses n=2673 alpha=0.1: split-CP coverage <= 0.900 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] brazilian_houses n=2673 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.795–0.799
+  [PASS] brazilian_houses n=2673 alpha=0.2: split-CP coverage <= 0.800 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] naval_propulsion_plant n=250 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.948–0.962
+  [PASS] naval_propulsion_plant n=250 alpha=0.05: split-CP coverage <= 0.954 + 4 SE where scores are continuous: 3 models checked, models with discrete residuals excluded: ['lasso', 'rf', 'xgboost', 'lightgbm']
+  [PASS] naval_propulsion_plant n=250 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.898–0.903
+  [PASS] naval_propulsion_plant n=250 alpha=0.1: split-CP coverage <= 0.904 + 4 SE where scores are continuous: 3 models checked, models with discrete residuals excluded: ['lasso', 'rf', 'xgboost', 'lightgbm']
+  [PASS] naval_propulsion_plant n=250 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.792–0.807
+  [PASS] naval_propulsion_plant n=250 alpha=0.2: split-CP coverage <= 0.804 + 4 SE where scores are continuous: 3 models checked, models with discrete residuals excluded: ['lasso', 'rf', 'xgboost', 'lightgbm']
+  [PASS] naval_propulsion_plant n=1000 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.948–0.958
+  [PASS] naval_propulsion_plant n=1000 alpha=0.05: split-CP coverage <= 0.951 + 4 SE where scores are continuous: 3 models checked, models with discrete residuals excluded: ['lasso', 'rf', 'xgboost', 'lightgbm']
+  [PASS] naval_propulsion_plant n=1000 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.899–0.907
+  [PASS] naval_propulsion_plant n=1000 alpha=0.1: split-CP coverage <= 0.901 + 4 SE where scores are continuous: 3 models checked, models with discrete residuals excluded: ['lasso', 'rf', 'xgboost', 'lightgbm']
+  [PASS] naval_propulsion_plant n=1000 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.797–0.807
+  [PASS] naval_propulsion_plant n=1000 alpha=0.2: split-CP coverage <= 0.801 + 4 SE where scores are continuous: 3 models checked, models with discrete residuals excluded: ['lasso', 'rf', 'xgboost', 'lightgbm']
+  [PASS] naval_propulsion_plant n=2983 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.950–0.959
+  [PASS] naval_propulsion_plant n=2983 alpha=0.05: split-CP coverage <= 0.950 + 4 SE where scores are continuous: 3 models checked, models with discrete residuals excluded: ['lasso', 'rf', 'xgboost', 'lightgbm']
+  [PASS] naval_propulsion_plant n=2983 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.901–0.907
+  [PASS] naval_propulsion_plant n=2983 alpha=0.1: split-CP coverage <= 0.900 + 4 SE where scores are continuous: 3 models checked, models with discrete residuals excluded: ['lasso', 'rf', 'xgboost', 'lightgbm']
+  [PASS] naval_propulsion_plant n=2983 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.799–0.807
+  [PASS] naval_propulsion_plant n=2983 alpha=0.2: split-CP coverage <= 0.800 + 4 SE where scores are continuous: 3 models checked, models with discrete residuals excluded: ['lasso', 'rf', 'xgboost', 'lightgbm']
+  [PASS] miami_housing n=250 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.953–0.957
+  [PASS] miami_housing n=250 alpha=0.05: split-CP coverage <= 0.954 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] miami_housing n=250 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.900–0.908
+  [PASS] miami_housing n=250 alpha=0.1: split-CP coverage <= 0.904 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] miami_housing n=250 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.797–0.809
+  [PASS] miami_housing n=250 alpha=0.2: split-CP coverage <= 0.804 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] miami_housing n=1000 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.950–0.953
+  [PASS] miami_housing n=1000 alpha=0.05: split-CP coverage <= 0.951 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] miami_housing n=1000 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.899–0.903
+  [PASS] miami_housing n=1000 alpha=0.1: split-CP coverage <= 0.901 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] miami_housing n=1000 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.798–0.801
+  [PASS] miami_housing n=1000 alpha=0.2: split-CP coverage <= 0.801 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] miami_housing n=3483 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.951–0.952
+  [PASS] miami_housing n=3483 alpha=0.05: split-CP coverage <= 0.950 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] miami_housing n=3483 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.899–0.902
+  [PASS] miami_housing n=3483 alpha=0.1: split-CP coverage <= 0.900 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] miami_housing n=3483 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.799–0.803
+  [PASS] miami_housing n=3483 alpha=0.2: split-CP coverage <= 0.800 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] fifa n=250 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.946–0.953
+  [PASS] fifa n=250 alpha=0.05: split-CP coverage <= 0.954 + 4 SE where scores are continuous: 4 models checked, models with discrete residuals excluded: ['rf', 'lightgbm', 'dnn']
+  [PASS] fifa n=250 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.893–0.901
+  [PASS] fifa n=250 alpha=0.1: split-CP coverage <= 0.904 + 4 SE where scores are continuous: 4 models checked, models with discrete residuals excluded: ['rf', 'lightgbm', 'dnn']
+  [PASS] fifa n=250 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.790–0.805
+  [PASS] fifa n=250 alpha=0.2: split-CP coverage <= 0.804 + 4 SE where scores are continuous: 4 models checked, models with discrete residuals excluded: ['rf', 'lightgbm', 'dnn']
+  [PASS] fifa n=1000 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.949–0.951
+  [PASS] fifa n=1000 alpha=0.05: split-CP coverage <= 0.951 + 4 SE where scores are continuous: 4 models checked, models with discrete residuals excluded: ['rf', 'lightgbm', 'dnn']
+  [PASS] fifa n=1000 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.898–0.901
+  [PASS] fifa n=1000 alpha=0.1: split-CP coverage <= 0.901 + 4 SE where scores are continuous: 4 models checked, models with discrete residuals excluded: ['rf', 'lightgbm', 'dnn']
+  [PASS] fifa n=1000 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.798–0.803
+  [PASS] fifa n=1000 alpha=0.2: split-CP coverage <= 0.801 + 4 SE where scores are continuous: 4 models checked, models with discrete residuals excluded: ['rf', 'lightgbm', 'dnn']
+  [PASS] fifa n=4000 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.949–0.950
+  [PASS] fifa n=4000 alpha=0.05: split-CP coverage <= 0.950 + 4 SE where scores are continuous: 4 models checked, models with discrete residuals excluded: ['rf', 'lightgbm', 'dnn']
+  [PASS] fifa n=4000 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.898–0.900
+  [PASS] fifa n=4000 alpha=0.1: split-CP coverage <= 0.900 + 4 SE where scores are continuous: 4 models checked, models with discrete residuals excluded: ['rf', 'lightgbm', 'dnn']
+  [PASS] fifa n=4000 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.798–0.801
+  [PASS] fifa n=4000 alpha=0.2: split-CP coverage <= 0.800 + 4 SE where scores are continuous: 4 models checked, models with discrete residuals excluded: ['rf', 'lightgbm', 'dnn']
+  [PASS] fifa n=4794 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.949–0.951
+  [PASS] fifa n=4794 alpha=0.05: split-CP coverage <= 0.950 + 4 SE where scores are continuous: 4 models checked, models with discrete residuals excluded: ['rf', 'lightgbm', 'dnn']
+  [PASS] fifa n=4794 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.899–0.900
+  [PASS] fifa n=4794 alpha=0.1: split-CP coverage <= 0.900 + 4 SE where scores are continuous: 4 models checked, models with discrete residuals excluded: ['rf', 'lightgbm', 'dnn']
+  [PASS] fifa n=4794 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.798–0.801
+  [PASS] fifa n=4794 alpha=0.2: split-CP coverage <= 0.800 + 4 SE where scores are continuous: 4 models checked, models with discrete residuals excluded: ['rf', 'lightgbm', 'dnn']
+  [PASS] california_housing n=250 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.948–0.953
+  [PASS] california_housing n=250 alpha=0.05: split-CP coverage <= 0.954 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] california_housing n=250 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.891–0.901
+  [PASS] california_housing n=250 alpha=0.1: split-CP coverage <= 0.904 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] california_housing n=250 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.786–0.799
+  [PASS] california_housing n=250 alpha=0.2: split-CP coverage <= 0.804 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] california_housing n=1000 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.949–0.950
+  [PASS] california_housing n=1000 alpha=0.05: split-CP coverage <= 0.951 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] california_housing n=1000 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.897–0.901
+  [PASS] california_housing n=1000 alpha=0.1: split-CP coverage <= 0.901 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] california_housing n=1000 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.795–0.800
+  [PASS] california_housing n=1000 alpha=0.2: split-CP coverage <= 0.801 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] california_housing n=4000 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.949–0.951
+  [PASS] california_housing n=4000 alpha=0.05: split-CP coverage <= 0.950 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] california_housing n=4000 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.899–0.901
+  [PASS] california_housing n=4000 alpha=0.1: split-CP coverage <= 0.900 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] california_housing n=4000 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.800–0.801
+  [PASS] california_housing n=4000 alpha=0.2: split-CP coverage <= 0.800 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] california_housing n=5160 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.950–0.951
+  [PASS] california_housing n=5160 alpha=0.05: split-CP coverage <= 0.950 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] california_housing n=5160 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.901–0.902
+  [PASS] california_housing n=5160 alpha=0.1: split-CP coverage <= 0.900 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] california_housing n=5160 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.800–0.801
+  [PASS] california_housing n=5160 alpha=0.2: split-CP coverage <= 0.800 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] kings_county n=250 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.954–0.957
+  [PASS] kings_county n=250 alpha=0.05: split-CP coverage <= 0.954 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] kings_county n=250 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.898–0.904
+  [PASS] kings_county n=250 alpha=0.1: split-CP coverage <= 0.904 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] kings_county n=250 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.800–0.804
+  [PASS] kings_county n=250 alpha=0.2: split-CP coverage <= 0.804 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] kings_county n=1000 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.951–0.954
+  [PASS] kings_county n=1000 alpha=0.05: split-CP coverage <= 0.951 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] kings_county n=1000 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.900–0.904
+  [PASS] kings_county n=1000 alpha=0.1: split-CP coverage <= 0.901 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] kings_county n=1000 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.800–0.805
+  [PASS] kings_county n=1000 alpha=0.2: split-CP coverage <= 0.801 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] kings_county n=4000 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.951–0.952
+  [PASS] kings_county n=4000 alpha=0.05: split-CP coverage <= 0.950 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] kings_county n=4000 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.900–0.902
+  [PASS] kings_county n=4000 alpha=0.1: split-CP coverage <= 0.900 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] kings_county n=4000 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.800–0.803
+  [PASS] kings_county n=4000 alpha=0.2: split-CP coverage <= 0.800 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] kings_county n=5403 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.951–0.952
+  [PASS] kings_county n=5403 alpha=0.05: split-CP coverage <= 0.950 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] kings_county n=5403 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.900–0.902
+  [PASS] kings_county n=5403 alpha=0.1: split-CP coverage <= 0.900 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] kings_county n=5403 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.799–0.804
+  [PASS] kings_county n=5403 alpha=0.2: split-CP coverage <= 0.800 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] health_insurance n=250 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.951–0.955
+  [PASS] health_insurance n=250 alpha=0.05: split-CP coverage <= 0.954 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] health_insurance n=250 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.898–0.901
+  [PASS] health_insurance n=250 alpha=0.1: split-CP coverage <= 0.904 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] health_insurance n=250 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.801–0.808
+  [PASS] health_insurance n=250 alpha=0.2: split-CP coverage <= 0.804 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] health_insurance n=1000 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.948–0.952
+  [PASS] health_insurance n=1000 alpha=0.05: split-CP coverage <= 0.951 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] health_insurance n=1000 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.900–0.903
+  [PASS] health_insurance n=1000 alpha=0.1: split-CP coverage <= 0.901 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] health_insurance n=1000 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.803–0.804
+  [PASS] health_insurance n=1000 alpha=0.2: split-CP coverage <= 0.801 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] health_insurance n=4000 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.950–0.951
+  [PASS] health_insurance n=4000 alpha=0.05: split-CP coverage <= 0.950 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] health_insurance n=4000 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.900–0.902
+  [PASS] health_insurance n=4000 alpha=0.1: split-CP coverage <= 0.900 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] health_insurance n=4000 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.801–0.803
+  [PASS] health_insurance n=4000 alpha=0.2: split-CP coverage <= 0.800 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] health_insurance n=5568 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.949–0.950
+  [PASS] health_insurance n=5568 alpha=0.05: split-CP coverage <= 0.950 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] health_insurance n=5568 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.899–0.902
+  [PASS] health_insurance n=5568 alpha=0.1: split-CP coverage <= 0.900 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] health_insurance n=5568 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.800–0.802
+  [PASS] health_insurance n=5568 alpha=0.2: split-CP coverage <= 0.800 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] fps_benchmark n=250 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.951–0.955
+  [PASS] fps_benchmark n=250 alpha=0.05: split-CP coverage <= 0.954 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['rf']
+  [PASS] fps_benchmark n=250 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.898–0.907
+  [PASS] fps_benchmark n=250 alpha=0.1: split-CP coverage <= 0.904 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['rf']
+  [PASS] fps_benchmark n=250 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.795–0.807
+  [PASS] fps_benchmark n=250 alpha=0.2: split-CP coverage <= 0.804 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['rf']
+  [PASS] fps_benchmark n=1000 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.950–0.954
+  [PASS] fps_benchmark n=1000 alpha=0.05: split-CP coverage <= 0.951 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['rf']
+  [PASS] fps_benchmark n=1000 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.900–0.904
+  [PASS] fps_benchmark n=1000 alpha=0.1: split-CP coverage <= 0.901 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['rf']
+  [PASS] fps_benchmark n=1000 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.798–0.806
+  [PASS] fps_benchmark n=1000 alpha=0.2: split-CP coverage <= 0.801 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['rf']
+  [PASS] fps_benchmark n=4000 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.950–0.951
+  [PASS] fps_benchmark n=4000 alpha=0.05: split-CP coverage <= 0.950 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['rf']
+  [PASS] fps_benchmark n=4000 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.898–0.902
+  [PASS] fps_benchmark n=4000 alpha=0.1: split-CP coverage <= 0.900 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['rf']
+  [PASS] fps_benchmark n=4000 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.799–0.801
+  [PASS] fps_benchmark n=4000 alpha=0.2: split-CP coverage <= 0.800 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['rf']
+  [PASS] fps_benchmark n=6156 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.949–0.951
+  [PASS] fps_benchmark n=6156 alpha=0.05: split-CP coverage <= 0.950 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['rf']
+  [PASS] fps_benchmark n=6156 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.898–0.902
+  [PASS] fps_benchmark n=6156 alpha=0.1: split-CP coverage <= 0.900 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['rf']
+  [PASS] fps_benchmark n=6156 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.798–0.801
+  [PASS] fps_benchmark n=6156 alpha=0.2: split-CP coverage <= 0.800 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['rf']
+  [PASS] cps88wages n=250 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.951–0.954
+  [PASS] cps88wages n=250 alpha=0.05: split-CP coverage <= 0.954 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] cps88wages n=250 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.897–0.901
+  [PASS] cps88wages n=250 alpha=0.1: split-CP coverage <= 0.904 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] cps88wages n=250 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.800–0.802
+  [PASS] cps88wages n=250 alpha=0.2: split-CP coverage <= 0.804 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] cps88wages n=1000 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.950–0.951
+  [PASS] cps88wages n=1000 alpha=0.05: split-CP coverage <= 0.951 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] cps88wages n=1000 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.901–0.903
+  [PASS] cps88wages n=1000 alpha=0.1: split-CP coverage <= 0.901 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] cps88wages n=1000 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.800–0.803
+  [PASS] cps88wages n=1000 alpha=0.2: split-CP coverage <= 0.801 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] cps88wages n=4000 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.948–0.950
+  [PASS] cps88wages n=4000 alpha=0.05: split-CP coverage <= 0.950 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] cps88wages n=4000 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.899–0.901
+  [PASS] cps88wages n=4000 alpha=0.1: split-CP coverage <= 0.900 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] cps88wages n=4000 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.799–0.801
+  [PASS] cps88wages n=4000 alpha=0.2: split-CP coverage <= 0.800 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] cps88wages n=7038 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.950–0.950
+  [PASS] cps88wages n=7038 alpha=0.05: split-CP coverage <= 0.950 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] cps88wages n=7038 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.899–0.900
+  [PASS] cps88wages n=7038 alpha=0.1: split-CP coverage <= 0.900 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] cps88wages n=7038 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.799–0.800
+  [PASS] cps88wages n=7038 alpha=0.2: split-CP coverage <= 0.800 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] physiochemical_protein n=250 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.946–0.952
+  [PASS] physiochemical_protein n=250 alpha=0.05: split-CP coverage <= 0.954 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] physiochemical_protein n=250 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.896–0.901
+  [PASS] physiochemical_protein n=250 alpha=0.1: split-CP coverage <= 0.904 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] physiochemical_protein n=250 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.791–0.794
+  [PASS] physiochemical_protein n=250 alpha=0.2: split-CP coverage <= 0.804 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] physiochemical_protein n=1000 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.949–0.951
+  [PASS] physiochemical_protein n=1000 alpha=0.05: split-CP coverage <= 0.951 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] physiochemical_protein n=1000 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.898–0.902
+  [PASS] physiochemical_protein n=1000 alpha=0.1: split-CP coverage <= 0.901 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] physiochemical_protein n=1000 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.797–0.800
+  [PASS] physiochemical_protein n=1000 alpha=0.2: split-CP coverage <= 0.801 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] physiochemical_protein n=4000 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.950–0.951
+  [PASS] physiochemical_protein n=4000 alpha=0.05: split-CP coverage <= 0.950 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] physiochemical_protein n=4000 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.900–0.901
+  [PASS] physiochemical_protein n=4000 alpha=0.1: split-CP coverage <= 0.900 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] physiochemical_protein n=4000 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.799–0.801
+  [PASS] physiochemical_protein n=4000 alpha=0.2: split-CP coverage <= 0.800 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] physiochemical_protein n=11432 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.950–0.950
+  [PASS] physiochemical_protein n=11432 alpha=0.05: split-CP coverage <= 0.950 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] physiochemical_protein n=11432 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.899–0.901
+  [PASS] physiochemical_protein n=11432 alpha=0.1: split-CP coverage <= 0.900 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] physiochemical_protein n=11432 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.799–0.801
+  [PASS] physiochemical_protein n=11432 alpha=0.2: split-CP coverage <= 0.800 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] sarcos n=250 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.949–0.955
+  [PASS] sarcos n=250 alpha=0.05: split-CP coverage <= 0.954 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] sarcos n=250 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.898–0.905
+  [PASS] sarcos n=250 alpha=0.1: split-CP coverage <= 0.904 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] sarcos n=250 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.796–0.812
+  [PASS] sarcos n=250 alpha=0.2: split-CP coverage <= 0.804 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] sarcos n=1000 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.948–0.950
+  [PASS] sarcos n=1000 alpha=0.05: split-CP coverage <= 0.951 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] sarcos n=1000 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.896–0.900
+  [PASS] sarcos n=1000 alpha=0.1: split-CP coverage <= 0.901 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] sarcos n=1000 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.796–0.801
+  [PASS] sarcos n=1000 alpha=0.2: split-CP coverage <= 0.801 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] sarcos n=4000 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.950–0.951
+  [PASS] sarcos n=4000 alpha=0.05: split-CP coverage <= 0.950 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] sarcos n=4000 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.898–0.900
+  [PASS] sarcos n=4000 alpha=0.1: split-CP coverage <= 0.900 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] sarcos n=4000 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.800–0.803
+  [PASS] sarcos n=4000 alpha=0.2: split-CP coverage <= 0.800 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] sarcos n=12233 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.950–0.951
+  [PASS] sarcos n=12233 alpha=0.05: split-CP coverage <= 0.950 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] sarcos n=12233 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.899–0.902
+  [PASS] sarcos n=12233 alpha=0.1: split-CP coverage <= 0.900 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] sarcos n=12233 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.801–0.802
+  [PASS] sarcos n=12233 alpha=0.2: split-CP coverage <= 0.800 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] diamonds n=250 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.951–0.953
+  [PASS] diamonds n=250 alpha=0.05: split-CP coverage <= 0.954 + 4 SE where scores are continuous: 4 models checked, models with discrete residuals excluded: ['rf', 'lightgbm', 'dnn']
+  [PASS] diamonds n=250 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.900–0.907
+  [PASS] diamonds n=250 alpha=0.1: split-CP coverage <= 0.904 + 4 SE where scores are continuous: 4 models checked, models with discrete residuals excluded: ['rf', 'lightgbm', 'dnn']
+  [PASS] diamonds n=250 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.796–0.809
+  [PASS] diamonds n=250 alpha=0.2: split-CP coverage <= 0.804 + 4 SE where scores are continuous: 4 models checked, models with discrete residuals excluded: ['rf', 'lightgbm', 'dnn']
+  [PASS] diamonds n=1000 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.950–0.954
+  [PASS] diamonds n=1000 alpha=0.05: split-CP coverage <= 0.951 + 4 SE where scores are continuous: 4 models checked, models with discrete residuals excluded: ['rf', 'lightgbm', 'dnn']
+  [PASS] diamonds n=1000 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.898–0.904
+  [PASS] diamonds n=1000 alpha=0.1: split-CP coverage <= 0.901 + 4 SE where scores are continuous: 4 models checked, models with discrete residuals excluded: ['rf', 'lightgbm', 'dnn']
+  [PASS] diamonds n=1000 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.801–0.806
+  [PASS] diamonds n=1000 alpha=0.2: split-CP coverage <= 0.801 + 4 SE where scores are continuous: 4 models checked, models with discrete residuals excluded: ['rf', 'lightgbm', 'dnn']
+  [PASS] diamonds n=4000 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.950–0.952
+  [PASS] diamonds n=4000 alpha=0.05: split-CP coverage <= 0.950 + 4 SE where scores are continuous: 4 models checked, models with discrete residuals excluded: ['rf', 'lightgbm', 'dnn']
+  [PASS] diamonds n=4000 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.901–0.902
+  [PASS] diamonds n=4000 alpha=0.1: split-CP coverage <= 0.900 + 4 SE where scores are continuous: 4 models checked, models with discrete residuals excluded: ['rf', 'lightgbm', 'dnn']
+  [PASS] diamonds n=4000 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.801–0.803
+  [PASS] diamonds n=4000 alpha=0.2: split-CP coverage <= 0.800 + 4 SE where scores are continuous: 4 models checked, models with discrete residuals excluded: ['rf', 'lightgbm', 'dnn']
+  [PASS] diamonds n=12500 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.950–0.951
+  [PASS] diamonds n=12500 alpha=0.05: split-CP coverage <= 0.950 + 4 SE where scores are continuous: 4 models checked, models with discrete residuals excluded: ['rf', 'lightgbm', 'dnn']
+  [PASS] diamonds n=12500 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.900–0.901
+  [PASS] diamonds n=12500 alpha=0.1: split-CP coverage <= 0.900 + 4 SE where scores are continuous: 4 models checked, models with discrete residuals excluded: ['rf', 'lightgbm', 'dnn']
+  [PASS] diamonds n=12500 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.800–0.801
+  [PASS] diamonds n=12500 alpha=0.2: split-CP coverage <= 0.800 + 4 SE where scores are continuous: 4 models checked, models with discrete residuals excluded: ['rf', 'lightgbm', 'dnn']
+  [PASS] video_transcoding n=250 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.953–0.958
+  [PASS] video_transcoding n=250 alpha=0.05: split-CP coverage <= 0.954 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['rf']
+  [PASS] video_transcoding n=250 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.902–0.906
+  [PASS] video_transcoding n=250 alpha=0.1: split-CP coverage <= 0.904 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['rf']
+  [PASS] video_transcoding n=250 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.795–0.809
+  [PASS] video_transcoding n=250 alpha=0.2: split-CP coverage <= 0.804 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['rf']
+  [PASS] video_transcoding n=1000 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.951–0.952
+  [PASS] video_transcoding n=1000 alpha=0.05: split-CP coverage <= 0.951 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['rf']
+  [PASS] video_transcoding n=1000 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.901–0.905
+  [PASS] video_transcoding n=1000 alpha=0.1: split-CP coverage <= 0.901 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['rf']
+  [PASS] video_transcoding n=1000 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.800–0.803
+  [PASS] video_transcoding n=1000 alpha=0.2: split-CP coverage <= 0.801 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['rf']
+  [PASS] video_transcoding n=4000 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.950–0.951
+  [PASS] video_transcoding n=4000 alpha=0.05: split-CP coverage <= 0.950 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['rf']
+  [PASS] video_transcoding n=4000 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.899–0.901
+  [PASS] video_transcoding n=4000 alpha=0.1: split-CP coverage <= 0.900 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['rf']
+  [PASS] video_transcoding n=4000 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.800–0.802
+  [PASS] video_transcoding n=4000 alpha=0.2: split-CP coverage <= 0.800 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['rf']
+  [PASS] video_transcoding n=12500 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.950–0.951
+  [PASS] video_transcoding n=12500 alpha=0.05: split-CP coverage <= 0.950 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['rf']
+  [PASS] video_transcoding n=12500 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.899–0.900
+  [PASS] video_transcoding n=12500 alpha=0.1: split-CP coverage <= 0.900 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['rf']
+  [PASS] video_transcoding n=12500 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.800–0.801
+  [PASS] video_transcoding n=12500 alpha=0.2: split-CP coverage <= 0.800 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['rf']
+  [PASS] wave_energy n=250 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.951–0.957
+  [PASS] wave_energy n=250 alpha=0.05: split-CP coverage <= 0.954 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] wave_energy n=250 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.898–0.908
+  [PASS] wave_energy n=250 alpha=0.1: split-CP coverage <= 0.904 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] wave_energy n=250 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.800–0.810
+  [PASS] wave_energy n=250 alpha=0.2: split-CP coverage <= 0.804 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] wave_energy n=1000 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.949–0.953
+  [PASS] wave_energy n=1000 alpha=0.05: split-CP coverage <= 0.951 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] wave_energy n=1000 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.899–0.906
+  [PASS] wave_energy n=1000 alpha=0.1: split-CP coverage <= 0.901 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] wave_energy n=1000 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.798–0.805
+  [PASS] wave_energy n=1000 alpha=0.2: split-CP coverage <= 0.801 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] wave_energy n=4000 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.949–0.951
+  [PASS] wave_energy n=4000 alpha=0.05: split-CP coverage <= 0.950 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] wave_energy n=4000 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.898–0.902
+  [PASS] wave_energy n=4000 alpha=0.1: split-CP coverage <= 0.900 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] wave_energy n=4000 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.797–0.802
+  [PASS] wave_energy n=4000 alpha=0.2: split-CP coverage <= 0.800 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] wave_energy n=12500 alpha=0.05: split-CP coverage >= 0.950 - 4 SE for all models: 0.949–0.951
+  [PASS] wave_energy n=12500 alpha=0.05: split-CP coverage <= 0.950 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] wave_energy n=12500 alpha=0.1: split-CP coverage >= 0.900 - 4 SE for all models: 0.899–0.901
+  [PASS] wave_energy n=12500 alpha=0.1: split-CP coverage <= 0.900 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] wave_energy n=12500 alpha=0.2: split-CP coverage >= 0.800 - 4 SE for all models: 0.799–0.801
+  [PASS] wave_energy n=12500 alpha=0.2: split-CP coverage <= 0.800 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] positives above the cutoff never exceed n - k (implementation check): 0 (split, n, alpha, model) cases, 0 violations
+  [PASS] cutoff < 1/2 exactly when #{|r| >= 1/2} <= n - k (Proposition 3, finite-sample form): 0 (split, n, alpha, model) cases, 0 violations (not applicable: no binary outcomes)
+  [PASS] same fitted models as E4 (test MSE identical, max |diff| < 1e-9): 400 splits compared, max |diff| = 0.00e+00
+
+0 check(s) failed.
+exit code: 0

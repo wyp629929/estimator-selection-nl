@@ -1,4 +1,9 @@
 .DS_Store
 __pycache__/
 *.pyc
+# data are public but not redistributed (see README)
 data/
+logs/
+paper_assets/
+results/**/*_quick/
+results/**/*_quick.json

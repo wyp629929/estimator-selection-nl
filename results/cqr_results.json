@@ -1,0 +1,27 @@
+{
+  "linear": {
+    "delta_cqr": 0.885,
+    "se_cqr": 0.02255825791146116
+  },
+  "mildly_nonlinear": {
+    "delta_cqr": 0.875,
+    "se_cqr": 0.023385358667337135
+  },
+  "nonlinear": {
+    "delta_cqr": 1.0,
+    "se_cqr": 0.0
+  },
+  "threshold": {
+    "delta_cqr": 1.0,
+    "se_cqr": 0.0
+  },
+  "highdim": {
+    "delta_cqr": 1.0,
+    "se_cqr": 0.0
+  },
+  "heteroscedastic": {
+    "delta_cqr": 0.855,
+    "se_cqr": 0.024897289009046742
+  },
+  "_n_reps": 200
+}

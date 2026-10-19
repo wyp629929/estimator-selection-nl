@@ -1,0 +1,23 @@
+{
+  "PIMA": {
+    "n_splits": 50,
+    "n": 768,
+    "p": 8,
+    "delta_width": 0.82,
+    "best_model_by_mse": "rf"
+  },
+  "HomeCredit": {
+    "n_splits": 20,
+    "n": 50000,
+    "p": 104,
+    "delta_width": 1.0,
+    "best_model_by_mse": "rf"
+  },
+  "Superconductivity": {
+    "n_splits": 30,
+    "n": 21263,
+    "p": 81,
+    "delta_width": 0.0,
+    "best_model_by_mse": "xgboost"
+  }
+}

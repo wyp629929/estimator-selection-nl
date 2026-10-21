@@ -8,7 +8,7 @@ The paper asks when a residual-based uncertainty summary, the split-conformal in
 
 ```
 theory/
-  theory_checks.py          numerical checks of every lemma, theorem and proposition (Section 3)
+  theory_checks.py          numerical checks of every result of Section 3, including equation (4)
 scripts/                    experiments, diagnostics, reports (one flat directory; scripts import each other)
 results/                    final results, one directory per experiment, each with its report.txt
   e1/                       mirror construction of Theorem 4                         (Figure 2)

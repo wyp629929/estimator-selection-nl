@@ -144,6 +144,70 @@ print(f"[Prop 2b] n={n}: P(CP picks globally worse model 1)={pick_cp1 / reps:.3f
 
 
 # ---------------------------------------------------------------------------
+# Proposition 2(d): C_A(xi_2) = P(|r_1| <= xi_2, X in A) decides the width.
+# Covariates take K cells; each cell has its own noise law (normal or skewed
+# standardized Gamma, with its own scale: no assumption N), its own g_1, g_2.
+# A is a random set of cells; g_1 outside A is arbitrary. Closed-form CDFs.
+# (i)  C_A(xi_2) >= tau  =>  W_1 <= W_2 for every choice of g_1 outside A.
+# (ii) C_A(xi_2) <  tau  =>  W_{1_c} > W_2 once c is large (g_1 + c outside A).
+# ---------------------------------------------------------------------------
+noise_laws = [stats.norm(), stats.gamma(2, loc=-np.sqrt(2), scale=1 / np.sqrt(2))]   # normal; standardized Gamma(2), skewed
+
+def cover(cells, t):                               # sum_k w_k P(|s_k eps_k + g_k| <= t)
+    return sum(w * (D.cdf((t - g) / s) - D.cdf((-t - g) / s)) for w, D, s, g in cells)
+
+def q_cells(cells, tau):
+    return optimize.brentq(lambda t: cover(cells, t) - tau, 0.0, 1e7, xtol=1e-12)
+
+n_suff = n_rev = 0
+good_suff = good_rev = good_risk = True
+for _ in range(6000):
+    K = int(rng.integers(2, 7))
+    w = rng.dirichlet(np.ones(K))
+    Ds = [noise_laws[i] for i in rng.integers(0, 2, K)]
+    s = rng.uniform(0.3, 2.0, K)
+    g1, g2 = rng.normal(0, 1.5, K), rng.normal(0, 1.5, K)
+    inA = rng.uniform(size=K) < 0.85
+    if inA.all() or not inA.any():
+        continue
+    alpha = rng.choice([0.05, 0.1, 0.2]); tau = 1 - alpha
+    xi2 = q_cells(list(zip(w, Ds, s, g2)), tau)
+    CA = cover([(w[k], Ds[k], s[k], g1[k]) for k in range(K) if inA[k]], xi2)
+    if abs(CA - tau) < 1e-6:
+        continue
+    if CA > tau:                                   # (i): any g_1 outside A, including huge ones
+        n_suff += 1
+        for _ in range(4):
+            g1o = np.where(inA, g1, rng.normal(0, 1, K) * 10.0 ** rng.uniform(-1, 4))
+            good_suff &= q_cells(list(zip(w, Ds, s, g1o)), tau) < xi2
+    else:                                          # (ii): g_1 + c outside A
+        n_rev += 1
+        cells_c = lambda c: list(zip(w, Ds, s, np.where(inA, g1, g1 + c)))
+        good_rev &= q_cells(cells_c(1e5), tau) > xi2
+        risk = lambda c: sum(w * (s**2 + np.where(inA, g1, g1 + c) ** 2))
+        good_risk &= risk(1e3) > risk(1e2) > risk(10.0)
+print(f"[Prop 2d] (i)  C_A(xi2) > tau => W1 < W2 for any g1 outside A ({n_suff} configs, normal/skewed, "
+      f"heteroscedastic): {ok(good_suff and n_suff > 100)}")
+print(f"[Prop 2d] (ii) C_A(xi2) < tau => W_1c > W2 for large c ({n_rev} configs); G(1_c) grows: "
+      f"{ok(good_rev and good_risk and n_rev > 200)}")
+
+# Remark 4: in the construction of part (b), C_A(xi_2) = (1-p) H(q_b), and C_A > tau iff p < pbar.
+good = True
+for dname, D in [("normal", stats.norm()), ("laplace", stats.laplace()), ("t3", stats.t(3))]:
+    for alpha in [0.05, 0.1, 0.2]:
+        tau = 1 - alpha
+        for b in [0.25, 0.5, 1.0, 2.0]:
+            qb = quantile(lambda t: h(D, b, t), tau)
+            pbar = 1 - tau / h(D, 0.0, qb)
+            for p in np.linspace(0.001, 0.3, 60):
+                cells = [(1 - p, D, 1.0, b), (p, D, 1.0, b)]            # model 2: g = b everywhere
+                xi2 = q_cells(cells, tau)
+                CA = (1 - p) * h(D, 0.0, xi2)
+                good &= abs(xi2 - qb) < 1e-8 and ((CA > tau) == (p < pbar) or abs(p - pbar) < 1e-9)
+print(f"[Rem 4]   part (b) is the case A = B^c: C_A(xi2) = (1-p)H(q_b) > tau iff p < pbar: {ok(good)}")
+
+
+# ---------------------------------------------------------------------------
 # Theorem 4 / Example 1: reflection T(x) = (-x1, x2, ..., xd).
 # fhat_1 = 0, fhat_2 = c (both T-invariant), f0 = c*1{x1>0} vs its mirror.
 # ---------------------------------------------------------------------------
@@ -437,3 +501,114 @@ for n_cal in (500, 2000, 8000):
     dl[n_cal] = np.mean(errs)
 print(f"[Thm 4iv] t3 noise: kNN on r^2 and on r_M^2 - r_1^2 pick the same model: {ok(same)}; "
       f"Delta_loc by n {dict((k, round(v, 3)) for k, v in dl.items())} decreasing: {ok(dl[500] > dl[2000] > dl[8000])}")
+
+
+# ---------------------------------------------------------------------------
+# Corollary 3: over measure-preserving maps, no residual-only rule beats a single model.
+# X ~ Unif[0,1), N(0,1) noise independent of X, T_u(x) = (x + u) mod 1 (phi = identity).
+# Bounds: min_M G(M) - E[min_M D(M|X)] (local regret), 1 - max_M P{M in A(X)} (misalignment).
+# ---------------------------------------------------------------------------
+grid = (np.arange(4000) + 0.5) / 4000
+f0c = lambda x: 1.5 * np.sin(2 * np.pi * x)
+fhc = [lambda x: np.zeros_like(x), lambda x: 1.0 * (x > 0.3) + 0.5 * (x > 0.75) - 0.2]
+gsq = np.column_stack([(f0c(grid) - fh(grid)) ** 2 for fh in fhc])          # D(M|x) - sigma^2
+rho_g = gsq - gsq.min(axis=1, keepdims=True)
+bound_reg = rho_g.mean(axis=0).min()
+oracle_g = gsq.argmin(axis=1)
+bound_mis = 1 - max(np.mean(oracle_g == m) for m in range(2))
+idx = lambda x: np.minimum((x * len(grid)).astype(int), len(grid) - 1)
+
+def reg_mis(rule, u, n=2000, reps=40):          # local regret and misalignment of a residual-only rule under P^(T_u)
+    regs, mis = [], []
+    for _ in range(reps):
+        xc = rng.uniform(size=n); xt = (xc + u) % 1
+        y = f0c(xt) + rng.standard_normal(n)
+        R = np.column_stack([y - fh(xt) for fh in fhc])
+        s = rule(grid, R)                       # selection at every test point of the grid
+        k = idx((grid + u) % 1)                 # D_{P^(T)}(M|x) = D_P(M|T x)
+        regs.append(rho_g[k, s].mean()); mis.append(np.mean(s != oracle_g[k]))
+    return np.mean(regs), np.mean(mis)
+
+rules = {
+    "oracle of P (x-dependent)": lambda x, R: oracle_g[idx(x)],
+    "residual-switched oracle":   lambda x, R: np.where(np.mean(R[:, 0] ** 2 - R[:, 1] ** 2) > 0, oracle_g[idx(x)], 1 - oracle_g[idx(x)]),
+    "CP width (global)":          lambda x, R: np.full(len(x), np.argmin(np.quantile(np.abs(R), 0.9, axis=0))),
+}
+us = np.arange(32) / 32
+good_max = good_avg = True
+for name, rule in rules.items():
+    rm = np.array([reg_mis(rule, u, reps=8) for u in us])
+    good_max &= rm[:, 0].max() >= bound_reg - 0.01 and rm[:, 1].max() >= bound_mis - 0.01
+    good_avg &= rm[:, 0].mean() >= bound_reg - 0.01 and rm[:, 1].mean() >= bound_mis - 0.01
+print(f"[Cor 3]   bounds: local regret {bound_reg:.4f}, misalignment {bound_mis:.4f}; "
+      f"max over 32 shifts >= bound for 3 residual-only rules: {ok(good_max)}; average over shifts >= bound: {ok(good_avg)}")
+
+# E[m_L] -> bound as L grows (random shifts), regret version
+mL = {}
+for L in (1, 4, 32, 256):
+    V = rng.uniform(size=(400, L)); X0 = rng.uniform(size=400)
+    k = idx((X0[:, None] + V) % 1)
+    mL[L] = np.mean(rho_g[k].mean(axis=1).min(axis=1))
+print(f"[Cor 3]   E[m_L] by L {dict((k, round(float(v), 4)) for k, v in mL.items())} -> {bound_reg:.4f}: "
+      f"{ok(mL[1] < mL[256] and abs(mL[256] - bound_reg) < 0.03 * max(bound_reg, 1e-9) + 0.01)}")
+
+# validation MSE attains the regret bound under every shift
+val = lambda x, R: np.full(len(x), np.argmin(np.mean(R ** 2, axis=0)))
+vr = [reg_mis(val, u, n=20000, reps=10)[0] for u in (0.0, 0.17, 0.5, 0.83)]
+print(f"[Cor 3]   validation MSE local regret under 4 shifts {np.round(vr, 4)} = bound {bound_reg:.4f}: "
+      f"{ok(max(abs(v - bound_reg) for v in vr) < 0.01)}")
+
+
+# ---------------------------------------------------------------------------
+# Decomposition (eq:decomposition): Reg_loc(S) = Reg(S) + V for global S, V = min G - E min D.
+# Same Unif[0,1) configuration as Corollary 3; CP width at n=250 (often wrong) and val MSE.
+# Plus: the kNN conditional selector's local regret tends to zero.
+# ---------------------------------------------------------------------------
+Gc = gsq.mean(axis=0) + 1.0                       # global risks (sigma^2 = 1)
+Vc = Gc.min() - (gsq.min(axis=1) + 1.0).mean()
+# A global rule is a mixture of constant rules, and both sides of the identity are linear in that
+# mixture, so checking every constant rule and the random choices of CP width and val MSE suffices.
+good_dec, picks = True, []
+for s in range(2):
+    good_dec &= abs(rho_g[:, s].mean() - ((Gc[s] - Gc.min()) + Vc)) < 1e-12
+for _ in range(300):
+    xc = rng.uniform(size=40)
+    y = f0c(xc) + rng.standard_normal(40)
+    R = np.column_stack([y - fh(xc) for fh in fhc])
+    for s in (np.argmin(np.quantile(np.abs(R), 0.9, axis=0)), np.argmin(np.mean(R ** 2, axis=0))):
+        good_dec &= abs(rho_g[:, s].mean() - ((Gc[s] - Gc.min()) + Vc)) < 1e-12
+        picks.append(int(s))
+print(f"[Eq 4]    V={Vc:.4f} (= Cor 3 bound {bound_reg:.4f}: {ok(abs(Vc - bound_reg) < 1e-12)}); "
+      f"Reg_loc = Reg + V for both constant rules and for CP width and val MSE at n=40 "
+      f"(model 1 picked in {np.mean(np.array(picks) == 1):.1%} of draws): {ok(good_dec and 0 < np.mean(np.array(picks) == 1) < 1)}")
+
+knn_reg = {}
+for n_cal in (500, 4000, 32000):
+    vals = []
+    for _ in range(5):
+        xc = rng.uniform(size=n_cal)
+        y = f0c(xc) + rng.standard_normal(n_cal)
+        R = np.column_stack([y - fh(xc) for fh in fhc])
+        eta = KNeighborsRegressor(int(np.sqrt(n_cal))).fit(xc[:, None], R ** 2).predict(grid[:, None])
+        vals.append(rho_g[np.arange(len(grid)), eta.argmin(axis=1)].mean())
+    knn_reg[n_cal] = float(np.mean(vals))
+print(f"[Eq 4]    kNN local regret by n {dict((k, round(v, 4)) for k, v in knn_reg.items())} vs V={Vc:.4f}: "
+      f"{ok(knn_reg[500] > knn_reg[4000] > knn_reg[32000] and knn_reg[32000] < 0.2 * Vc)}")
+
+# Torus [0,1)^2 with translations only: smooth periodic f0, fhat; E[m_L] -> V.
+f02 = lambda x: np.sin(2 * np.pi * x[:, 0]) + 0.8 * np.cos(2 * np.pi * x[:, 1])
+fh2 = [lambda x: np.zeros(len(x)), lambda x: 0.6 * np.sin(2 * np.pi * (x[:, 0] + x[:, 1]))]
+g2sq = lambda x: np.column_stack([(f02(x) - fh(x)) ** 2 for fh in fh2])
+Xg = rng.uniform(size=(200_000, 2)); gg = g2sq(Xg)
+V2 = gg.mean(axis=0).min() - gg.min(axis=1).mean()
+X0, Lm = rng.uniform(size=(300, 2)), {}
+for L in (1, 8, 128):
+    U = rng.uniform(size=(L, 2))
+    vals = []
+    for x in X0:
+        gx = g2sq((x + U) % 1)
+        rx = gx - gx.min(axis=1, keepdims=True)
+        vals.append(rx.mean(axis=0).min())
+    Lm[L] = float(np.mean(vals))
+print(f"[Cor 3]   torus [0,1)^2, translations only: E[m_L] by L {dict((k, round(v, 4)) for k, v in Lm.items())} -> V={V2:.4f}: "
+      f"{ok(Lm[1] < Lm[8] < Lm[128] + 1e-9 and abs(Lm[128] - V2) < 0.05 * V2)}")

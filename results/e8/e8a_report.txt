@@ -1,0 +1,201 @@
+## Table E1: test MSE of each estimator (mean over splits)
+
+| dataset | n train / cal / test | ols | ridge | lasso | rf | xgboost | lightgbm | dnn |
+|---|---|---|---|---|---|---|---|---|
+| albert | 25000 / 12500 / 12500 | 0.2281 | 0.2281 | 0.2293 | 0.2159 | 0.2183 | 0.2165 | 0.2199 |
+| compas | 2483 / 1241 / 1242 | 0.2138 | 0.2138 | 0.2145 | 0.2166 | 0.2346 | 0.2196 | 0.2101 |
+| covertype | 25000 / 12500 / 12500 | 0.1632 | 0.1632 | 0.1661 | 0.1163 | 0.1048 | 0.1099 | 0.08835 |
+| electricity | 19237 / 9618 / 9619 | 0.2031 | 0.2031 | 0.2035 | 0.1071 | 0.08725 | 0.0919 | 0.1278 |
+| eye_movements | 3804 / 1902 / 1902 | 0.2421 | 0.2421 | 0.2427 | 0.2284 | 0.2262 | 0.2293 | 0.241 |
+| road_safety | 25000 / 12500 / 12500 | 0.2046 | 0.2046 | 0.2063 | 0.1582 | 0.1549 | 0.1552 | 0.1463 |
+| diabetes130us | 25000 / 12500 / 12500 | 0.2379 | 0.2379 | 0.2382 | 0.2351 | 0.2385 | 0.2367 | 0.2345 |
+| higgs | 25000 / 12500 / 12500 | 0.227 | 0.227 | 0.2308 | 0.1905 | 0.1878 | 0.1866 | 0.1928 |
+| magic_telescope | 6688 / 3344 / 3344 | 0.1716 | 0.1716 | 0.1726 | 0.1106 | 0.1082 | 0.1075 | 0.1082 |
+| miniboone | 25000 / 12500 / 12500 | 1.092e+05 | 3.086e+06 | 0.1583 | 0.05993 | 0.05335 | 0.05338 | 5.022e+04 |
+| credit | 8357 / 4178 / 4179 | 0.2255 | 0.2255 | 0.2353 | 0.1566 | 0.1627 | 0.1601 | 0.1696 |
+| heloc | 5000 / 2500 / 2500 | 0.1944 | 0.1944 | 0.1969 | 0.1882 | 0.1967 | 0.1959 | 0.1887 |
+| jannis | 25000 / 12500 / 12500 | 0.1844 | 0.1844 | 0.1866 | 0.155 | 0.1505 | 0.1502 | 0.1579 |
+| airlines_depdelay | 25000 / 12500 / 12500 | 3.75 | 3.75 | 3.75 | 3.701 | 3.768 | 3.729 | 3.707 |
+| allstate_claims | 25000 / 12500 / 12500 | 0.3365 | 0.3365 | 0.3413 | 0.3392 | 0.3021 | 0.3004 | 0.3233 |
+| bike_sharing | 8689 / 4344 / 4346 | 1.972e+04 | 1.972e+04 | 1.972e+04 | 2884 | 2011 | 2058 | 2598 |
+| mercedes_benz | 2104 / 1052 / 1053 | 87.12 | 86.66 | 84.05 | 75 | 86.33 | 79.85 | 137.8 |
+| sgemm_gpu | 25000 / 12500 / 12500 | 0.3945 | 0.3945 | 0.3953 | 0.0002436 | 0.0003111 | 0.0003226 | 0.003814 |
+| analcatdata_supreme | 2026 / 1013 / 1013 | 0.168 | 0.168 | 0.1682 | 0.006253 | 0.008506 | 0.006224 | 0.01158 |
+| delays_zurich | 25000 / 12500 / 12500 | 9.683 | 9.683 | 9.685 | 9.08 | 9.256 | 9.135 | 9.152 |
+| medical_charges | 25000 / 12500 / 12500 | 0.05805 | 0.05805 | 0.0583 | 0.006548 | 0.006855 | 0.006636 | 0.006996 |
+| nyc_taxi_green | 25000 / 12500 / 12500 | 0.2475 | 0.2475 | 0.2473 | 0.1587 | 0.1593 | 0.1532 | 0.1566 |
+| particulate_matter | 25000 / 12500 / 12500 | 0.2237 | 0.2237 | 0.2245 | 0.1547 | 0.1439 | 0.1423 | 0.1623 |
+| seattlecrime6 | 25000 / 12500 / 12500 | 1.55e+05 | 1.55e+05 | 1.55e+05 | 1.452e+05 | 1.456e+05 | 1.453e+05 | 1.475e+05 |
+| topo_2_1 | 4442 / 2221 / 2222 | 0.001031 | 0.0009958 | 0.0008653 | 0.0008135 | 0.0008749 | 0.0008639 | 0.001049 |
+| visualizing_soil | 4320 / 2160 / 2161 | 25.74 | 25.74 | 25.74 | 0.008671 | 0.00622 | 0.008833 | 0.07697 |
+| ailerons | 6875 / 3437 / 3438 | 3.16e-08 | 3.059e-08 | 1.663e-07 | 2.823e-08 | 2.911e-08 | 2.591e-08 | 5.321e-06 |
+| elevators | 8299 / 4149 / 4151 | 29.08 | 8.318e-06 | 4.471e-05 | 9.046e-06 | 5.268e-06 | 5.089e-06 | 1.012e-05 |
+| house_16h | 11392 / 5696 / 5696 | 0.5734 | 0.5734 | 0.5746 | 0.3429 | 0.3503 | 0.3547 | 0.4051 |
+| pol | 7500 / 3750 / 3750 | 933.1 | 932.4 | 931.6 | 39.94 | 29.37 | 32.73 | 11.61 |
+| sulfur | 5040 / 2520 / 2521 | 0.001843 | 0.001843 | 0.001991 | 0.0006606 | 0.0005548 | 0.0006038 | 0.0006256 |
+
+## Table E2: held-out risk relative to the validation-MSE rule (mean ± SE over splits)
+
+| dataset | cp | val | lw | U | rhat | knn | crs | best single model (infeasible) | P(kNN level = const) | P(forest level = const) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| albert | 1.062 ± 0.001 | 1.000 ± 0.000 | 1.038 ± 0.001 | 1.023 ± 0.001 | 1.003 ± 0.001 | 1.001 ± 0.000 | 1.000 ± 0.000 | 1.000 ± 0.000 | 0.75 | 0.90 |
+| compas | 1.021 ± 0.002 | 1.000 ± 0.000 | 1.020 ± 0.002 | 1.008 ± 0.002 | 1.013 ± 0.003 | 1.002 ± 0.002 | 1.005 ± 0.003 | 1.000 ± 0.000 | 0.45 | 0.50 |
+| covertype | 1.032 ± 0.015 | 1.000 ± 0.000 | 1.107 ± 0.006 | 1.074 ± 0.008 | 0.980 ± 0.002 | 0.970 ± 0.003 | 0.940 ± 0.003 | 1.000 ± 0.000 | 0.00 | 0.00 |
+| electricity | 1.000 ± 0.000 | 1.000 ± 0.000 | 1.110 ± 0.009 | 1.018 ± 0.004 | 1.003 ± 0.001 | 0.997 ± 0.001 | 0.970 ± 0.002 | 1.000 ± 0.000 | 0.20 | 0.00 |
+| eye_movements | 1.074 ± 0.004 | 1.000 ± 0.000 | 1.045 ± 0.004 | 1.017 ± 0.004 | 1.003 ± 0.003 | 1.005 ± 0.003 | 0.997 ± 0.002 | 0.997 ± 0.001 | 0.25 | 0.35 |
+| road_safety | 1.031 ± 0.006 | 1.000 ± 0.000 | 1.059 ± 0.004 | 1.035 ± 0.009 | 0.985 ± 0.002 | 0.992 ± 0.001 | 0.987 ± 0.002 | 1.000 ± 0.000 | 0.00 | 0.00 |
+| diabetes130us | 1.016 ± 0.001 | 1.000 ± 0.000 | 1.014 ± 0.001 | 1.005 ± 0.001 | 1.004 ± 0.000 | 1.000 ± 0.000 | 1.001 ± 0.000 | 1.000 ± 0.000 | 0.85 | 0.70 |
+| higgs | 1.236 ± 0.002 | 1.000 ± 0.000 | 1.130 ± 0.003 | 1.067 ± 0.006 | 1.004 ± 0.001 | 1.001 ± 0.000 | 1.000 ± 0.000 | 0.999 ± 0.000 | 0.70 | 0.80 |
+| magic_telescope | 0.999 ± 0.002 | 1.000 ± 0.000 | 1.051 ± 0.007 | 1.009 ± 0.006 | 0.972 ± 0.005 | 0.974 ± 0.004 | 0.973 ± 0.004 | 0.989 ± 0.003 | 0.05 | 0.05 |
+| miniboone | 956490.090 ± 539420.884 | 1.000 ± 0.000 | 738044.177 ± 510635.777 | 1.032 ± 0.006 | 0.991 ± 0.004 | 551461.613 ± 387863.539 | 0.985 ± 0.003 | 0.993 ± 0.002 | 0.10 | 0.10 |
+| credit | 1.503 ± 0.006 | 1.000 ± 0.000 | 1.087 ± 0.005 | 1.180 ± 0.009 | 1.012 ± 0.002 | 1.002 ± 0.001 | 1.001 ± 0.001 | 1.000 ± 0.000 | 0.65 | 0.90 |
+| heloc | 1.046 ± 0.002 | 1.000 ± 0.000 | 1.029 ± 0.002 | 1.024 ± 0.002 | 1.011 ± 0.002 | 1.002 ± 0.001 | 1.002 ± 0.001 | 0.998 ± 0.001 | 0.50 | 0.65 |
+| jannis | 1.190 ± 0.022 | 1.000 ± 0.000 | 1.093 ± 0.002 | 1.022 ± 0.003 | 1.004 ± 0.001 | 1.000 ± 0.000 | 1.001 ± 0.000 | 1.000 ± 0.000 | 0.60 | 0.85 |
+| airlines_depdelay | 1.008 ± 0.001 | 1.000 ± 0.000 | 1.005 ± 0.000 | 1.000 ± 0.001 | 1.003 ± 0.000 | 1.001 ± 0.000 | 1.000 ± 0.000 | 0.999 ± 0.000 | 0.70 | 0.60 |
+| allstate_claims | 1.001 ± 0.001 | 1.000 ± 0.000 | 1.012 ± 0.002 | 1.003 ± 0.001 | 1.004 ± 0.001 | 1.000 ± 0.000 | 1.001 ± 0.000 | 0.999 ± 0.001 | 0.80 | 0.80 |
+| bike_sharing | 1.000 ± 0.002 | 1.000 ± 0.000 | 1.018 ± 0.007 | 1.026 ± 0.007 | 1.014 ± 0.005 | 0.997 ± 0.004 | 0.997 ± 0.004 | 0.996 ± 0.002 | 0.25 | 0.45 |
+| mercedes_benz | 1.000 ± 0.000 | 1.000 ± 0.000 | 1.067 ± 0.019 | 1.037 ± 0.018 | 1.047 ± 0.019 | 1.000 ± 0.000 | 1.000 ± 0.000 | 1.000 ± 0.000 | 0.90 | 0.90 |
+| sgemm_gpu | 1.000 ± 0.000 | 1.000 ± 0.000 | 1.000 ± 0.000 | 1.000 ± 0.002 | 0.993 ± 0.002 | 1.007 ± 0.003 | 0.994 ± 0.002 | 1.000 ± 0.000 | 0.40 | 0.05 |
+| analcatdata_supreme | 1.359 ± 0.088 | 1.000 ± 0.000 | 1.318 ± 0.090 | 1.082 ± 0.038 | 1.109 ± 0.034 | 1.040 ± 0.042 | 1.105 ± 0.060 | 0.934 ± 0.019 | 0.25 | 0.40 |
+| delays_zurich | 1.005 ± 0.001 | 1.000 ± 0.000 | 1.017 ± 0.001 | 1.011 ± 0.001 | 1.002 ± 0.000 | 1.001 ± 0.000 | 1.000 ± 0.001 | 1.000 ± 0.000 | 0.50 | 0.25 |
+| medical_charges | 1.004 ± 0.002 | 1.000 ± 0.000 | 1.014 ± 0.002 | 1.025 ± 0.007 | 0.998 ± 0.001 | 0.993 ± 0.001 | 0.995 ± 0.001 | 1.000 ± 0.000 | 0.00 | 0.10 |
+| nyc_taxi_green | 1.021 ± 0.004 | 1.000 ± 0.000 | 0.967 ± 0.004 | 0.961 ± 0.004 | 0.943 ± 0.003 | 0.964 ± 0.003 | 0.894 ± 0.003 | 0.998 ± 0.001 | 0.05 | 0.00 |
+| particulate_matter | 1.003 ± 0.001 | 1.000 ± 0.000 | 1.045 ± 0.003 | 1.011 ± 0.002 | 1.005 ± 0.001 | 1.000 ± 0.001 | 1.000 ± 0.001 | 0.999 ± 0.001 | 0.55 | 0.40 |
+| seattlecrime6 | 1.036 ± 0.006 | 1.000 ± 0.000 | 1.003 ± 0.001 | 1.012 ± 0.002 | 1.003 ± 0.001 | 1.000 ± 0.000 | 1.000 ± 0.001 | 1.000 ± 0.000 | 0.20 | 0.15 |
+| topo_2_1 | 1.051 ± 0.011 | 1.000 ± 0.000 | 1.049 ± 0.011 | 1.012 ± 0.002 | 1.028 ± 0.011 | 1.001 ± 0.001 | 1.003 ± 0.001 | 1.000 ± 0.000 | 0.75 | 0.80 |
+| visualizing_soil | 1.513 ± 0.144 | 1.000 ± 0.000 | 0.944 ± 0.072 | 0.536 ± 0.036 | 0.511 ± 0.033 | 0.489 ± 0.041 | 0.462 ± 0.032 | 0.967 ± 0.021 | 0.00 | 0.00 |
+| ailerons | 1.000 ± 0.000 | 1.000 ± 0.000 | 1.006 ± 0.006 | 1.027 ± 0.004 | 1.027 ± 0.004 | 1.002 ± 0.001 | 1.004 ± 0.002 | 1.000 ± 0.000 | 0.55 | 0.85 |
+| elevators | 1.002 ± 0.003 | 1.000 ± 0.000 | 1.000 ± 0.004 | 1.014 ± 0.006 | 1.007 ± 0.007 | 0.998 ± 0.005 | 0.980 ± 0.006 | 0.994 ± 0.003 | 0.25 | 0.25 |
+| house_16h | 1.017 ± 0.014 | 1.000 ± 0.000 | 1.048 ± 0.016 | 1.010 ± 0.015 | 1.003 ± 0.015 | 1.025 ± 0.010 | 0.991 ± 0.006 | 0.980 ± 0.007 | 0.20 | 0.10 |
+| pol | 1.000 ± 0.000 | 1.000 ± 0.000 | 1.067 ± 0.030 | 1.071 ± 0.021 | 1.041 ± 0.024 | 1.003 ± 0.032 | 0.980 ± 0.026 | 1.000 ± 0.000 | 0.35 | 0.25 |
+| sulfur | 0.936 ± 0.023 | 1.000 ± 0.000 | 0.949 ± 0.026 | 0.962 ± 0.032 | 0.941 ± 0.031 | 0.936 ± 0.016 | 0.956 ± 0.022 | 0.903 ± 0.027 | 0.15 | 0.20 |
+
+Acceptance checks:
+  [PASS] albert: splits 0..19 all present exactly once: 20 rows
+  [PASS] compas: splits 0..19 all present exactly once: 20 rows
+  [PASS] covertype: splits 0..19 all present exactly once: 20 rows
+  [PASS] electricity: splits 0..19 all present exactly once: 20 rows
+  [PASS] eye_movements: splits 0..19 all present exactly once: 20 rows
+  [PASS] road_safety: splits 0..19 all present exactly once: 20 rows
+  [PASS] diabetes130us: splits 0..19 all present exactly once: 20 rows
+  [PASS] higgs: splits 0..19 all present exactly once: 20 rows
+  [PASS] magic_telescope: splits 0..19 all present exactly once: 20 rows
+  [PASS] miniboone: splits 0..19 all present exactly once: 20 rows
+  [PASS] credit: splits 0..19 all present exactly once: 20 rows
+  [PASS] heloc: splits 0..19 all present exactly once: 20 rows
+  [PASS] jannis: splits 0..19 all present exactly once: 20 rows
+  [PASS] airlines_depdelay: splits 0..19 all present exactly once: 20 rows
+  [PASS] allstate_claims: splits 0..19 all present exactly once: 20 rows
+  [PASS] bike_sharing: splits 0..19 all present exactly once: 20 rows
+  [PASS] mercedes_benz: splits 0..19 all present exactly once: 20 rows
+  [PASS] sgemm_gpu: splits 0..19 all present exactly once: 20 rows
+  [PASS] analcatdata_supreme: splits 0..19 all present exactly once: 20 rows
+  [PASS] delays_zurich: splits 0..19 all present exactly once: 20 rows
+  [PASS] medical_charges: splits 0..19 all present exactly once: 20 rows
+  [PASS] nyc_taxi_green: splits 0..19 all present exactly once: 20 rows
+  [PASS] particulate_matter: splits 0..19 all present exactly once: 20 rows
+  [PASS] seattlecrime6: splits 0..19 all present exactly once: 20 rows
+  [PASS] topo_2_1: splits 0..19 all present exactly once: 20 rows
+  [PASS] visualizing_soil: splits 0..19 all present exactly once: 20 rows
+  [PASS] ailerons: splits 0..19 all present exactly once: 20 rows
+  [PASS] elevators: splits 0..19 all present exactly once: 20 rows
+  [PASS] house_16h: splits 0..19 all present exactly once: 20 rows
+  [PASS] pol: splits 0..19 all present exactly once: 20 rows
+  [PASS] sulfur: splits 0..19 all present exactly once: 20 rows
+  [PASS] no NaN/Infinity in any output: 
+  [PASS] albert: split-CP test coverage >= 0.900 - 4 SE for all models: 0.899–0.901
+  [PASS] albert: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] albert: U_M joint coverage >= 0.90 - 4 SE: 0.902 (SE 0.001)
+  [PASS] compas: split-CP test coverage >= 0.900 - 4 SE for all models: 0.900–0.903
+  [PASS] compas: split-CP test coverage <= 0.901 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] compas: U_M joint coverage >= 0.90 - 4 SE: 0.906 (SE 0.003)
+  [PASS] covertype: split-CP test coverage >= 0.900 - 4 SE for all models: 0.899–0.900
+  [PASS] covertype: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 5 models checked, models with discrete residuals excluded: ['rf', 'dnn']
+  [PASS] covertype: U_M joint coverage >= 0.90 - 4 SE: 0.900 (SE 0.001)
+  [PASS] electricity: split-CP test coverage >= 0.900 - 4 SE for all models: 0.901–0.902
+  [PASS] electricity: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 4 models checked, models with discrete residuals excluded: ['rf', 'xgboost', 'lightgbm']
+  [PASS] electricity: U_M joint coverage >= 0.90 - 4 SE: 0.901 (SE 0.001)
+  [PASS] eye_movements: split-CP test coverage >= 0.900 - 4 SE for all models: 0.897–0.901
+  [PASS] eye_movements: split-CP test coverage <= 0.901 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] eye_movements: U_M joint coverage >= 0.90 - 4 SE: 0.896 (SE 0.003)
+  [PASS] road_safety: split-CP test coverage >= 0.900 - 4 SE for all models: 0.899–0.900
+  [PASS] road_safety: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 5 models checked, models with discrete residuals excluded: ['rf', 'dnn']
+  [PASS] road_safety: U_M joint coverage >= 0.90 - 4 SE: 0.899 (SE 0.001)
+  [PASS] diabetes130us: split-CP test coverage >= 0.900 - 4 SE for all models: 0.898–0.902
+  [PASS] diabetes130us: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] diabetes130us: U_M joint coverage >= 0.90 - 4 SE: 0.899 (SE 0.001)
+  [PASS] higgs: split-CP test coverage >= 0.900 - 4 SE for all models: 0.899–0.902
+  [PASS] higgs: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] higgs: U_M joint coverage >= 0.90 - 4 SE: 0.900 (SE 0.001)
+  [PASS] magic_telescope: split-CP test coverage >= 0.900 - 4 SE for all models: 0.897–0.900
+  [PASS] magic_telescope: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['rf']
+  [PASS] magic_telescope: U_M joint coverage >= 0.90 - 4 SE: 0.901 (SE 0.003)
+  [PASS] miniboone: split-CP test coverage >= 0.900 - 4 SE for all models: 0.899–0.901
+  [PASS] miniboone: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['rf']
+  [PASS] miniboone: U_M joint coverage >= 0.90 - 4 SE: 0.900 (SE 0.001)
+  [PASS] credit: split-CP test coverage >= 0.900 - 4 SE for all models: 0.900–0.902
+  [PASS] credit: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] credit: U_M joint coverage >= 0.90 - 4 SE: 0.900 (SE 0.002)
+  [PASS] heloc: split-CP test coverage >= 0.900 - 4 SE for all models: 0.899–0.901
+  [PASS] heloc: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] heloc: U_M joint coverage >= 0.90 - 4 SE: 0.902 (SE 0.002)
+  [PASS] jannis: split-CP test coverage >= 0.900 - 4 SE for all models: 0.900–0.901
+  [PASS] jannis: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['rf']
+  [PASS] jannis: U_M joint coverage >= 0.90 - 4 SE: 0.899 (SE 0.002)
+  [PASS] airlines_depdelay: split-CP test coverage >= 0.900 - 4 SE for all models: 0.900–0.900
+  [PASS] airlines_depdelay: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] airlines_depdelay: U_M joint coverage >= 0.90 - 4 SE: 0.900 (SE 0.001)
+  [PASS] allstate_claims: split-CP test coverage >= 0.900 - 4 SE for all models: 0.900–0.902
+  [PASS] allstate_claims: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] allstate_claims: U_M joint coverage >= 0.90 - 4 SE: 0.901 (SE 0.001)
+  [PASS] bike_sharing: split-CP test coverage >= 0.900 - 4 SE for all models: 0.900–0.902
+  [PASS] bike_sharing: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] bike_sharing: U_M joint coverage >= 0.90 - 4 SE: 0.901 (SE 0.002)
+  [PASS] mercedes_benz: split-CP test coverage >= 0.900 - 4 SE for all models: 0.899–0.902
+  [PASS] mercedes_benz: split-CP test coverage <= 0.901 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] mercedes_benz: U_M joint coverage >= 0.90 - 4 SE: 0.898 (SE 0.004)
+  [PASS] sgemm_gpu: split-CP test coverage >= 0.900 - 4 SE for all models: 0.899–0.902
+  [PASS] sgemm_gpu: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] sgemm_gpu: U_M joint coverage >= 0.90 - 4 SE: 0.902 (SE 0.001)
+  [PASS] analcatdata_supreme: split-CP test coverage >= 0.900 - 4 SE for all models: 0.898–0.907
+  [PASS] analcatdata_supreme: split-CP test coverage <= 0.901 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] analcatdata_supreme: U_M joint coverage >= 0.90 - 4 SE: 0.900 (SE 0.004)
+  [PASS] delays_zurich: split-CP test coverage >= 0.900 - 4 SE for all models: 0.900–0.901
+  [PASS] delays_zurich: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] delays_zurich: U_M joint coverage >= 0.90 - 4 SE: 0.901 (SE 0.001)
+  [PASS] medical_charges: split-CP test coverage >= 0.900 - 4 SE for all models: 0.899–0.901
+  [PASS] medical_charges: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] medical_charges: U_M joint coverage >= 0.90 - 4 SE: 0.900 (SE 0.001)
+  [PASS] nyc_taxi_green: split-CP test coverage >= 0.900 - 4 SE for all models: 0.901–0.904
+  [PASS] nyc_taxi_green: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 4 models checked, models with discrete residuals excluded: ['lasso', 'rf', 'lightgbm']
+  [PASS] nyc_taxi_green: U_M joint coverage >= 0.90 - 4 SE: 0.901 (SE 0.001)
+  [PASS] particulate_matter: split-CP test coverage >= 0.900 - 4 SE for all models: 0.900–0.900
+  [PASS] particulate_matter: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] particulate_matter: U_M joint coverage >= 0.90 - 4 SE: 0.901 (SE 0.002)
+  [PASS] seattlecrime6: split-CP test coverage >= 0.900 - 4 SE for all models: 0.900–0.901
+  [PASS] seattlecrime6: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 0 models checked, models with discrete residuals excluded: ['ols', 'ridge', 'lasso', 'rf', 'xgboost', 'lightgbm', 'dnn']
+  [PASS] seattlecrime6: U_M joint coverage >= 0.90 - 4 SE: 0.901 (SE 0.001)
+  [PASS] topo_2_1: split-CP test coverage >= 0.900 - 4 SE for all models: 0.899–0.903
+  [PASS] topo_2_1: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['lasso']
+  [PASS] topo_2_1: U_M joint coverage >= 0.90 - 4 SE: 0.897 (SE 0.003)
+  [PASS] visualizing_soil: split-CP test coverage >= 0.900 - 4 SE for all models: 0.899–0.901
+  [PASS] visualizing_soil: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 4 models checked, models with discrete residuals excluded: ['rf', 'xgboost', 'lightgbm']
+  [PASS] visualizing_soil: U_M joint coverage >= 0.90 - 4 SE: 0.903 (SE 0.002)
+  [PASS] ailerons: split-CP test coverage >= 0.900 - 4 SE for all models: 0.901–0.908
+  [PASS] ailerons: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 5 models checked, models with discrete residuals excluded: ['lasso', 'xgboost']
+  [PASS] ailerons: U_M joint coverage >= 0.90 - 4 SE: 0.906 (SE 0.002)
+  [PASS] elevators: split-CP test coverage >= 0.900 - 4 SE for all models: 0.901–0.903
+  [PASS] elevators: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 6 models checked, models with discrete residuals excluded: ['lasso']
+  [PASS] elevators: U_M joint coverage >= 0.90 - 4 SE: 0.901 (SE 0.002)
+  [PASS] house_16h: split-CP test coverage >= 0.900 - 4 SE for all models: 0.899–0.900
+  [PASS] house_16h: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] house_16h: U_M joint coverage >= 0.90 - 4 SE: 0.898 (SE 0.001)
+  [PASS] pol: split-CP test coverage >= 0.900 - 4 SE for all models: 0.899–0.902
+  [PASS] pol: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 4 models checked, models with discrete residuals excluded: ['rf', 'xgboost', 'lightgbm']
+  [PASS] pol: U_M joint coverage >= 0.90 - 4 SE: 0.900 (SE 0.002)
+  [PASS] sulfur: split-CP test coverage >= 0.900 - 4 SE for all models: 0.900–0.903
+  [PASS] sulfur: split-CP test coverage <= 0.900 + 4 SE where scores are continuous: 7 models checked, models with discrete residuals excluded: []
+  [PASS] sulfur: U_M joint coverage >= 0.90 - 4 SE: 0.903 (SE 0.003)
+
+0 check(s) failed.
+exit code: 0

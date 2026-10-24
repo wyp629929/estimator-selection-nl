@@ -1,0 +1,70 @@
+## Table E8b: CP width vs validation MSE (full calibration set): mean (max) risk ratio, P(CP = val)
+
+| dataset | type | n_cal | α=0.05 | α=0.1 | α=0.2 |
+|---|---|---|---|---|---|
+| albert | binary | 12500 | 1.062 (1.067), 0.00 | 1.062 (1.067), 0.00 | 1.062 (1.067), 0.00 |
+| compas | binary | 1241 | 1.021 (1.037), 0.00 | 1.021 (1.037), 0.00 | 1.021 (1.037), 0.00 |
+| covertype | binary | 12500 | 1.188 (1.226), 0.00 | 1.032 (1.170), 0.80 | 1.000 (1.000), 1.00 |
+| electricity | binary | 9618 | 1.198 (2.359), 0.85 | 1.000 (1.000), 1.00 | 1.000 (1.000), 1.00 |
+| eye_movements | binary | 1902 | 1.074 (1.110), 0.00 | 1.074 (1.110), 0.00 | 1.074 (1.110), 0.00 |
+| road_safety | binary | 12500 | 1.410 (1.440), 0.00 | 1.031 (1.075), 0.40 | 1.031 (1.093), 0.50 |
+| diabetes130us | binary | 12500 | 1.016 (1.022), 0.00 | 1.016 (1.022), 0.00 | 1.016 (1.022), 0.00 |
+| higgs | binary | 12500 | 1.236 (1.254), 0.00 | 1.236 (1.254), 0.00 | 1.236 (1.254), 0.00 |
+| magic_telescope | binary | 3344 | 1.572 (1.678), 0.05 | 0.999 (1.018), 0.55 | 1.001 (1.046), 0.25 |
+| miniboone | binary | 12500 | 1.001 (1.025), 0.45 | 956490.090 (8100570.236), 0.25 | 960059.676 (8100570.236), 0.20 |
+| credit | binary | 4178 | 1.503 (1.558), 0.00 | 1.503 (1.558), 0.00 | 1.005 (1.027), 0.80 |
+| heloc | binary | 2500 | 1.046 (1.068), 0.00 | 1.046 (1.068), 0.00 | 1.027 (1.068), 0.15 |
+| jannis | binary | 12500 | 1.243 (1.262), 0.00 | 1.190 (1.258), 0.05 | 1.000 (1.005), 0.75 |
+| airlines_depdelay | regression | 12500 | 1.003 (1.011), 0.25 | 1.008 (1.017), 0.15 | 1.004 (1.017), 0.45 |
+| allstate_claims | regression | 12500 | 1.001 (1.008), 0.70 | 1.001 (1.007), 0.65 | 1.001 (1.008), 0.70 |
+| bike_sharing | regression | 4344 | 1.000 (1.016), 0.90 | 1.000 (1.019), 0.85 | 0.998 (1.019), 0.80 |
+| mercedes_benz | regression | 1052 | 1.005 (1.058), 0.85 | 1.000 (1.000), 1.00 | 1.000 (1.000), 1.00 |
+| sgemm_gpu | regression | 12500 | 1.000 (1.000), 1.00 | 1.000 (1.000), 1.00 | 1.000 (1.000), 1.00 |
+| analcatdata_supreme | nearly binary | 1013 | 1.243 (2.212), 0.25 | 1.359 (2.370), 0.05 | 1.359 (2.370), 0.05 |
+| delays_zurich | regression | 12500 | 1.013 (1.070), 0.10 | 1.005 (1.012), 0.30 | 1.004 (1.012), 0.45 |
+| medical_charges | regression | 12500 | 1.008 (1.062), 0.75 | 1.004 (1.030), 0.75 | 1.008 (1.042), 0.65 |
+| nyc_taxi_green | regression | 12500 | 0.999 (1.009), 0.85 | 1.021 (1.060), 0.15 | 1.021 (1.060), 0.15 |
+| particulate_matter | regression | 12500 | 1.001 (1.010), 0.85 | 1.003 (1.021), 0.75 | 1.002 (1.013), 0.80 |
+| seattlecrime6 | regression | 12500 | 1.003 (1.022), 0.20 | 1.036 (1.072), 0.00 | 1.065 (1.078), 0.00 |
+| topo_2_1 | regression | 2221 | 1.065 (1.194), 0.10 | 1.051 (1.192), 0.25 | 1.094 (1.368), 0.10 |
+| visualizing_soil | regression | 2160 | 1.238 (2.354), 0.50 | 1.513 (3.691), 0.20 | 1.513 (3.691), 0.20 |
+| ailerons | regression | 3437 | 1.000 (1.000), 1.00 | 1.000 (1.000), 1.00 | 1.000 (1.000), 1.00 |
+| elevators | regression | 4149 | 1.014 (1.135), 0.80 | 1.002 (1.042), 0.85 | 1.001 (1.040), 0.85 |
+| house_16h | regression | 5696 | 1.017 (1.189), 0.20 | 1.017 (1.189), 0.20 | 1.017 (1.189), 0.20 |
+| pol | nearly binary | 3750 | 1.000 (1.000), 1.00 | 1.000 (1.000), 1.00 | 1.000 (1.000), 1.00 |
+| sulfur | regression | 2520 | 0.936 (1.000), 0.50 | 0.936 (1.000), 0.50 | 0.936 (1.000), 0.50 |
+
+## Pre-registered predictions
+
+Q1  min mean ratio over 31 datasets x 3 levels = 0.9364 (sulfur, α=0.05): NOT borne out
+Q2  albert α=0.05: mean ratio 1.062; S in 20/20 splits with CP != val
+Q2  albert α=0.1: mean ratio 1.062; S in 20/20 splits with CP != val
+Q2  albert α=0.2: mean ratio 1.062; S in 20/20 splits with CP != val
+Q2  covertype α=0.05: mean ratio 1.188; S in 20/20 splits with CP != val
+Q2  electricity α=0.05: mean ratio 1.198; S in 3/3 splits with CP != val
+Q2  eye_movements α=0.05: mean ratio 1.074; S in 20/20 splits with CP != val
+Q2  eye_movements α=0.1: mean ratio 1.074; S in 20/20 splits with CP != val
+Q2  eye_movements α=0.2: mean ratio 1.074; S in 20/20 splits with CP != val
+Q2  road_safety α=0.05: mean ratio 1.410; S in 20/20 splits with CP != val
+Q2  higgs α=0.05: mean ratio 1.236; S in 20/20 splits with CP != val
+Q2  higgs α=0.1: mean ratio 1.236; S in 20/20 splits with CP != val
+Q2  higgs α=0.2: mean ratio 1.236; S in 20/20 splits with CP != val
+Q2  magic_telescope α=0.05: mean ratio 1.572; S in 19/19 splits with CP != val
+Q2  credit α=0.05: mean ratio 1.503; S in 20/20 splits with CP != val
+Q2  credit α=0.1: mean ratio 1.503; S in 20/20 splits with CP != val
+Q2  jannis α=0.05: mean ratio 1.243; S in 20/20 splits with CP != val
+Q2  jannis α=0.1: mean ratio 1.190; S in 19/19 splits with CP != val
+Q2  17 qualifying cells: borne out
+Q4  analcatdata_supreme α=0.05: mean ratio 1.243; S in 0/15 splits with CP != val
+Q4  analcatdata_supreme α=0.1: mean ratio 1.359; S in 0/19 splits with CP != val
+Q4  analcatdata_supreme α=0.2: mean ratio 1.359; S in 0/19 splits with CP != val
+Q4  3 qualifying cells: NOT borne out
+Q3  seattlecrime6: crossings in 0/27 costly cells
+Q3  topo_2_1: crossings in 1/23 costly cells
+Q3  visualizing_soil: crossings in 32/33 costly cells
+Q3  house_16h: crossings in 24/24 costly cells
+Q3  sulfur: crossings in 3/3 costly cells
+Q3  5 qualifying datasets: NOT borne out
+Q5  forest mean ratio <= 1.01 on 30/31 datasets: borne out
+Q6  forest better than val by > 2 SE on 6/18 regression datasets ['sgemm_gpu', 'medical_charges', 'nyc_taxi_green', 'visualizing_soil', 'elevators', 'sulfur']: borne out
+exit code: 0

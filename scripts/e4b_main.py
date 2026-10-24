@@ -38,10 +38,11 @@ from scipy import stats
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, BASE_DIR)
 from e2_main import MODELS, cp_quantile, done_reps, n_at_cut  # noqa: E402
-from e4_main import BASE_SEED, DATA_DIR, DATASET_IDS, E4_DATASETS, E7_DATASETS, SPLITS, fit_split  # noqa: E402
+from e4_main import BASE_SEED, DATA_DIR, DATASET_IDS, E4_DATASETS, E7_DATASETS, E8_DATASETS, SPLITS, fit_split  # noqa: E402
 
 OUT_DIR = os.path.join(BASE_DIR, '..', 'results', 'e4b')
-SETS = {'e4': (E4_DATASETS, OUT_DIR), 'e7': (E7_DATASETS, os.path.join(BASE_DIR, '..', 'results', 'e7', 'e4b'))}
+SETS = {'e4': (E4_DATASETS, OUT_DIR), 'e7': (E7_DATASETS, os.path.join(BASE_DIR, '..', 'results', 'e7', 'e4b')),
+        'e8': (E8_DATASETS, os.path.join(BASE_DIR, '..', 'results', 'e8', 'e4b'))}
 ALPHAS = [0.05, 0.1, 0.2]
 N_CAL = [250, 1000, 4000]          # plus the full calibration part
 
@@ -100,23 +101,25 @@ def one_split(name, split, device_name, max_rows=None):
                 # share of test points where the CP pick has a smaller absolute error than the val pick
                 win_share=(None if c == v else
                            float(np.mean(np.abs(yt - Pt[:, c]) < np.abs(yt - Pt[:, v])))),
-                m1prime=None if c == v else m1prime(c, v, a))
+                m1prime=None if c == v else m1prime(c, v, a),
+                # mean |r| of each model over the calibration points within its own cutoff (E8, pattern S)
+                body=[float(r_abs[r_abs[:, j] <= w[j] / 2, j].mean()) for j in range(len(MODELS))])
         by_n[str(n)] = entry
 
     return dict(dataset=name, split=split, seed=f['seed'], binary=binary,
                 prevalence_cal=float(yc.mean()) if binary else None,
                 n_train=f['n_train'], n_cal=f['n_cal'], n_test=f['n_test'],
-                model_mse=model_mse.tolist(), by_n=by_n, seconds=time.time() - t0)
+                model_mse=model_mse.tolist(), sd_test=Pt.std(axis=0).tolist(), by_n=by_n, seconds=time.time() - t0)
 
 
 def main():
     available = [k for k in DATASET_IDS if os.path.exists(os.path.join(DATA_DIR, f'{k}.npz'))]
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument('--set', default='e4', choices=list(SETS), help='e4 = the 8 E4 datasets; e7 = the 20 CTR23 datasets')
+    ap.add_argument('--set', default='e4', choices=list(SETS), help='e4 = the 8 E4 datasets; e7 = the 20 CTR23 datasets; e8 = the 31 Grinsztajn benchmark datasets')
     ap.add_argument('--datasets', nargs='+', default=None, choices=available, help='default: all datasets of --set')
     ap.add_argument('--workers', type=int, default=max(1, (os.cpu_count() or 2) - 1))
     ap.add_argument('--device', default='cpu', choices=['cpu', 'cuda', 'mps'])
-    ap.add_argument('--out-dir', default=None, help='default: results/e4b (set e4) or results/e7/e4b (set e7)')
+    ap.add_argument('--out-dir', default=None, help='default: results/e4b (set e4), results/e7/e4b (set e7) or results/e8/e4b (set e8)')
     ap.add_argument('--quick', action='store_true', help='smoke test: 2 splits per dataset, at most 4000 rows')
     args = ap.parse_args()
     args.datasets = args.datasets or SETS[args.set][0]

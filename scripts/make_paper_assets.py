@@ -143,6 +143,63 @@ def table_real_cp():
     write('tab3_real_cp.tex', L)
 
 
+def cp_all_header():
+    return [r'\begin{tabular}{lc' + 'cc' * 3 + '}', r'\toprule',
+            r' & & \multicolumn{2}{c}{$\alpha=0.05$} & \multicolumn{2}{c}{$\alpha=0.1$} & \multicolumn{2}{c}{$\alpha=0.2$} \\',
+            r'\cmidrule(lr){3-4}\cmidrule(lr){5-6}\cmidrule(lr){7-8}',
+            r'Data set & $n_{\mathrm{cal}}$ & ratio & $P(\text{CP}=\text{val})$ & ratio & $P(\text{CP}=\text{val})$ & ratio & $P(\text{CP}=\text{val})$ \\', r'\midrule']
+
+
+def num(x):
+    """Three decimals; values of 1000 or more (a few splits with runaway predictions) in powers of ten."""
+    if x < 1000:
+        return f'{x:.3f}'
+    m, e = f'{x:.1e}'.split('e')
+    return f'${m}\\times10^{{{int(e)}}}$'
+
+
+def cp_all_rows(d):
+    L = []
+    meta = json.load(open(os.path.join(RES, d, 'meta.json')))
+    for k in meta['settings']['datasets']:
+        R = jl(os.path.join(RES, d, f'{k}.jsonl'))
+        cells = []
+        for a in ALPHAS:
+            r = ratios(R, a)
+            agree = np.mean([x['by_n'][full(x)]['cp'][a]['choice'] == x['by_n'][full(x)]['val']['choice'] for x in R])
+            cells += [f'{num(r.mean())} ({np.median(r):.3f})', f'{agree:.2f}']
+        L.append(f"{ds(k)} & {R[0]['n_cal']} & " + ' & '.join(cells) + r' \\')
+    return L
+
+
+def table_e8_cp_all():
+    """Appendix Table B4: E8, the 31 datasets of the Grinsztajn et al. (2022) benchmark, all three levels.
+    Means can be dominated by one split (miniboone); medians are given beside them."""
+    rows = cp_all_rows('e8/e4b')
+    n_bin = 13                                            # 13 binary datasets first, then 18 regression
+    L = cp_all_header() + rows[:n_bin] + [r'\midrule'] + rows[n_bin:] + [r'\bottomrule', r'\end{tabular}']
+    write('tabA_e8_cp_all.tex', L)
+
+
+def table_e9a():
+    """Appendix Table B6: E9a, the 20 binary data sets with every candidate's predictions clipped to [0, 1]
+    (same refit): mean CP/val risk ratio unclipped -> clipped, and the share of test predictions outside [0, 1]."""
+    i = M.index
+    ratio = lambda x, kind, a: x[kind]['model_mse'][i(x[kind]['cp'][a]['choice'])] / x[kind]['model_mse'][i(x[kind]['val'])]
+    new = json.load(open(os.path.join(RES, 'e8', 'e4b', 'meta.json')))['settings']['datasets'][:13]
+    L = [r'\begin{tabular}{lcccc}', r'\toprule',
+         r'Data set & Outside $[0,1]$ & $\alpha=0.05$ & $\alpha=0.1$ & $\alpha=0.2$ \\', r'\midrule']
+    for k in ['pima', 'homecredit', 'creditcard', 'mammography', 'bank', 'default', 'adult'] + [None] + new:
+        if k is None:
+            L.append(r'\midrule')
+            continue
+        R = jl(os.path.join(RES, 'e9a', f'{k}.jsonl'))
+        cells = [f"{num(np.mean([ratio(x, 'raw', a) for x in R]))} $\\to$ {num(np.mean([ratio(x, 'clipped', a) for x in R]))}" for a in ALPHAS]
+        L.append(f"{ds(k)} & {np.mean([x['outside'] for x in R]):.3f} & " + ' & '.join(cells) + r' \\')
+    L += [r'\bottomrule', r'\end{tabular}']
+    write('tabA_e9a_clipped.tex', L)
+
+
 def table_real_cp_all():
     """Appendix Table B3: all 28 data sets, all three levels."""
     L = [r'\begin{tabular}{lc' + 'cc' * 3 + '}', r'\toprule',
@@ -166,9 +223,9 @@ def table_real_cp_all():
 
 
 # ── Table 4: local selection on real data ───────────────────────────────────
-def local_rows():
+def local_rows(dirs=('e4', 'e7/e4')):
     out = []
-    for d in ('e4', 'e7/e4'):
+    for d in dirs:
         meta = json.load(open(os.path.join(RES, d, 'meta.json')))
         for k in meta['settings']['datasets']:
             R = jl(os.path.join(RES, d, f'{k}.jsonl'))
@@ -208,6 +265,19 @@ def table_real_local():
     A += [r'\bottomrule', r'\end{tabular}']
     write('tabA_real_local_all.tex', A)
     print(f'   table 4: {len(sig)} significant gains, {len(worse)} above 1.01, {len(rest)} others')
+
+
+def table_e8_local_all():
+    """Appendix Table B5: E8 local selection, same columns as Table B3."""
+    fmt = lambda t: f'{num(t[0])} ({num(t[1])})'
+    A = [r'\begin{tabular}{lcccccc}', r'\toprule',
+         r'Data set & $n_{\mathrm{cal}}$ & CP width & Cond.\ forest & (median) & Cond.\ $k$-NN & Best single \\', r'\midrule']
+    for i, r in enumerate(local_rows(('e8/e4',))):
+        if i == 13:                                       # 13 binary datasets first, then 18 regression
+            A.append(r'\midrule')
+        A.append(f"{ds(r['k'])} & {r['n']} & {fmt(r['cp'])} & {fmt(r['crs'])} & {r['med']:.3f} & {fmt(r['knn'])} & {fmt(r['best'])} \\\\")
+    A += [r'\bottomrule', r'\end{tabular}']
+    write('tabA_e8_local_all.tex', A)
 
 
 # ── Appendix: robustness variants (E3, E6) ──────────────────────────────────
@@ -258,5 +328,6 @@ def figure_e5():
 if __name__ == '__main__':
     os.makedirs(TAB, exist_ok=True); os.makedirs(FIG, exist_ok=True)
     table_global(); table_local(); table_real_cp(); table_real_cp_all(); table_real_local(); table_robust(); figure_e5()
+    table_e8_cp_all(); table_e8_local_all(); table_e9a()
     shutil.copy(os.path.join(BASE, 'figures', 'e1_mirror.pdf'), os.path.join(FIG, 'fig2_e1_barrier.pdf'))
     print('copied fig2_e1_barrier.pdf')

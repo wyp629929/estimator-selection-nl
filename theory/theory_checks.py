@@ -612,3 +612,42 @@ for L in (1, 8, 128):
     Lm[L] = float(np.mean(vals))
 print(f"[Cor 3]   torus [0,1)^2, translations only: E[m_L] by L {dict((k, round(v, 4)) for k, v in Lm.items())} -> V={V2:.4f}: "
       f"{ok(Lm[1] < Lm[8] < Lm[128] + 1e-9 and abs(Lm[128] - V2) < 0.05 * V2)}")
+
+
+# ---------------------------------------------------------------------------
+# Remark 6 (binary outcomes, predictions in [0,1]): |Y - fhat| = 1 - phat_Y, the score of
+# the least ambiguous set-valued classifier; the split-CP interval contains label y iff
+# 1 - phat_y <= xi_hat; xi < 1/2 gives sets of size <= 1 that omit label 1 for positives
+# predicted below 1/2; xi >= 1/2 gives sets of size >= 1.
+# ---------------------------------------------------------------------------
+good_score = good_set = good_small = good_large = True
+n_small = n_large = 0
+for _ in range(2000):
+    n = int(rng.integers(20, 400))
+    x = rng.uniform(size=n + 500)
+    p = np.clip(rng.uniform() + rng.uniform(-1, 1) * x, 0, 1)            # P(Y=1 | x)
+    y = (rng.uniform(size=n + 500) < p).astype(float)
+    fhat = np.clip(p + rng.normal(0, rng.uniform(0, 0.4), n + 500), 0, 1)
+    ph = lambda lab, f: np.where(lab == 1, f, 1 - f)                       # phat_y
+    s_abs, s_lac = np.abs(y - fhat), 1 - ph(y, fhat)
+    good_score &= bool(np.allclose(s_abs, s_lac))
+    alpha = rng.choice([0.05, 0.1, 0.2])
+    k = int(np.ceil((n + 1) * (1 - alpha)))
+    if k > n:
+        continue
+    xi = np.sort(s_abs[:n])[k - 1]
+    ft, yt = fhat[n:], y[n:]
+    in_int = [np.abs(lab - ft) <= xi for lab in (0.0, 1.0)]
+    in_lac = [1 - ph(lab, ft) <= xi for lab in (0.0, 1.0)]
+    good_set &= all(np.array_equal(a, b) for a, b in zip(in_int, in_lac))
+    size = in_lac[0].astype(int) + in_lac[1].astype(int)
+    if xi < 0.5:
+        n_small += 1
+        good_small &= bool(np.all(size <= 1) and not np.any(in_lac[1][(yt == 1) & (ft < 0.5)]))
+    else:
+        n_large += 1
+        good_large &= bool(np.all(size >= 1))
+print(f"[Rem 6]   predictions in [0,1]: |Y-fhat| = 1 - phat_Y: {ok(good_score)}; interval and LAC set "
+      f"contain the same labels: {ok(good_set)}")
+print(f"[Rem 6]   xi<1/2 ({n_small} draws): sets of size <= 1, label 1 omitted for positives below 1/2: "
+      f"{ok(good_small and n_small > 100)}; xi>=1/2 ({n_large} draws): sets of size >= 1: {ok(good_large and n_large > 100)}")

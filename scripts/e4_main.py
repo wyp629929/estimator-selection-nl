@@ -48,11 +48,23 @@ E7_DATASETS = ['abalone', 'white_wine', 'cpu_activity', 'kin8nm', 'pumadyn32nh',
                'kings_county', 'health_insurance', 'fps_benchmark', 'cps88wages', 'physiochemical_protein',
                'sarcos', 'diamonds', 'video_transcoding', 'wave_energy']
 DATASET_IDS.update({k: 8 + i for i, k in enumerate(E7_DATASETS)})
+# E8 (added 2026-10-21, Appendix D of the manuscript): the 31 datasets of the Grinsztajn et al. (2022) tabular
+# benchmark selected by the rule fixed before download (13 balanced binary, 18 regression). Ids 28-58.
+# yprop_4_1 was dropped under the rule's one-version-per-source clause: on download it proved to share its
+# rows and target with topo_2_1 (the numerical-and-categorical version), before any model was fitted.
+E8_BINARY = ['albert', 'compas', 'covertype', 'electricity', 'eye_movements', 'road_safety', 'diabetes130us', 'higgs',
+             'magic_telescope', 'miniboone', 'credit', 'heloc', 'jannis']
+E8_REGRESSION = ['airlines_depdelay', 'allstate_claims', 'bike_sharing', 'mercedes_benz', 'sgemm_gpu',
+                 'analcatdata_supreme', 'delays_zurich', 'medical_charges', 'nyc_taxi_green', 'particulate_matter',
+                 'seattlecrime6', 'topo_2_1', 'visualizing_soil', 'ailerons', 'elevators', 'house_16h', 'pol', 'sulfur']
+E8_DATASETS = E8_BINARY + E8_REGRESSION
+DATASET_IDS.update({k: 28 + i for i, k in enumerate(E8_DATASETS)})
 DATASETS = list(DATASET_IDS)
 SPLITS = {'pima': 50, 'supercond': 20, 'homecredit': 20,
           'creditcard': 20, 'mammography': 20, 'bank': 20, 'default': 20, 'adult': 20}
-SPLITS.update({k: 20 for k in E7_DATASETS})
-SETS = {'e4': (E4_DATASETS, OUT_DIR), 'e7': (E7_DATASETS, os.path.join(BASE_DIR, '..', 'results', 'e7', 'e4'))}
+SPLITS.update({k: 20 for k in E7_DATASETS + E8_DATASETS})
+SETS = {'e4': (E4_DATASETS, OUT_DIR), 'e7': (E7_DATASETS, os.path.join(BASE_DIR, '..', 'results', 'e7', 'e4')),
+        'e8': (E8_DATASETS, os.path.join(BASE_DIR, '..', 'results', 'e8', 'e4'))}
 FRAC_TRAIN, FRAC_CAL = 0.5, 0.25
 CP_ALPHA = 0.10
 
@@ -118,11 +130,11 @@ def one_split(name, split, device_name, max_rows=None):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument('--set', default='e4', choices=list(SETS), help='e4 = the 8 E4 datasets; e7 = the 20 CTR23 datasets')
+    ap.add_argument('--set', default='e4', choices=list(SETS), help='e4 = the 8 E4 datasets; e7 = the 20 CTR23 datasets; e8 = the 31 Grinsztajn benchmark datasets')
     ap.add_argument('--datasets', nargs='+', default=None, choices=DATASETS, help='default: all datasets of --set')
     ap.add_argument('--workers', type=int, default=max(1, (os.cpu_count() or 2) - 1))
     ap.add_argument('--device', default='cpu', choices=['cpu', 'cuda', 'mps'])
-    ap.add_argument('--out-dir', default=None, help='default: results/e4 (set e4) or results/e7/e4 (set e7)')
+    ap.add_argument('--out-dir', default=None, help='default: results/e4 (set e4), results/e7/e4 (set e7) or results/e8/e4 (set e8)')
     ap.add_argument('--quick', action='store_true', help='smoke test: 2 splits per dataset, at most 4000 rows')
     args = ap.parse_args()
     args.datasets = args.datasets or SETS[args.set][0]

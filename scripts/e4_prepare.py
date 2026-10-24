@@ -24,6 +24,16 @@ have already been run do not change.
   curated regression benchmark suite) with at least 4,000 rows, except superconductivity (already
   used as supercond). y = the CTR23 task target, untransformed. More than 50,000 rows: random
   50,000 (seed 2024). Categorical features one-hot encoded with missing values as a category.
+  The datasets in GRINSZTAJN below were added on 2026-10-21 for E8 (Section 4.5 and Appendix D of the manuscript) by one
+  rule fixed before any data were downloaded: every dataset of the tabular benchmark of Grinsztajn,
+  Oyallon and Varoquaux (2022) with at least 4,000 rows, one version per source dataset (numerical and
+  categorical version when both exist; the regression version for house_16H and pol), excluding source
+  datasets already used in this paper. The CSVs are read from data/e8_raw/ (downloaded from
+  https://huggingface.co/datasets/inria-soda/tabular-benchmark; checksums in data/e8_raw/SHA256SUMS)
+  and used as distributed: the benchmark balanced the two classes of each classification task and
+  log-transformed heavy-tailed regression targets. The target is the last column. For classification,
+  y = 1 for the larger of the two class labels. Non-numeric columns are one-hot encoded with missing
+  values as a category. More than 50,000 rows: random 50,000 (seed 2024).
 """
 import argparse
 import os
@@ -90,6 +100,47 @@ def openml_regression(data_id, target, n_max=MAX_ROWS):
     return X.to_numpy(float), t.to_numpy(float), list(X.columns), note
 
 
+# E8: name -> path in data/e8_raw/ (Grinsztajn et al. 2022 tabular benchmark)
+GRINSZTAJN = {
+    'albert': 'clf_cat/albert.csv', 'compas': 'clf_cat/compas-two-years.csv', 'covertype': 'clf_cat/covertype.csv',
+    'electricity': 'clf_cat/electricity.csv', 'eye_movements': 'clf_cat/eye_movements.csv',
+    'road_safety': 'clf_cat/road-safety.csv', 'diabetes130us': 'clf_num/Diabetes130US.csv', 'higgs': 'clf_num/Higgs.csv',
+    'magic_telescope': 'clf_num/MagicTelescope.csv', 'miniboone': 'clf_num/MiniBooNE.csv', 'credit': 'clf_num/credit.csv',
+    'heloc': 'clf_num/heloc.csv', 'jannis': 'clf_num/jannis.csv',
+    'airlines_depdelay': 'reg_cat/Airlines_DepDelay_1M.csv', 'allstate_claims': 'reg_cat/Allstate_Claims_Severity.csv',
+    'bike_sharing': 'reg_cat/Bike_Sharing_Demand.csv', 'mercedes_benz': 'reg_cat/Mercedes_Benz_Greener_Manufacturing.csv',
+    'sgemm_gpu': 'reg_cat/SGEMM_GPU_kernel_performance.csv', 'analcatdata_supreme': 'reg_cat/analcatdata_supreme.csv',
+    'delays_zurich': 'reg_cat/delays_zurich_transport.csv', 'medical_charges': 'reg_cat/medical_charges.csv',
+    'nyc_taxi_green': 'reg_cat/nyc-taxi-green-dec-2016.csv', 'particulate_matter': 'reg_cat/particulate-matter-ukair-2017.csv',
+    'seattlecrime6': 'reg_cat/seattlecrime6.csv', 'topo_2_1': 'reg_cat/topo_2_1.csv',
+    'visualizing_soil': 'reg_cat/visualizing_soil.csv', 'ailerons': 'reg_num/Ailerons.csv',
+    'elevators': 'reg_num/elevators.csv', 'house_16h': 'reg_num/house_16H.csv', 'pol': 'reg_num/pol.csv',
+    'sulfur': 'reg_num/sulfur.csv',
+}   # yprop_4_1 dropped: same rows and target as topo_2_1 (one version per source dataset)
+
+
+def grinsztajn(path, n_max=MAX_ROWS):
+    df = pd.read_csv(os.path.join(DATA, 'e8_raw', path))
+    n_all = len(df)
+    if n_max and len(df) > n_max:
+        df = df.sample(n=n_max, random_state=SEED)
+    target = df.columns[-1]
+    t, df = df[target], df.drop(columns=[target])
+    if path.startswith('clf'):
+        labels = sorted(t.unique())
+        assert len(labels) == 2, (path, labels)
+        y = (t == labels[1]).to_numpy(float)
+        ydesc = f'y = 1 if {target} == {labels[1]!r}'
+    else:
+        y = t.to_numpy(float)
+        ydesc = f'y = {target}'
+    cat = [c for c in df.columns if str(df[c].dtype) in ('category', 'object', 'string', 'bool')]
+    X = pd.get_dummies(df, columns=cat, dummy_na=True, dtype=float) if cat else df.astype(float)
+    note = (f'Grinsztajn et al. (2022) tabular benchmark, {path}; {ydesc}; {len(df)} of {n_all} rows'
+            + (' (random, seed 2024)' if len(df) < n_all else ''))
+    return X.to_numpy(float), y, list(X.columns), note
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--overwrite', action='store_true')
@@ -129,6 +180,12 @@ def main():
             save(name, None, None, None, None, ow)
             continue
         save(name, *openml_regression(did, target), ow)
+
+    for name, path in GRINSZTAJN.items():
+        if os.path.exists(os.path.join(OUT, f'{name}.npz')) and not ow:
+            save(name, None, None, None, None, ow)
+            continue
+        save(name, *grinsztajn(path), ow)
 
 
 if __name__ == '__main__':

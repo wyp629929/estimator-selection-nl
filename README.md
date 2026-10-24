@@ -19,7 +19,10 @@ results/                    final results, one directory per experiment, each wi
   e5/                       mechanism of Proposition 2(b), dose-response             (Figure 1)
   e6/noise_{normal,t3,skew}/  noise variants                                         (Table B1)
   e7/{e4,e4b}/              the 20 OpenML-CTR23 regression data sets: local selection and width
-  diag/                     diagnostics of the shrinkage pattern (Section 4.4)
+  e8/{e4,e4b}/              replication on 31 data sets of Grinsztajn et al. (2022)  (Section 4.5, Tables B4, B5)
+  e9a/                      binary data sets with predictions clipped to [0, 1]      (Section 4.5, Table B6)
+  diag/                     diagnostics of the shrinkage pattern (Section 4.4) and of topo_2_1 and sulfur (Section 4.5)
+checksums/                  SHA-256 of the benchmark CSVs used by E8
 figures/                    Figure 2
 requirements.txt
 ```
@@ -32,11 +35,13 @@ The original-submission code is preserved under the tag [`v1-submission`](https:
 |---|---|---|
 | E1, mirror construction | `e1_mirror.py` | `e1_report.py` (also draws Figure 2) |
 | E2, simulations; E3 variants (`--variant corr/tuned/highp`) | `e2_main.py` | `e2_report.py` |
-| E4, local selection on real data (`--set e4` or `--set e7`) | `e4_main.py` | `e4_report.py` |
-| E4b, what the width selects on real data (`--set e4` or `--set e7`) | `e4b_main.py` | `e4b_report.py` |
+| E4, local selection on real data (`--set e4`, `e7` or `e8`) | `e4_main.py` | `e4_report.py` |
+| E4b, what the width selects on real data (`--set e4`, `e7` or `e8`) | `e4b_main.py` | `e4b_report.py` |
 | E5, mechanism of Proposition 2(b) | `e5_mechanism.py` | `e5_report.py` |
 | E6, noise variants | `run_e6.sh` (calls `e2_main.py --variant noise_*`) | `report_e6.sh`, `e6_report.py` |
 | E7, CTR23 data sets | `run_e7.sh` | `report_e7.sh`, `e7_report.py` |
+| E8, replication on the Grinsztajn et al. (2022) benchmark | `run_e8.sh` | `report_e8.sh`, `e8_report.py` |
+| E9a, binary data sets with clipped predictions; diagnostics of topo_2_1 and sulfur | `run_e9.sh` (calls `diag_e9a_clipped.py`, `diag_e8_topo_sulfur.py`) | `e9a_report.py` |
 | Data preparation | `e4_prepare.py` | |
 | Diagnostics | `diag_shrinkage_all_splits.py`, `diag_e7_health_insurance.py`, `diag_e6_*.py`, `diag_creditcard_coverage_*.py` | |
 | Tables and Figure 1 of the manuscript | `make_paper_assets.py` (writes `paper_assets/`) | |
@@ -52,7 +57,7 @@ pip install torch==2.12.1 --index-url https://download.pytorch.org/whl/cpu
 pip install -r requirements.txt
 ```
 
-**Data.** The data sets are public but not redistributed here. `scripts/e4_prepare.py` writes `data/e4/*.npz`; it downloads the OpenML data sets and expects three files from their sources: `data/pima_diabetes.csv` (PIMA Indians Diabetes, UCI, response column `outcome`), `data/superconductivity/train.csv` (UCI Superconductivity) and `data/application_train.csv` (Kaggle, Home Credit Default Risk).
+**Data.** The data sets are public but not redistributed here. `scripts/e4_prepare.py` writes `data/e4/*.npz`; it downloads the OpenML data sets and expects three files from their sources: `data/pima_diabetes.csv` (PIMA Indians Diabetes, UCI, response column `outcome`), `data/superconductivity/train.csv` (UCI Superconductivity) and `data/application_train.csv` (Kaggle, Home Credit Default Risk). For E8 it reads the CSVs of the tabular benchmark of Grinsztajn et al. (2022) from `data/e8_raw/`, downloaded from [inria-soda/tabular-benchmark](https://huggingface.co/datasets/inria-soda/tabular-benchmark) with the folder layout of that repository (`clf_cat/`, `clf_num/`, `reg_cat/`, `reg_num/`); the files used are listed in `GRINSZTAJN` in `e4_prepare.py`, and their checksums are in `checksums/e8_raw.sha256`.
 
 **Runs** (CPU only):
 
@@ -62,8 +67,10 @@ python3 scripts/e5_mechanism.py
 bash scripts/run_all.sh <workers>       # E1, E2, E3, E4, E4b
 bash scripts/run_e6.sh <workers>
 bash scripts/run_e7.sh <workers>
-bash scripts/report_all.sh && bash scripts/report_e6.sh && bash scripts/report_e7.sh
+bash scripts/run_e8.sh <workers>
+bash scripts/run_e9.sh <workers>       # E9a and the diagnostics of Section 4.5
+bash scripts/report_all.sh && bash scripts/report_e6.sh && bash scripts/report_e7.sh && bash scripts/report_e8.sh
 python3 scripts/make_paper_assets.py
 ```
 
-On a 20-core machine, `run_all.sh` takes about 17 hours and `run_e6.sh` and `run_e7.sh` about 1.5 hours each; the other steps take minutes. The experiment scripts (`e1_mirror.py`, `e2_main.py`, `e4_main.py`, `e4b_main.py`, `e5_mechanism.py`) also have a `--quick` mode for a smoke test. Results are reproducible bit for bit on the same machine and software versions.
+On a 20-core machine, `run_all.sh` takes about 17 hours, `run_e6.sh` and `run_e7.sh` about 1.5 hours each, `run_e8.sh` about 2.5 hours and `run_e9.sh` about half an hour; the other steps take minutes. The experiment scripts (`e1_mirror.py`, `e2_main.py`, `e4_main.py`, `e4b_main.py`, `e5_mechanism.py`) also have a `--quick` mode for a smoke test. Results are reproducible bit for bit on the same machine and software versions.

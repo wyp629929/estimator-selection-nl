@@ -1,0 +1,58 @@
+## E9a: mean CP/val ratio without and with clipping to [0, 1] (same refit), share of test predictions outside [0, 1]
+
+| dataset | splits | outside [0,1] | runaway splits | α=0.05 raw → clipped | α=0.1 raw → clipped | α=0.2 raw → clipped |
+|---|---|---|---|---|---|---|
+| adult | 20 | 0.158 | 0 | 1.314 → 1.302 | 1.002 → 1.001 | 1.001 → 1.001 |
+| albert | 20 | 0.005 | 0 | 1.062 → 1.058 | 1.062 → 1.058 | 1.062 → 1.058 |
+| bank | 20 | 0.182 | 0 | 1.029 → 1.031 | 1.003 → 1.003 | 1.049 → 1.044 |
+| compas | 20 | 0.018 | 0 | 1.021 → 1.018 | 1.021 → 1.018 | 1.021 → 1.018 |
+| covertype | 20 | 0.077 | 0 | 1.188 → 1.187 | 1.032 → 1.031 | 1.000 → 1.000 |
+| credit | 20 | 0.025 | 0 | 1.503 → 1.499 | 1.503 → 1.499 | 1.005 → 1.004 |
+| creditcard | 20 | 0.428 | 0 | 1.084 → 1.120 | 1.084 → 1.132 | 1.084 → 1.136 |
+| default | 20 | 0.041 | 0 | 1.122 → 1.119 | 1.105 → 1.096 | 1.007 → 1.007 |
+| diabetes130us | 20 | 0.003 | 0 | 1.016 → 1.015 | 1.016 → 1.015 | 1.016 → 1.015 |
+| electricity | 20 | 0.058 | 0 | 1.198 → 1.254 | 1.000 → 1.000 | 1.000 → 1.000 |
+| eye_movements | 20 | 0.006 | 0 | 1.074 → 1.075 | 1.074 → 1.075 | 1.074 → 1.075 |
+| heloc | 20 | 0.023 | 0 | 1.046 → 1.043 | 1.046 → 1.043 | 1.027 → 1.024 |
+| higgs | 20 | 0.016 | 0 | 1.236 → 1.238 | 1.236 → 1.238 | 1.236 → 1.238 |
+| homecredit | 20 | 0.059 | 0 | 1.005 → 1.007 | 1.005 → 1.012 | 1.004 → 1.009 |
+| jannis | 20 | 0.041 | 0 | 1.243 → 1.240 | 1.190 → 1.188 | 1.000 → 1.000 |
+| magic_telescope | 20 | 0.089 | 0 | 1.572 → 1.563 | 0.999 → 0.995 | 1.001 → 1.006 |
+| mammography | 20 | 0.349 | 0 | 1.019 → 1.008 | 1.014 → 1.010 | 1.028 → 1.077 |
+| miniboone | 20 | 0.186 | 7 | 1.001 → 0.998 | 9.56e+05 → 1.017 | 9.60e+05 → 1.026 |
+| pima | 50 | 0.102 | 0 | 0.996 → 0.991 | 0.993 → 0.987 | 1.002 → 1.001 |
+| road_safety | 20 | 0.035 | 0 | 1.410 → 1.409 | 1.031 → 1.030 | 1.031 → 1.030 |
+
+## Predictions
+
+P1  NOT borne out; failing cells: [('creditcard', '0.05', np.float64(1.084), np.float64(1.12)), ('creditcard', '0.1', np.float64(1.084), np.float64(1.132)), ('creditcard', '0.2', np.float64(1.084), np.float64(1.136)), ('electricity', '0.05', np.float64(1.198), np.float64(1.254)), ('mammography', '0.2', np.float64(1.028), np.float64(1.077))]
+P2  albert α=0.05: clipped mean ratio 1.058; S in 20/20 splits with CP != val: ok
+P2  albert α=0.1: clipped mean ratio 1.058; S in 20/20 splits with CP != val: ok
+P2  albert α=0.2: clipped mean ratio 1.058; S in 20/20 splits with CP != val: ok
+P2  covertype α=0.05: clipped mean ratio 1.187; S in 20/20 splits with CP != val: ok
+P2  electricity α=0.05: clipped mean ratio 1.254; S in 4/4 splits with CP != val: ok
+P2  eye_movements α=0.05: clipped mean ratio 1.075; S in 20/20 splits with CP != val: ok
+P2  eye_movements α=0.1: clipped mean ratio 1.075; S in 20/20 splits with CP != val: ok
+P2  eye_movements α=0.2: clipped mean ratio 1.075; S in 20/20 splits with CP != val: ok
+P2  road_safety α=0.05: clipped mean ratio 1.409; S in 20/20 splits with CP != val: ok
+P2  higgs α=0.05: clipped mean ratio 1.238; S in 20/20 splits with CP != val: ok
+P2  higgs α=0.1: clipped mean ratio 1.238; S in 20/20 splits with CP != val: ok
+P2  higgs α=0.2: clipped mean ratio 1.238; S in 20/20 splits with CP != val: ok
+P2  magic_telescope α=0.05: clipped mean ratio 1.563; S in 19/19 splits with CP != val: ok
+P2  credit α=0.05: clipped mean ratio 1.499; S in 20/20 splits with CP != val: ok
+P2  credit α=0.1: clipped mean ratio 1.499; S in 20/20 splits with CP != val: ok
+P2  jannis α=0.05: clipped mean ratio 1.240; S in 20/20 splits with CP != val: ok
+P2  jannis α=0.1: clipped mean ratio 1.188; S in 19/19 splits with CP != val: ok
+P2  adult α=0.05: clipped mean ratio 1.302; S in 20/20 splits with CP != val: ok
+P2  default α=0.05: clipped mean ratio 1.119; S in 20/20 splits with CP != val: ok
+P2  19/19 cells: borne out
+P3  creditcard α=0.05: share of positives above the CP pick's cutoff 0.998
+P3  creditcard α=0.1: share of positives above the CP pick's cutoff 1.000
+P3  creditcard α=0.2: share of positives above the CP pick's cutoff 0.998
+P3  mammography α=0.05: share of positives above the CP pick's cutoff 0.837
+P3  mammography α=0.1: share of positives above the CP pick's cutoff 0.859
+P3  mammography α=0.2: share of positives above the CP pick's cutoff 0.821
+P3  homecredit α=0.1: share of positives above the CP pick's cutoff 1.000
+P3  homecredit α=0.2: share of positives above the CP pick's cutoff 1.000
+P3  5/8 cells: NOT borne out
+exit code: 0

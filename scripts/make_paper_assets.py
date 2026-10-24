@@ -37,6 +37,13 @@ def ms(a):
     return a.mean(), a.std(ddof=1) / np.sqrt(len(a))
 
 
+def ms_split(a, rho):
+    """Mean and standard error over repeated random splits, corrected for their overlap
+    (Nadeau and Bengio 2003): variance (1/J + rho) s^2 with rho = n_test / (n_train + n_cal)."""
+    a = np.asarray(a, float)
+    return a.mean(), a.std(ddof=1) * np.sqrt(1 / len(a) + rho)
+
+
 def write(name, lines):
     with open(os.path.join(TAB, name), 'w') as f:
         f.write('\n'.join(lines) + '\n')
@@ -235,7 +242,9 @@ def local_rows(dirs=('e4', 'e7/e4')):
             best = np.array([min(x['model_mse']) for x in R]) / val
             cp = np.array([x['selectors']['cp']['mse'] for x in R]) / val
             const = np.mean([x['selectors']['crs']['level'] == 'const' for x in R])
-            out.append(dict(k=k, n=R[0]['n_cal'], crs=ms(c), med=np.median(c), knn=ms(kn), best=ms(best), cp=ms(cp), const=const))
+            rho = R[0]['n_test'] / (R[0]['n_train'] + R[0]['n_cal'])
+            se = lambda a: ms_split(a, rho)
+            out.append(dict(k=k, n=R[0]['n_cal'], crs=se(c), med=np.median(c), knn=se(kn), best=se(best), cp=se(cp), const=const))
     return out
 
 
